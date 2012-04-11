@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="canIpublishComment" required="true"/>
+        <cc:attribute name="comment"  required="true"/>
+        <cc:attribute name="publishCommentAction"
+                      method-signature="java.lang.String action()" required="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup id="canIpublishComment" rendered="#{cc.attrs.canIpublishComment}" >
+            <table width="100%" border="0" cellspacing="0" cellpadding="5" >
+                <tr>
+                    <td colspan="2" height="6"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="left">
+                        <p:editor id="comment" value="#{cc.attrs.comment}"  widgetVar="editor"
+                                  controls="bold italic underline strikethrough numbering link unlink pastetext outdent indent"
+                                  width="550" height="160" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <h:commandButton id="publishCommentAction" action="#{cc.attrs.publishCommentAction}" value="#{msg.commun_info_publish_comment}" styleClass="button nightfall">
+                            <f:ajax execute="canIpublishComment" render="@form" />
+                        </h:commandButton>
+                    </td>
+                </tr>
+            </table>
+        </h:panelGroup>
+    </cc:implementation>
+</html>

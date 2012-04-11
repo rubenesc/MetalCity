@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+  <!-- INTERFACE -->
+  <cc:interface>
+    <cc:attribute name="pagination" />
+     <cc:attribute name="nextAction"
+      method-signature="java.lang.String action()" required="true"/>
+     <cc:attribute name="previousAction"
+      method-signature="java.lang.String action()" required="true"/>
+
+  </cc:interface>
+
+  <!-- IMPLEMENTATION -->
+  <cc:implementation>
+        <table width="100%" align="left">
+            <tr>
+                <td align="left">
+                    <h:outputText value="#{cc.attrs.pagination.pageFirstItem + 1}..#{cc.attrs.pagination.pageLastItem + 1} | #{msg.pagination_total}: #{cc.attrs.pagination.itemsCount}"/>
+                </td>
+                <td align="right">
+                    <h:commandLink id="previousAction" action="#{cc.attrs.previousAction}" value="#{msg.pagination_previous}" rendered="#{cc.attrs.pagination.hasPreviousPage}" style="font-weight: bold">
+                        <f:ajax execute="previousAction" render="@form" />
+                    </h:commandLink> |
+                    <h:commandLink id="nextAction" action="#{cc.attrs.nextAction}" value="#{msg.pagination_next}" rendered="#{cc.attrs.pagination.hasNextPage}"  style="font-weight: bold">
+                        <f:ajax execute="nextAction" render="@form" />
+                    </h:commandLink>
+                </td>
+            </tr>
+        </table>
+  </cc:implementation>
+</html>

@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="bodyHeaderTitle" >
+        #{msg.register_title}
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="registrationActiveForm">
+            <br/>
+            <h1 style="display:inline;">
+                <h:outputText escape="false" value="#{msg.index_info_welcometo}"/>
+                <h:outputText escape="false" value="#{msg.general_pagename}" styleClass="sectionTitleColor" />
+            </h1>
+
+            <p>
+                <h:outputText escape="false" value="#{msg.registration_active_info}"/>
+            </p>
+
+            <br/>
+            <br/>
+
+            <div align="center">
+                [<h:commandLink action="#{indexManagedBean.goToIndex}" >
+                    #{msg.commun_return}
+                </h:commandLink>]
+            </div>
+        </h:form>
+
+    </ui:define>
+
+
+</ui:composition>

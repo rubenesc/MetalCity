@@ -1,0 +1,28 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+
+        <li>
+            <h:graphicImage name="bombicons.png" library="images/nightfall/icons" width="29"/>
+            <h:link outcome="goToNewsControlRoom" >
+                <h:outputText value="#{msg.news_control_info_title}" />
+            </h:link>
+        </li>
+        <li>
+            <h:graphicImage name="bombicons.png" library="images/nightfall/icons" width="29"/>
+            <h:link outcome="goToEventControlRoom" >
+                <h:outputText value="#{msg.event_control_info_title}" />
+            </h:link>
+        </li>
+        <li>
+            <h:graphicImage name="bombicons.png" library="images/nightfall/icons" width="29"/>
+            <h:commandLink value="Evict All" actionListener="#{loginUserManagedBean.evictAll}"/>
+        </li>
+
+
+
+</ui:composition>
+

@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+
+
+        <ez:noItemsMsg message="#{msg.search_info_no_results}"
+                          numberOfItems="#{searchManagedBean.pagination.itemsCount}"/>
+
+            <h:panelGroup  rendered="#{searchManagedBean.pagination.itemsCount > 0}" id="itemPanelGroup">
+
+            <table width="100%" align="left">
+                <tr>
+                    <td>
+                        <ez:itemPagination pagination="#{searchManagedBean.pagination}"
+                           nextAction="#{searchManagedBean.next}" previousAction="#{searchManagedBean.previous}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <h:dataTable id="items" value="#{searchManagedBean.items}" var="item" styleClass="commentList" >
+                        <h:column>
+                            
+                            <tr>
+                                <td align="left" width="75">
+                                    <ui:include src="/portal/user/commonFragments/userAvatar.xhtml" />
+                                </td>
+                                <td id="userInfoTd" align="left" valign="top">
+                                    <span style="font-size: 13px; color: rgb(204, 204, 204);">
+                                        <ui:include src="/portal/user/commonFragments/userBasicInfo.xhtml" />
+                                        <h:panelGroup rendered="#{!searchManagedBean.canIAddToFriends}">
+                                        <table width="100%">
+                                            <tr>
+                                                <td style="text-align: left">
+                                                    <h:outputText value="#{msg.profile_info_friend}" rendered="false" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </h:panelGroup>
+                                    </span>
+                                </td>
+                                <!--
+                                <td align="right" valign="center">
+                                    <span style="padding-left:2px; padding-right:2px" ></span>
+                                    <h:commandButton id="addFriendbtn" value="#{msg.profile_info_add_friend}"
+                                                     rendered="false" styleClass="frmSubmit" />
+                                    <span style="padding-left:2px; padding-right:2px" ></span>
+                                </td>
+                                -->
+                            </tr>
+                        </h:column>
+                    </h:dataTable>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <ez:itemPagination pagination="#{searchManagedBean.pagination}"
+                           nextAction="#{searchManagedBean.next}" previousAction="#{searchManagedBean.previous}" />
+                    </td>
+                </tr>
+            </table>
+
+        </h:panelGroup>
+
+</ui:composition>
+

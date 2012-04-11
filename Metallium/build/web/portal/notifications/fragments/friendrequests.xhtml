@@ -1,0 +1,85 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="5"  >
+        <tr>
+            <td align="left" nowrap="true">
+                <h:outputText value="#{msg.notification_info_friend_request}" styleClass="sectionTitle" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            <h:panelGroup  id="ajaxPanalGroup">
+
+                <ez:noItemsMsg id="noItemsSentComp" message="#{msg.common_info_empty}"
+                               numberOfItems="#{notificationManagedBean.pagination2.itemsCount}"/>
+
+
+                <h:panelGroup  rendered="#{notificationManagedBean.items2.rowCount > 0}" id="itemPanelGroup">
+
+                    <hr/>
+
+                    <table width="100%" align="left">
+                        <tr>
+                            <td>
+                                <h:dataTable id="items" value="#{notificationManagedBean.items2}" var="item" width="100%"  styleClass="commentList" >
+                                    <h:column>
+                                        <span id="inboxitemspan">
+
+                                            <h:panelGroup id="messageUserAvatarPanelGroup" rendered="#{! empty item.avatarLocation}" >
+                                                <h:link outcome="goToProfile"  >
+                                                    <img alt=":)" id="messageProfilePicS" class="avatarReply" border="1" width="75"
+                                                         src="#{item.avatarLocation}" />
+                                                    <f:param name="nick" value="#{item.nick}"/>
+                                                </h:link>
+                                            </h:panelGroup>
+
+                                            <span class="tlIcon">
+                                                <span style="padding-left:2px; padding-right:2px" ></span>
+                                                <h:commandButton id="confirmFriendRequest" style="text-align: right"
+                                                                 actionListener="#{notificationManagedBean.confirmFriendRequest}"
+                                                                 value="#{msg.common_confirm}" styleClass="button nightfall">
+                                                    <f:ajax render="@form" execute="@this"/>
+                                                </h:commandButton>
+                                                <span style="padding-left:2px; padding-right:2px" ></span>
+                                                <h:commandButton id="deleteFriendRequest" style="text-align: right"
+                                                                 actionListener="#{notificationManagedBean.deleteFriendRequest}"
+                                                                 value="#{msg.common_delete}" styleClass="button nightfall">
+                                                    <f:ajax render="@form" execute="@this"/>
+                                                </h:commandButton>
+                                                <span style="padding-left:2px; padding-right:2px" ></span>
+                                            </span>
+
+                                            <span class="tlComment2"  style="margin-left: 85px; display: block; color: #999999; line-height: 17px; font-size: 13px;">
+                                                    <ui:include src="/portal/user/commonFragments/userBasicInfo.xhtml" />
+                                            </span>
+                                            <hr/>
+
+
+                                        </span>
+                                    </h:column>
+                                </h:dataTable>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                    <br/>
+                    <br/>
+
+                </h:panelGroup>
+
+            </h:panelGroup>
+            </td>
+        </tr>
+    </table>
+
+</ui:composition>
+

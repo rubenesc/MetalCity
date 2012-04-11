@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="forumCategoryListForm" >
+
+            <br/>
+
+            <h:panelGroup rendered="#{forum.authenticated}">
+                <div class="forum">
+                    <br/>
+                    <h:link outcome="goToForumCreate" >
+                        <h:outputText value="#{msg.forum_info_title_create}" style="font-size: large; font-weight: bold"/>
+                        <f:param name="category" value="1"/>
+                    </h:link>
+                </div>
+            </h:panelGroup>
+
+            <table>
+                <tr>
+                    <td>
+                        <div class="forum">
+                            <h:dataTable value="#{forum.categories}" var="item" style="width: 700px;"  rowClasses="uneven,even"
+                                         border="0"  cellpadding="7px" cellspacing="0">
+                                <h:column headerClass="dataTableHeader1">
+                                    <f:facet name="header" >
+                                        <h:outputText value="#{msg.forum_info_categories}" style="text-transform: capitalize;"  />
+                                    </f:facet>
+                                        <div class="forumTitle">
+                                            <h:link outcome="goToForumList" >
+                                                <h:outputText escape="true" value="#{msg[item.name]}" />
+                                                <f:param name="category" value="#{item.id}"/>
+                                            </h:link>
+                                            <br/>
+                                        </div>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+        </h:form>
+
+        <br/>
+        <br/>
+
+    </ui:define>
+</ui:composition>

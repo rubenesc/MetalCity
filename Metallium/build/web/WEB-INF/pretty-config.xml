@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.2.1"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.2.1
+                                   		http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.2.1.xsd">
+
+   <!-- Begin Example RewriteRules
+
+      // These are custom rewrite-rules, and are probably not necessary for your application.
+
+      <rewrite match="^/old-url/(\w+)/$" substitute="/new_url/$1/" redirect="301" />
+
+   -->
+
+    <url-mapping id="home">
+        <pattern value="/" />
+        <!--
+        <view-id value="/portal/jukebox/search.jsf" />
+        -->
+        <view-id value="/portal/index.jsf" />
+    </url-mapping>
+    
+    <url-mapping id="search">
+        <pattern value="/search" />
+        <view-id value="/portal/search/search.jsf" />
+    </url-mapping>
+    
+      <!-- Jukebox Start -->
+        <url-mapping id="jukebox1">
+            <pattern value="/jukebox" />
+            <view-id value="/portal/jukebox/search.jsf" />
+            <action onPostback="false" >#{jukebox.initialize}</action>
+        </url-mapping>
+        
+        
+        <url-mapping id="jukebox2">
+            <pattern value="/jukebox/#{ nick : jukebox.playlistNick}" />
+            <view-id value="/portal/jukebox/search.jsf" />
+            <action onPostback="false" >#{jukebox.initialize}</action>
+        </url-mapping>
+        
+        
+      <!-- Jukebox End -->
+
+      <!-- Jukebox Start -->
+        <url-mapping id="shout">
+            <pattern value="/shout" />
+            <view-id value="/portal/common/test/shout.jsf" />
+            <action onPostback="false" >#{jukebox.initialize}</action>
+        </url-mapping>
+      <!-- Jukebox End -->
+    
+    
+
+
+      <!-- Profile Start -->
+
+    <url-mapping id="profileByNick">
+        <pattern value="/#{ nick : profileManagedBean.profileNick}" />
+        <view-id value="/portal/user/profile/profile.jsf" />
+        <action onPostback="false" >#{profileManagedBean.loadProfileByNick}</action>
+    </url-mapping>
+
+    <url-mapping id="editprofile">
+        <pattern value="/edit/#{ nick : profileExtManagedBean.profileNick}/#{ edit : editProfileManagedBean.edit}" />
+        <view-id value="/portal/user/edit/editprofile.jsf" />
+        <action onPostback="false" >#{editProfileManagedBean.loadDataProfile}</action>
+    </url-mapping>
+
+
+    <url-mapping id="editprofile">
+        <pattern value="/edit/#{ nick : profileExtManagedBean.profileNick}/#{ edit : editProfileManagedBean.edit}/#{ id : editProfileManagedBean.userWallComp.userWallPost.id}" />
+        <view-id value="/portal/user/edit/editprofile.jsf" />
+        <action onPostback="false" >#{editProfileManagedBean.loadDataWallPost}</action>
+    </url-mapping>
+
+
+    <url-mapping id="editprofilepicture">
+        <pattern value="/editpic/#{ edit : editProfileManagedBean.edit}" />
+        <view-id value="/portal/user/edit/editprofile.jsf" />
+        <action onPostback="false" >#{editProfileManagedBean.loadDataProfile}</action>
+    </url-mapping>
+
+    <url-mapping id="friends">
+        <pattern value="/friends/#{ nick : profileManagedBean.profileNick}" />
+        <view-id value="/portal/user/profile/profileFriends.jsf" />
+        <action onPostback="false" >#{profileManagedBean.loadProfileByNick}</action>
+    </url-mapping>
+
+    <url-mapping id="galleries">
+        <pattern value="/galleries/#{ nick : galleriesManagedBean.userNick}" />
+        <view-id value="/portal/gallery/galleries.jsf" />
+        <action onPostback="false" >#{galleriesManagedBean.loadUserGalleries}</action>
+    </url-mapping>
+
+    <url-mapping id="gallery">
+        <pattern value="/gallery/#{ nick : imageGalleryBase.userNick}/#{ gid : galleryManagedBean.galleryId}" />
+        <view-id value="/portal/gallery/gallery.jsf" />
+        <action onPostback="false" >#{galleryManagedBean.loadUserGallery}</action>
+    </url-mapping>
+
+    <url-mapping id="image">
+        <pattern value="/image/#{ id : imageManagedBean.galleryId}/#{ iid : imageManagedBean.imageName}" />
+        <view-id value="/portal/gallery/image.jsf" />
+        <action onPostback="false" >#{imageManagedBean.loadManagedBean}</action>
+    </url-mapping>
+
+    <url-mapping id="uploadimagesgallery">
+        <pattern value="/uploadimagesgallery/#{ gid : galleryManagedBean.galleryId}" />
+        <view-id value="/portal/gallery/uploadimagesgallery.jsf" />
+        <action onPostback="false" >#{galleryManagedBean.loadUserGallery}</action>
+    </url-mapping>
+
+
+
+      <!-- Profile End -->
+
+      <!-- Profile Configuration Start -->
+
+    <url-mapping id="configuration">
+        <pattern value="/configuration/#{ edit : userConfigurationManagedBean.edit}" />
+        <view-id value="/portal/user/configuration/configuration.jsf" />
+        <action onPostback="false" >#{userConfigurationManagedBean.loadManagedBean}</action>
+    </url-mapping>
+
+      <!-- Profile Configuration End -->
+
+      <!-- Profile Messages Start -->
+
+    <url-mapping id="messagebox">
+        <pattern value="/profile/messagebox" />
+        <view-id value="/portal/messages/messagebox.jsf" />
+    </url-mapping>
+
+    <url-mapping id="messagebox2" parentId="messagebox">
+        <pattern value="/#{ box : messageBoxManagedBean.box}" />
+        <view-id value="/portal/messages/messagebox.jsf" />
+    </url-mapping>
+
+    <url-mapping id="message">
+        <pattern value="/message/#{ box : messageBoxManagedBean.box}/#{ id : messageManagedBean.messageId}" />
+        <view-id value="/portal/messages/message.jsf" />
+        <action onPostback="false" >#{messageManagedBean.loadMessageById}</action>
+    </url-mapping>
+
+      <!-- Profile Messages End -->
+
+      <!-- Profile Notifications Start -->
+    <url-mapping id="notifications">
+        <pattern value="/profile/notifications" />
+        <view-id value="/portal/notifications/notifications.jsf" />
+    </url-mapping>
+      <!-- Profile Notifications End -->
+
+
+      <!-- News Control Room Start -->
+
+    <url-mapping id="newscontrolroom">
+        <pattern value="/news/controlroom" />
+        <view-id value="/portal/news/controlroom/newscontrolroom.jsf" />
+    </url-mapping>
+
+    <url-mapping id="newscreate" parentId="newscontrolroom">
+        <pattern value="/create" />
+        <view-id value="/portal/news/create/newscreate.jsf" />
+    </url-mapping>
+
+    <url-mapping id="newsedit" parentId="newscontrolroom">
+        <pattern value="/#{ view : editNewsManagedBean.view}/#{ id : editNewsManagedBean.id}" />
+        <view-id value="/portal/news/edit/newsedit.jsf" />
+        <action onPostback="false" >#{editNewsManagedBean.findNews}</action>
+    </url-mapping>
+
+      <!-- News Control Room End
+
+
+        <query-param name="id" validatorIds="languageValidator" onError="pretty:error"> #{editNewsManagedBean.validateId} </query-param>
+      -->
+
+      <!-- Event Control Room Start -->
+
+    <url-mapping id="eventcontrolroom">
+        <pattern value="/event/controlroom" />
+        <view-id value="/portal/events/controlroom/eventcontrolroom.jsf" />
+    </url-mapping>
+
+    <url-mapping id="eventcreate" parentId="eventcontrolroom">
+        <pattern value="/create" />
+        <view-id value="/portal/events/create/eventcreate.jsf" />
+    </url-mapping>
+
+    <url-mapping id="eventedit" parentId="eventcontrolroom">
+        <pattern value="/#{ view : editEvent.view}/#{ id : editEvent.id}" />
+        <view-id value="/portal/events/edit/eventedit.jsf" />
+        <action onPostback="false" >#{editEvent.findEvent}</action>
+    </url-mapping>
+      <!-- Event Control Room End -->
+
+
+
+    <url-mapping id="news">
+        <pattern value="/news/#{ news : newsManagedBean.newsAlias }" />
+        <view-id value="/portal/news/news.jsf" />
+        <action onPostback="false" >#{newsManagedBean.loadNewsByAlias}</action>
+    </url-mapping>
+
+
+    <url-mapping id="newslist">
+        <pattern value="/news/mc/list" /> <!-- /mc/ stands for metal city. I needed an extra word in the filter, so mc is better than xxx. -->
+        <view-id value="/portal/news/newslist.jsf" />
+    </url-mapping>
+
+    <url-mapping id="event">
+        <pattern value="/event/#{ event : event.eventAlias }" />
+        <view-id value="/portal/events/event.jsf" />
+        <action onPostback="false" >#{event.loadEventByAlias}</action>
+    </url-mapping>
+
+    <url-mapping id="eventlist">
+        <pattern value="/event/mc/list" /> <!-- /mc/ stands for metal city. I needed an extra word in the filter, so mc is better than xxx. -->
+        <view-id value="/portal/events/eventlist.jsf" />
+    </url-mapping>
+
+
+    <url-mapping id="register">
+        <pattern value="/user/register" />
+        <view-id value="/portal/user/register/register.jsf" />
+    </url-mapping>
+
+      
+      <!-- Forums Start -->
+
+    <url-mapping id="forumcategories">
+        <pattern value="/forum/mc/categories" /> <!-- /mc/ stands for metal city. I needed an extra word in the filter, so mc is better than xxx. -->
+        <view-id value="/portal/forums/forumcategories.jsf" />
+        <action onPostback="false" >#{forum.loadForumCategories}</action>
+    </url-mapping>
+
+    <url-mapping id="forumlist">
+        <pattern value="/forum/mc/list/#{ category : forum.category }" /> <!-- /mc/ stands for metal city. I needed an extra word in the filter, so mc is better than xxx. -->
+        <view-id value="/portal/forums/forumlist.jsf" />
+        <action onPostback="false" >#{forum.loadForumList}</action>
+    </url-mapping>
+
+    <url-mapping id="forum">
+        <pattern value="/forum/#{ forum : forum.alias }" />
+        <view-id value="/portal/forums/forum.jsf" />
+        <action onPostback="false" >#{forum.loadForumByAlias}</action>
+    </url-mapping>
+    
+    <url-mapping id="forumcreate">
+        <pattern value="/forum/mc/create/#{ category : editForum.category }" /> 
+        <view-id value="/portal/forums/create.jsf" />
+        <action onPostback="false" >#{editForum.forumCreate}</action>
+    </url-mapping>
+    
+    <url-mapping id="forumedit">
+        <pattern value="/forum/mc/edit/#{ id : editForum.id}" /> 
+        <view-id value="/portal/forums/edit.jsf" />
+        <action onPostback="false" >#{editForum.loadForumById}</action>
+    </url-mapping>
+    
+    
+
+      <!-- Forums End -->
+
+      <!-- Start Stupid Static Pages -->
+
+    <url-mapping id="privacy">
+        <pattern value="/info/privacy" />
+        <view-id value="/portal/common/info/privacy.jsf" />
+    </url-mapping>
+    <url-mapping id="terms">
+        <pattern value="/info/terms" />
+        <view-id value="/portal/common/info/terms.jsf" />
+    </url-mapping>
+    <url-mapping id="error404">
+        <pattern value="/not/found" />
+        <view-id value="/portal/common/errors/pagenotfound.jsf" />
+    </url-mapping>
+    <url-mapping id="error500">
+        <pattern value="/severe/error" />
+        <view-id value="/portal/common/errors/servererror.jsf" />
+    </url-mapping>
+
+      
+      
+      
+      <!-- End Stupid Static Pages -->
+ 
+ 
+ 
+    <url-mapping id="report">
+        <pattern value="/report/memory" />
+        <view-id value="/portal/reports/memory.jsf" />
+        <action onPostback="false" >#{report.loadMemoryReport}</action>
+    </url-mapping>
+
+    <url-mapping id="report2">
+        <pattern value="/report/headers" />
+        <view-id value="/portal/reports/headers.jsp" />
+    </url-mapping>
+
+
+   <!-- Begin UrlMappings
+      // These are examples of URL mappings, and should be customized for your application.
+
+
+
+      <url-mapping id="viewCategory">
+          <pattern value="/store/#{ cat : bean.category }/" />
+          <view-id value="/faces/shop/store.jsf" />
+      </url-mapping>
+
+      <url-mapping id="viewItem">
+          <pattern value="/store/#{ cat : bean.category }/#{ iid : bean.itemId }/" />
+          <view-id value="/faces/shop/item.jsf" />
+          <action>#{bean.loadItem}</action>
+      </url-mapping>
+
+   -->
+
+
+
+</pretty-config>

@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:form id="profileFriendsPreviewForm" >
+        <table cellspacing="0" cellpadding="2" width="100%" border="0" >
+            <tbody>
+            <h:panelGroup rendered="true" >
+                <tr>
+                    <td align="right">
+                <h:outputText value="#{msg.profile_info_friends} (#{profileManagedBean.user.numberOfFriends})" styleClass="sectionTitle"/>
+                </td>
+                </tr>
+            </h:panelGroup>
+
+            <table cellspacing="0" cellpadding="0"  border="0">
+                <tr>
+                    <td>
+                        <p:dataGrid  var="item" value="#{profileFriendList.items}" columns="2"  rows="10" rendered="true">
+                            <p:column>
+                                <h:link  outcome="goToProfile">
+                                    <f:param name="id" value="#{item.id}"/>
+                                    <img alt=":)" id="profilePicS" align="left" border="0" width="100" src="#{item.avatarLocation}"
+                                         name="#{item.name}" longdesc="#{item.name}"/>
+                                </h:link>
+                            </p:column>
+                        </p:dataGrid>
+                    </td>
+                </tr>
+            </table>
+
+
+
+
+            </tbody>
+        </table>
+    </h:form>
+
+</ui:composition>

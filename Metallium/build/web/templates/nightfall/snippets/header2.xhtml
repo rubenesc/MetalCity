@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:form id="headerUserForm">
+
+        <div class="siteHeader2" >
+            <div class="headerLeftSideHolder2" >
+                <div style="font-size: 10px;">
+                    <h:link outcome="goToIndex" >
+                        <img alt="logo" align="center" border="0"  src="/img/resources/logo.jpg" style="border-style: none; vertical-align: bottom" />
+                    </h:link>
+
+                    <span style="padding-left:100px" ></span>
+
+                    <h:panelGroup id="searchHeaderPanelGroup" >
+                        <p:inputText id="searchQuery" value="#{jukebox.searchQuery}"  label="Keyword" size="50" />  
+                        <p:watermark for="searchQuery" value="#{msg.juke_search_watermark}" /> 
+                        <span style="padding-left:3px" ></span>
+                        <p:commandButton value="#{msg.search_info_btn_search}"
+                                         update=":jukeboxForm:searchPanelGroup" process="searchHeaderPanelGroup"
+                                 actionListener="#{jukebox.performSearch}"   
+                                 styleClass="widgetButton" />                        
+                    </h:panelGroup>
+                    
+                    <span style="padding-left:80px" ></span>
+
+                    <h:link outcome="goToJukebox" value="Jukebox" styleClass="sectionTitle" />
+                    <h:panelGroup rendered="true" >
+                        |
+                        <h:link outcome="goToNewsList" value="#{msg.news_title}" styleClass="sectionTitle"  />
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="false" >
+                        |
+                        <h:link outcome="goToEventList" value="#{msg.event_info_title}" styleClass="sectionTitle"  />
+                    </h:panelGroup>
+                        |
+                    <h:link outcome="goToForumCategories" value="#{msg.forum_info_title}" styleClass="sectionTitle" />
+                </div>
+            </div>
+        </div>
+
+    </h:form>
+
+
+ 
+
+</ui:composition>

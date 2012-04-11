@@ -1,0 +1,132 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>
+        <f:viewParam name="category"  converterMessage="#{msg.commun_info_input_invalid}"  value="#{forum.category}" />
+    </f:metadata>
+    
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="forumListForm" >
+
+            <br/>
+            <table width="100%" border="0">
+                <tr bgcolor="">
+                    <td  align="left" >
+                        <h:link outcome="goToForums">
+                            <h:link outcome="goToForumCategories" value="#{msg.forum_info_title}" styleClass="sectionTitle"/>
+                            <h:outputText value=" - #{msg[forum.forumCategory.name]}" styleClass="sectionTitle"/>
+                        </h:link>
+                    </td>
+                    <td  align="right" valign="bottom">
+                        <h:panelGroup rendered="#{loginUserManagedBean.myProfileAdministrator1}" >
+                            <div>
+                                <h:outputText value="#{msg.profile_info_network}:" style="font-size: large"/>
+                                <span style="padding-left:2px; padding-right:2px" />
+                                <h:selectOneMenu id="network" value="#{forum.paginationComp.searchDTO.network}"
+                                                 valueChangeListener="#{forum.paginationComp.valueChangeListenerNetwork}" >
+                                    <f:selectItem itemLabel="#{msg.common_info_none}" itemValue=""/>
+                                    <f:selectItems value="#{loginUserManagedBean.selectItemNetwork}" />
+                                    <f:ajax render="ajaxPanel"  execute="@this"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </h:panelGroup>
+                    </td>
+                </tr>
+            </table>
+            
+            <h:panelGroup rendered="#{forum.authenticated}">
+                    <br/>
+                    <h:link outcome="goToForumCreate" >
+                        <h:outputText value="#{msg.forum_info_title_create}" style="font-size: large; font-weight: bold"/>
+                        <f:param name="category" value="#{forum.category}"/>
+                    </h:link>
+            </h:panelGroup>
+            
+            
+            
+            <h:panelGroup id="ajaxPanel">
+                <ez:noItemsMsg message="#{msg.commun_info_no_forums}"
+                               numberOfItems="#{forum.paginationComp.pagination.itemsCount}"/>
+
+                <h:panelGroup  rendered="#{forum.paginationComp.pagination.itemsCount > 0}" id="newsPanelGroup" >
+
+                    <table>
+                        <tr>
+                            <td>
+                                <ez:itemPagination pagination="#{forum.paginationComp.pagination}"
+                                                   nextAction="#{forum.paginationComp.next}" previousAction="#{forum.paginationComp.previous}" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="forum">
+                                    <h:dataTable value="#{forum.paginationComp.items}" var="item" style="width: 700px;"  rowClasses="uneven,even"
+                                                 border="0"  cellpadding="7px" cellspacing="0">
+                                        <h:column headerClass="dataTableHeader1">
+                                            <f:facet name="header" >
+                                                <h:outputText value="#{msg.forum_info_topic}" />
+                                            </f:facet>
+                                                <div class="forumTitle">
+                                                    <h:link outcome="goToForum" >
+                                                        <h:outputText escape="true" value="#{item.title}" />
+                                                        <f:param name="forum" value="#{item.alias}"/>
+                                                    </h:link>
+                                                    <br/>
+                                                    <div class="subText">
+                                                            #{msg.index_info_by}
+                                                        <h:link outcome="goToProfile" value="#{item.user.name}" >
+                                                            <f:param name="nick" value="#{item.user.nick}"/>
+                                                        </h:link>
+                                                    </div>
+                                                </div>
+                                        </h:column>
+                                        <h:column headerClass="dataTableHeader2">
+                                            <f:facet name="header" >
+                                                <h:outputText value="#{msg.index_info_commentaries}" />
+                                            </f:facet>
+                                            <div class="postCount">
+                                                <h:outputText escape="true" value="#{item.numberComments}" />
+                                            </div>
+                                        </h:column>
+                                        <h:column headerClass="dataTableHeader2">
+                                            <f:facet name="header" >
+                                                <h:outputText value="#{msg.forum_info_last_activity}" />
+                                            </f:facet>
+                                            <div class="Lastby">
+                                                <h:outputText escape="true" value="#{item.date}">
+                                                    <f:converter converterId="co.metallium.PrettyTimeConverter"/>
+                                                </h:outputText>
+                                             </div>
+                                        </h:column>
+
+                                    </h:dataTable>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </table>
+                </h:panelGroup>
+            </h:panelGroup>
+
+
+        </h:form>
+
+        <br/>
+        <br/>
+
+
+
+
+    </ui:define>
+</ui:composition>

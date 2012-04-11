@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:metadata>
+        <f:viewParam name="box" converterMessage="#{msg.commun_info_input_invalid}" value="#{messageBoxManagedBean.box}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+        #{msg.message_box_info_title}
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!messageBoxManagedBean.authenticated}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{messageBoxManagedBean.authenticated}" id="yesPanelGroup">
+            <h:form id="messagesForm" >
+
+                <br/>
+                <table cellspacing="2" width="100%" cellpadding="0" border="0" align="left">
+                    <tr>
+                        <td align="left">
+                            <h:commandButton value="#{msg.message_box_info_inbox}" actionListener="#{messageBoxManagedBean.recreateItemsModel}" styleClass="button nightfall" >
+                                <f:setPropertyActionListener target="#{messageBoxManagedBean.box}" value="inbox"/>
+                            </h:commandButton>
+                            <span style="padding-left:2px; padding-right:2px" ></span>
+                            <h:commandButton value="#{msg.message_box_info_sent}" actionListener="#{messageBoxManagedBean.recreateItemsModel}"  styleClass="button nightfall" >
+                                <f:setPropertyActionListener target="#{messageBoxManagedBean.box}" value="sent"/>
+                            </h:commandButton>
+                            <span style="padding-left:2px; padding-right:2px" ></span>
+                            <h:commandButton value="#{msg.message_info_new_message}" actionListener="#{messageBoxManagedBean.recreateItemsModel}"  styleClass="button nightfall" >
+                                <f:setPropertyActionListener target="#{messageBoxManagedBean.box}" value="newmessage"/>
+                            </h:commandButton>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td align="left">
+                            <h:panelGroup rendered="#{messageBoxManagedBean.canISeeInbox}" >
+                                <ui:include src="fragments/inbox.xhtml"  />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{messageBoxManagedBean.canISeeSent}" >
+                                <ui:include src="fragments/outbox.xhtml"  />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{messageBoxManagedBean.canISeeNewMessage}" >
+                                <ui:include src="fragments/sendMessage.xhtml"  />
+                            </h:panelGroup>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </h:form>
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

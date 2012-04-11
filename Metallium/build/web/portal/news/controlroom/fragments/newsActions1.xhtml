@@ -1,0 +1,38 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:panelGroup >
+
+        <h:link style="text-align: right" outcome="goToNewsEdit" >
+            <h:outputText escape="true" value="#{msg.common_edit}" />
+            <f:param name="id" value="#{item.id}"/>
+            <f:param name="view" value="ncr"/>
+        </h:link>
+
+        <h:panelGroup rendered="#{item.state == 'PENDING'}" >
+            <span style="padding-left:3px; padding-right:3px" />
+            <h:commandLink id="activateNews" style="text-align: right"
+                           action="#{newsControlRoomManagedBean.activateNews}" value="#{msg.common_activate}" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{item.state == 'DELETED'}" >
+            <span style="padding-left:3px; padding-right:3px" />
+            <h:commandLink id="restoreNews" style="text-align: right"
+                           action="#{newsControlRoomManagedBean.activateNews}" value="#{msg.common_restore}" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{item.state == 'ACTIVE' || item.state == 'PENDING' }" >
+            <span style="padding-left:3px; padding-right:3px" />
+            <h:commandLink id="deleteNews" style="text-align: right"
+                           action="#{newsControlRoomManagedBean.deleteNews}" value="#{msg.common_delete}" />
+        </h:panelGroup>
+
+    </h:panelGroup>
+
+</ui:composition>
+

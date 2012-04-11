@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGroup  id="newForumPanel" rendered="#{forum.canIeditForum}">
+
+        <h:link outcome="goToForumEdit" >
+            <h:outputText escape="true" value="#{msg.common_edit}" />
+            <f:param name="id" value="#{forum.current.id}"/>
+        </h:link>
+        
+         / <p:commandLink value="#{msg.common_delete}" onclick="confirmation.show()" />
+         
+       <h:panelGroup rendered="#{profileManagedBean.amIadministrator}" >
+           /
+           <h:outputText value="#{msg.common_info_id}:"  style="color: red"/>
+            <span style="padding-left:3px"></span>
+            <h:outputText value="#{forum.current.id}" style="color: red"/>
+        </h:panelGroup>
+         
+        <!-- Just a dialog -->
+         <p:confirmDialog message="#{msg.confirm_msg_delete_forum}"
+                          header="#{msg.common_delete}" severity="alert" widgetVar="confirmation">
+             <p:commandButton value="#{msg.common_yes}" update="messages" ajax="false" oncomplete="confirmation.hide()"
+                              action="#{forum.deleteForum}" />
+             <p:commandButton value="#{msg.common_no}" onclick="confirmation.hide()" type="button" />
+         </p:confirmDialog>
+        <!-- Just a dialog -->
+        
+    </h:panelGroup>
+
+
+</ui:composition>

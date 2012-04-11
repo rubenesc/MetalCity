@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:myComponents="http://java.sun.com/jsf/composite/myComponents"
+                template="/templates/metalcity_template_02.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="servererrorForm">
+            <table width="200" border="0">
+                <tr>
+                    <th scope="row"><div align="justify">Metal City is Powered by:</div></th>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                </tr>
+                <tr>
+                    <th scope="row"><div align="justify"></div></th>
+                </tr>
+            </table>
+            <br />
+            <table width="200" border="0">
+                <tr>
+                    <td><div align="center">Java</div></td>
+                    <td><div align="center"></div></td>
+                    <td><div align="center">Netbeans</div></td>
+                    <td><div align="center"></div></td>
+                    <td><div align="center">MySql</div></td>
+                    <td><div align="center"></div></td>
+                    <td><div align="center">Glassfish</div></td>
+                    <td><div align="center"></div></td>
+                    <td><div align="center">JSF 2.0 + Primefaces</div></td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <a href="http://java.com/" target="_self">
+                            <img src="#{request.contextPath}/image/images/powerdby/dukeguitar.png" />
+                        </a>
+                    </td>
+                    <td><span style="padding-left:10px;" /></td>
+                    <td valign="top">
+                        <a href="http://netbeans.org/" target="_self">
+                            <img src="#{request.contextPath}/image/images/powerdby/netbeans.png" />
+                        </a>
+                    </td>
+                    <td><span style="padding-left:10px;" /></td>
+                    <td valign="top">
+                        <a href="http://www.mysql.com/" target="_self">
+                            <img src="#{request.contextPath}/image/images/powerdby/mysql.gif" />
+                        </a>
+                    </td>
+                    <td><span style="padding-left:10px;" /></td>
+                    <td valign="top">
+                        <a href="http://en.wikipedia.org/wiki/GlassFish" target="_self">
+                            <img src="#{request.contextPath}/image/images/powerdby/glassfish.png" />
+                        </a>
+                    </td>
+                    <td><span style="padding-left:10px;" /></td>
+                    <td valign="top">
+                        <a href="http://www.primefaces.org/" target="_self">
+                            <img src="#{request.contextPath}/image/images/powerdby/primefaces.gif" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+            <p>If you are a Java developer and want do discuss anything about the site, just drop me a line.<br />
+                at metalcity.bot@gmail.com</p>
+            <p></p>
+            <p></p>
+            <br/>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

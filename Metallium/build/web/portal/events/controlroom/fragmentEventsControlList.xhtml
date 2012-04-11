@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGroup  rendered="true" id="eventsPanelGroup">
+
+    <ez:noItemsMsg id="noItemsComp" message="#{msg.commun_info_no_events}"
+                   numberOfItems="#{eventControlRoom.pagination.itemsCount}"/>
+
+    <h:panelGroup  rendered="#{eventControlRoom.pagination.itemsCount > 0}" id="eventsPanelGroup1">
+
+    <br/>
+    <table width="100%" align="left">
+        <tr>
+            <td>
+                <ez:itemPagination id="itemPaginationComp" pagination="#{eventControlRoom.pagination}"
+                                   nextAction="#{eventControlRoom.next}" previousAction="#{eventControlRoom.previous}" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h:dataTable id="items" value="#{eventControlRoom.items}" var="item" width="100%" border="0" cellspacing="0" cellpadding="1" >
+                    <h:column>
+                        <table>
+                            <tr><td colspan="2"><hr/></td></tr>
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <div class="">
+                                            <h:panelGroup id="coverImageThumbnailPanelGroup" rendered="#{! empty item.coverImageThumbnail}" >
+                                                <h:link  outcome="goToEvent">
+                                                    <f:param name="event" value="#{item.alias}"/>
+                                                    <img alt="" id="coverImageThumbnail" align="left" border="1" width="150" src="#{item.coverImageThumbnailLocation}" />
+                                                </h:link>
+                                            </h:panelGroup>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td valign="top" width="100%" bgcolor="">
+                                    <div style="display: inline;">
+                                        <ui:include src="fragments/eventItemInfo.xhtml" id="eventItemInfo" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </h:column>
+                </h:dataTable>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+        </tr>
+    </table>
+
+
+
+    </h:panelGroup>
+    </h:panelGroup>
+
+
+</ui:composition>
+
+

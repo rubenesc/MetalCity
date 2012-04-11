@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="bodyHeaderTitle" > 
+    </ui:define>
+
+    <ui:define name="body">
+        <f:view >
+
+        <h:panelGroup rendered="#{!userConfigurationManagedBean.canIeditProfile}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{userConfigurationManagedBean.canIeditProfile}" id="yesPanelGroup">
+                <table width="100%" border="0" cellspacing="5" cellpadding="5">
+                    <tr>
+                        <td style="text-align: left" valign="top" width="160">
+                            <h:form id="userConfigurationForm" >
+                                <div class="quickBox">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="5" >
+                                        <tr>
+                                            <td>
+                                                <h:link outcome="goToProfileConfiguration" value="#{msg.profile_config_menu}" >
+                                                    <f:param name="edit" value="config"/>
+                                                </h:link>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h:link outcome="goToProfileConfiguration" value="#{msg.profile_info_username}" >
+                                                    <f:param name="edit" value="username"/>
+                                                </h:link>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h:link outcome="goToProfileConfiguration" value="#{msg.change_password_menu}" >
+                                                    <f:param name="edit" value="password"/>
+                                                </h:link>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h:link outcome="goToProfileConfiguration" value="#{msg.change_email_menu}" >
+                                                    <f:param name="edit" value="email"/>
+                                                </h:link>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h:link outcome="goToProfileConfiguration" value="#{msg.delete_profile_menu}" >
+                                                    <f:param name="edit" value="delete"/>
+                                                </h:link>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </h:form>
+
+                        </td>
+                        <td style="text-align: left" valign="top"  >
+                            <div class="quickBox">
+                                <h:panelGroup rendered="#{userConfigurationManagedBean.canIeditProfileConfig}" >
+                                    <ui:include src="fragments/configprofile.xhtml" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{userConfigurationManagedBean.canIeditUsername}" >
+                                      <ui:include src="fragments/editusername.xhtml"  />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{userConfigurationManagedBean.canIeditPassword}" >
+                                      <ui:include src="fragments/editpassword.xhtml"  />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{userConfigurationManagedBean.canIeditEmail}" >
+                                      <ui:include src="fragments/editemail.xhtml"  />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{userConfigurationManagedBean.canIeditDeleteProfile}" >
+                                      <ui:include src="fragments/deleteProfile.xhtml"  />
+                                </h:panelGroup>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+        </h:panelGroup>
+
+        </f:view>
+    </ui:define>
+</ui:composition>

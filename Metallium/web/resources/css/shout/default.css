@@ -1,0 +1,26 @@
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+body {
+	margin: 0px;
+	padding: 0;
+	color: #616161;
+}
+
+
+
+
+
+.new {
+    color: #FF9900 !important;
+    font-weight: bold;
+    display:block;
+}
+
+.ui-widget {
+    font-size: 10px;
+}
+

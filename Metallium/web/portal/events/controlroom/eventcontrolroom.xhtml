@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!eventControlRoom.canIseeTheEventControlRoomPage}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{eventControlRoom.canIseeTheEventControlRoomPage}" id="yesPanelGroup">
+            <h:form id="eventControlRoomForm">
+
+                <br/>
+                <table width="100%" border="0" cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td width="100%" align="left">
+                            <h:outputText value="#{msg.event_control_info_title}" styleClass="sectionTitle" />
+                        </td>
+                        <td align="right">
+                            <h:commandButton action="#{eventControlRoom.goToEventCreate}" value="#{msg.event_info_create_event}"
+                                             styleClass="button nightfall" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%" align="left">
+                        </td>
+                        <td ></td>
+                    </tr>
+                </table>
+
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td width="20%" align="left">
+                            <h:outputText value="#{msg.profile_info_network}:" style="font-weight: bold" />
+                        </td>
+                        <td align="left">
+                                <h:selectOneMenu id="network" value="#{eventControlRoom.criteria.network}"
+                                                 valueChangeListener="#{eventControlRoom.valueChangeListenerNetwork}" >
+                                    <f:selectItem itemLabel="#{msg.common_info_none}" itemValue=""/>
+                                    <f:selectItems value="#{loginUserManagedBean.selectItemNetwork}" />
+                                    <f:ajax render="eventsPanelGroup"  execute="@this"/>
+                                </h:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%" align="left">
+                            <h:outputText value="#{msg.common_info_state}:" style="font-weight: bold" />
+                        </td>
+                        <td align="left">
+                                <h:selectOneMenu id="state" value="#{eventControlRoom.criteria.state}"
+                                                 valueChangeListener="#{eventControlRoom.valueChangeListenerState}" >
+                                    <f:selectItems value="#{eventControlRoom.selectItemEventState}" />
+                                    <f:ajax render="eventsPanelGroup"  execute="@this"/>
+                                </h:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <ui:include src="fragmentEventsControlList.xhtml"/>
+                        </td>
+                    </tr>
+                </table>
+                <!-- Fin Tabla Noticias y Eventos -->
+
+                <br/>
+            </h:form>
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

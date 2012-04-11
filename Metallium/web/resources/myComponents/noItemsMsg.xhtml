@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="numberOfItems" />
+        <cc:attribute name="message" required="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup  id="noItemsPanelGroup"  rendered="#{cc.attrs.numberOfItems == 0}">
+            <table align="center">
+                <tr>
+                    <td height="20"></td>
+                </tr>
+                <tr>
+                    <td >
+                        <h:outputText escape="false" value="#{cc.attrs.message}" styleClass="cttitulos"/>
+                    </td>
+                </tr>
+            </table>
+            
+        </h:panelGroup>
+    </cc:implementation>
+</html>

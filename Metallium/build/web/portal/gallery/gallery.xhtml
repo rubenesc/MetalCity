@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>
+        <f:viewParam name="nick" converterMessage="#{msg.commun_info_input_invalid}" value="#{imageGalleryBase.userNick}" />
+        <f:viewParam name="gid" converterMessage="#{msg.commun_info_input_invalid}" value="#{galleryManagedBean.galleryId}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!galleryManagedBean.galleryExists}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{galleryManagedBean.galleryExists}" id="yesPanelGroup">
+
+            <h:form id="galleryForm" >
+                <br/>
+                <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                    <tr>
+                        <td colspan="2">
+                            <h:outputText value="#{galleryManagedBean.imageGallery.title}" styleClass="sectionTitle" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <h:link outcome="goToProfile" value="#{galleryManagedBean.imageGallery.user.name}" >
+                                <f:param name="nick" value="#{galleryManagedBean.imageGallery.user.nick}"/>
+                            </h:link>
+                            <span style="padding-left:3px"/> >> <span style="padding-left:3px"/>
+                            <h:link outcome="goToGalleries" value="#{msg.common_galleries}" >
+                                <f:param name="nick" value="#{galleryManagedBean.imageGallery.user.nick}"/>
+                            </h:link>
+                        </td>
+                        <td align="right">
+                            <h:link outcome="goToUploadImagesToGallery" value="#{msg.image_gallery_info_upload_photos}" rendered="#{galleryManagedBean.canIeditProfile}" >
+                                <f:param name="gid" value="#{galleryManagedBean.imageGallery.id}"/>
+                            </h:link>
+                        </td>
+                    </tr>
+                </table>
+
+                <h:panelGroup rendered="#{!empty  galleryManagedBean.imageGallery.description}" >
+                    <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                        <tr>
+                            <td colspan="2" height="10">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h:outputText value="#{galleryManagedBean.imageGallery.description}" styleClass="" />
+                            </td>
+                        </tr>
+                    </table>
+                </h:panelGroup>
+                
+            </h:form>
+            <br/>
+            <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                <tr>
+                    <td colspan="2" >
+                        <h:panelGroup id="editGalleryPanelGroup" rendered="#{galleryManagedBean.canIeditProfile}" >
+
+                            <h:form id="galleryMenuForm" >
+
+                                <div style="white-space: nowrap; font-size: small">
+                                    <p:commandButton id="dynaButton" value="#{msg.common_edit}" type="button"  />
+
+                                    <p:menu widgetVar="dynaMenu" position="dynamic"  trigger="dynaButton"  style="width:200px"  my="left top" at="left bottom">
+                                         <p:menuitem value="#{msg.image_gallery_info_album_properties}" onclick="dialogEditGallery.show();"  rendered="#{galleryManagedBean.thisAnImageGallery}" icon="ui-icon-star"/>
+                                         <p:menuitem value="#{msg.image_gallery_info_album_cover}" onclick="dialogPhotoChooser.show();" icon="ui-icon-arrowrefresh-1-w" />
+                                         <p:menuitem value="#{msg.common_delete}" onclick="confirmation.show()" rendered="#{galleryManagedBean.thisAnImageGallery}" icon="ui-icon-close" />
+                                     </p:menu>
+                                </div>
+
+                                <!-- Just a dialog -->
+                                 <p:confirmDialog message="#{msg.confirm_msg_delete_gallery}"
+                                                  showEffect="drop" hideEffect="drop"
+                                                  header="#{msg.common_delete}" severity="alert" widgetVar="confirmation">
+                                     <p:commandButton value="#{msg.common_yes}" update="messages" ajax="false" oncomplete="confirmation.hide()"
+                                                 action="#{galleryManagedBean.deleteImageGallery}" />
+                                     <p:commandButton value="#{msg.common_no}" onclick="confirmation.hide()" type="button" />
+                                 </p:confirmDialog>
+                                <!-- Just a dialog -->
+
+                                    <h:inputHidden value="#{galleryManagedBean.user.id}" />
+                            </h:form>
+
+                            <ui:include src="fragments/dialogPhotoChooser.xhtml"  id="dialogPhotoChooser"  />
+                            <ui:include src="fragments/dialogEditGalleryProperties.xhtml"  id="dialogEditGalleryProperties" />
+
+                        </h:panelGroup>
+                    </td>
+                </tr>
+            </table>
+
+            <ui:include src="fragments/fragmentGallery.xhtml"  />
+
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

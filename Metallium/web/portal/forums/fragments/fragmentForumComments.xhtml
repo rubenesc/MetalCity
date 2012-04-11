@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+ 
+
+        <h:panelGroup  id="commentsPanelGroup">
+
+            <ez:commentInputVideo canIpublishComment="#{forum.authenticated}"
+                             comment="#{forum.commentComp.comment}"
+                             url="#{forum.commentComp.url}"
+                             publishCommentAction="#{forum.commentComp.publishComment}"/>
+
+            <ez:noItemsMsg  message="#{msg.commun_info_no_comments}"
+                           numberOfItems="#{forum.commentComp.paginationComments.itemsCount}"/>
+
+            <h:panelGroup rendered="#{forum.commentComp.paginationComments.itemsCount > 0}" id="commentsPanelGroup1">
+                <br/>
+                <table>
+                    <tr>
+                        <td>
+                            <ez:itemPagination pagination="#{forum.commentComp.paginationComments}"
+                                               nextAction="#{forum.commentComp.nextComments}"
+                                               previousAction="#{forum.commentComp.previousComments}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <h:dataTable value="#{forum.commentComp.itemsComments}" var="item"  styleClass="commentList">
+                                <h:column>
+                                    <span >
+					<span class="tlIcon" style="color: #555555;">
+                                            <h:commandLink id="deleteComment" style="text-align: right"
+                                                           rendered="#{forum.commentComp.canIdeleteComment}"
+                                                           actionListener="#{forum.commentComp.deleteComment}"
+                                                           value="#{msg.common_delete}" >
+                                                <f:ajax execute="@form" render="@form"  />
+                                            </h:commandLink>
+                                        </span>
+                                        
+                                        <h:panelGroup rendered="#{!cc.attrs.playMedia and not empty cc.attrs.mediaId}" >
+                                        
+                                        </h:panelGroup>
+
+                                            <ez:commentPost avatarLocation="#{item.user.avatarLocation}"
+                                                            nick="#{item.user.nick}"
+                                                            name="#{item.user.name}"
+                                                            whatsOnYourMind="#{item.user.whatsOnYourMind}"
+                                                            date="#{item.date}"
+                                                            comment="#{item.comment}"
+
+                                                            mediaId="#{item.mediaId}" playMedia="#{item.playMedia}" 
+                                                            mediaThumbnail1="#{item.mediaThumbnail1}" mediaTitle="#{item.mediaTitle}"
+                                                            mediaDescription="#{item.mediaDescription}" content="#{item.content}" 
+                                                            playVideo="#{forum.commentComp.playVideo(item)}" />
+                                    </span>
+                                </h:column>
+                            </h:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ez:itemPagination pagination="#{forum.commentComp.paginationComments}"
+                                               nextAction="#{forum.commentComp.nextComments}"
+                                               previousAction="#{forum.commentComp.previousComments}" />
+                        </td>
+                    </tr>
+                </table>
+
+            </h:panelGroup>
+        </h:panelGroup>
+
+    <br/>
+
+</ui:composition>
+
+

@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="chooseCoverForm" enctype="multipart/form-data">
+            <table cellspacing="5" cellpadding="0" border="0" align="left" width="300" bgcolor="">
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" border="0" align="left" width="300" >
+                            <tr>
+                                <td align="left">
+                                    #{msg.edit_profile_pic_info_select_pic}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" >
+                                    <p:fileUpload id="file" fileUploadListener="#{editNewsManagedBean.handleFileUpload}"
+                                                      update="coverImagePanelGroup" auto="true"
+                                                      sizeLimit="3000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" >
+                                    <h:panelGroup  rendered="true" id="growlPanel">
+                                        <!--
+                                        <p:growl id="messagesGrowl" />
+                                        -->
+                                    </h:panelGroup>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                        <span style="padding-left:30px"></span>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" border="0" align="left" width="300" bgcolor="">
+                            <tr>
+                                <td align="left">
+                                    <h:outputText value="#{msg.common_info_copy_image}"  />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left">
+                                    <h:inputText id="Id" style="text-align: left" value="#{editNewsManagedBean.newsId}" size="20">
+                                        <f:convertNumber integerOnly="true" maxIntegerDigits="6" type="number" pattern="######"/>
+                                    </h:inputText>
+                                    <span style="padding-left:4px"></span>
+                                    <h:commandButton action="#{editNewsManagedBean.performSearchNews}"
+                                                     value="#{msg.search_info_btn_search}" styleClass="button nightfall" >
+                                        <f:ajax execute="@form" render="@form"  />
+                                    </h:commandButton>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table cellspacing="0" style="text-align: left"  cellpadding="0" border="0" align="right" width="300" >
+                                <tr>
+                                    <td>
+                                        <h:panelGroup id="coverImagePanelGroup">
+                                            <img alt="" id="coverImage" border="1" width="200" src="#{editNewsManagedBean.news.coverImageLocation}" />
+                                        </h:panelGroup>
+                                    </td>
+                                </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+
+</ui:composition>
+

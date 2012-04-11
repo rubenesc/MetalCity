@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="headerPersonalInfoForm" >
+
+        <table width="100%" border="0" >
+            <tbody>
+                <tr>
+                    <td >
+                        <h:link  outcome="goToProfile">
+                            <h:outputText value="#{profileManagedBean.user.name}" styleClass="sectionTitle" />
+                            <f:param name="nick" value="#{profileManagedBean.user.nick}"/>
+                        </h:link>
+                    </td>
+                    <td align="right">
+                        <h:link id="editProfileLink" rendered="#{profileManagedBean.canIeditProfile}" outcome="goToEditProfile" value="#{msg.common_edit}" >
+                            <f:param name="nick" value="#{profileManagedBean.profileNick}"/>
+                            <f:param name="edit" value="personal"/>
+                        </h:link>
+
+                        <span style="padding-left:2px; padding-right:2px" />
+
+                        <h:commandButton id="banUserLink" rendered="#{profileManagedBean.canIbanUser}"
+                                      onclick="dialogBanUserFromProfileWidget.show();"
+                                      value="#{msg.banned_info_ban_button}" styleClass="button nightfall"
+                                      immediate="true">
+                            <f:ajax execute="@this" />
+                        </h:commandButton>
+
+                        <span style="padding-left:2px; padding-right:2px" />
+
+                        <h:commandButton id="unbanUserLink" rendered="#{profileManagedBean.canIunbanUser}"
+                                      onclick="dialogUnbanUserFromProfileWidget.show();"
+                                      value="#{msg.banned_info_unban_button}" styleClass="button nightfall"
+                                      immediate="true">
+                            <f:ajax execute="@this" />
+                        </h:commandButton>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+        <h:form id="createEventForm">
+
+         <!-- Start buttons top-->
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+               <tr >
+                   <td colspan="2" align="left">
+                        <h:commandButton value="#{msg.common_button_create}"
+                                         action="#{editEvent.createEvent}" styleClass="button nightfall" />
+                        <span style="padding-left:3px"></span>
+                        <h:commandButton action="#{editEvent.goToEventControlRoom}"
+                                         value="#{msg.commun_button_cancel}" immediate="true" styleClass="button nightfall" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+         <!-- End buttons top-->
+
+
+        <!-- Start Event Content -->
+        <table cellspacing="0" cellpadding="5" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+                <!-- Start choose network -->
+                <tr>
+                    <td  style="text-align: left" valign="top" width="10%"> <b> #{msg.profile_info_network} </b> </td>
+                    <td  style="text-align: left" >
+                        <h:selectOneMenu id="network" value="#{editEvent.event.network}" >
+                            <f:selectItem itemLabel="#{msg.common_info_none}" itemValue=""/>
+                            <f:selectItems value="#{loginUserManagedBean.selectItemNetwork}" />
+                        </h:selectOneMenu>
+                    </td>
+                </tr>
+                <!-- End choose network -->
+               <tr>
+                    <td  style="text-align: left" valign="top" width="10%"> <b> #{msg.news_info_title} </b> </td>
+                    <td  style="text-align: left" >
+                        <h:inputText style="text-align: left" value="#{editEvent.event.title}" size="94"/>
+                    </td>
+                </tr>
+               <tr>
+                   <td  style="text-align: left" valign="top" width="10%"> <b> #{msg.event_info_event_location} </b> </td>
+                    <td  style="text-align: left" >
+                        <h:inputText style="text-align: left" value="#{editEvent.event.location}" size="94"/>
+                    </td>
+                </tr>
+               <tr>
+                    <td  style="text-align: left" valign="top" width="10%"> <b> #{msg.event_info_event_date} </b> </td>
+                    <td  style="text-align: left" >
+                       <p:calendar value="#{editEvent.event.eventDate}" locale="en" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+                <tr>
+                    <td colspan="2" align="left">
+                        <p:editor value="#{editEvent.event.content}" widgetVar="editor" width="650"/>
+                    </td>
+               </tr>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+
+        <!-- End Event Content -->
+
+        <!-- Start Video Content -->
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+                <tr>
+                    <td  style="text-align: left" valign="top" width="15%"> <b> <h:outputText value="#{msg.news_field_video_url}" /> </b> </td>
+                    <td  style="text-align: left" >
+                        <h:inputText style="text-align: left" value="#{editEvent.event.mediaUrl}" size="100"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+        <!-- End Video Content -->
+
+
+
+
+         <!-- Start buttons bottom-->
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+               <tr >
+                   <td colspan="2" align="left">
+                        <h:commandButton value="#{msg.common_button_create}"
+                                         action="#{editEvent.createEvent}" styleClass="button nightfall" />
+                        <span style="padding-left:3px"></span>
+                        <h:commandButton action="#{editEvent.goToEventControlRoom}"
+                                         value="#{msg.commun_button_cancel}" immediate="true" styleClass="button nightfall" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+         <!-- End button bottom-->
+
+        </h:form>
+
+
+</ui:composition>
+
+
+

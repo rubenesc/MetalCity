@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:form id="userLoginForm" rendered="#{!loginUserManagedBean.authenticated}">
+
+        <div class="register" style="font-size: 16px; margin: 0px;">
+            <table>
+                <tr>
+                    <td>
+                <h:outputText value="#{msg.login_info_login}" />
+                </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        #{msg.commun_email}:
+                        <br/>
+                <h:inputText id="email" styleClass="frmText" value="#{loginUserManagedBean.user.email}" size="20" /><br/>
+                #{msg.commun_password}:<br/>
+                <h:inputSecret id="password" styleClass="frmText" value="#{loginUserManagedBean.user.password}" size="21" /><br/>
+                <br/>
+                <h:commandButton id="loginBtn" value="Login"
+                                 action="#{loginUserManagedBean.loginUser}" styleClass="button nightfall" />
+                <br/>
+                <br/>
+                </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                <h:commandLink id="forgotPasswordLink" value="#{msg.login_info_forgot_password}"
+                               onclick="dialogForgotPassword.show()"  immediate="true">
+                    <f:ajax execute="@none"/>
+                </h:commandLink>
+                </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h:link outcome="goToRegisterUser" value="#{msg.login_info_register}" style="border: none" />
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+
+        <ui:include src="/portal/user/commonFragments/forgotpassword.xhtml"  id="fragmentForgotPassword" />
+
+        <hr/>
+
+
+    </h:form>
+</ui:composition>

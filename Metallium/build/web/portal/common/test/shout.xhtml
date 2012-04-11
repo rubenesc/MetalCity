@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/shout/ui.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:define name="body">
+        <style type="text/css">
+            .bookmark {
+                background-image: url(/img/resources/bookmark.png) !important;
+            }
+        </style>
+
+
+        <h1 class="title ui-widget-header ui-corner-all">Button</h1>
+        <div class="entry">
+            <p>Button is an extension to the standard h:button component featuring advanced skinning capabilities. Just like
+            h:button, button does GET requests targeting bookmarkable URLs.</p>
+
+            <p:button  value="Bookmark" image="bookmark" style="margin-right:20px;">
+            </p:button>
+
+            <p:button  value="With Icon" image="bookmark" style="margin-right:20px;">
+            </p:button>
+
+            <p:button  image="bookmark" style="margin-right:20px;" title="Icon Only">
+            </p:button>
+
+            <p:button  value="Bookmark" image="bookmark" disabled="true" style="margin-right:20px;">
+            </p:button>
+
+        </div>
+
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+        <td style="text-align: left" valign="top" width="200" align="right" >
+            <table cellspacing="0" style="text-align: left"  cellpadding="0" border="0" align="left" width="200" >
+                <tbody>
+                    <tr>
+                        <td style="text-align: left" valign="top"  >
+                            <h:link outcome="goToGalleries">
+                                <img alt="_\,,/" id="profilePicM" align="right" border="0" width="200" src="#{profileManagedBean.user.avatarProfileLocation}" />
+                                <f:param name="nick" value="#{profileManagedBean.user.nick}"/>
+                            </h:link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  >
+                            <table >
+                                <tr>
+                                    <td style="text-align: left">
+                                        <h:link outcome="goToGalleries" value="#{msg.common_info_pics}">
+                                            <f:param name="nick" value="#{profileManagedBean.user.nick}"/>
+                                        </h:link>
+                                    </td>
+                                </tr>
+                                <h:panelGroup id="sendMessage"  rendered="#{profileManagedBean.canISendMessage}" >
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <h:commandLink id="sendMessageLink" value="#{msg.message_info_send_message}"
+                                                          onclick="dialogSendMessageFromProfile.show();" immediate="true">
+                                                <f:ajax execute="@this" />
+                                            </h:commandLink>
+                                       </td>
+                                    </tr>
+                                </h:panelGroup>
+                                <h:panelGroup id="addToFriends"  rendered="#{profileManagedBean.canIAddToFriends}" >
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <h:commandLink id="addToFriendsLink" value="#{msg.profile_info_add_friend}"
+                                                          onclick="dialogAddToFriendsFromProfileWidget.show();" immediate="true">
+                                                <f:ajax execute="@this" />
+                                            </h:commandLink>
+                                       </td>
+                                    </tr>
+                                </h:panelGroup>
+                                <h:panelGroup id="deleteFromFriends"  rendered="#{profileManagedBean.canIDeleteFromFriends}" >
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <h:commandLink id="deleteFromFriendsLink" value="#{msg.profile_info_delete_friend}"
+                                                          onclick="dialogDeleteFromFriendsFromProfileWidget.show();" immediate="true">
+                                                <f:ajax execute="@this" />
+                                            </h:commandLink>
+                                       </td>
+                                    </tr>
+                                </h:panelGroup>
+                                <h:panelGroup id="chatWithUser"  rendered="false" >
+                                    <tr>
+                                        <td style="text-align: left">
+                                            <h:link outcome="/portal/user/chat/chat" value="chat">
+                                                <f:param name="id" value="#{profileManagedBean.user.id}"/>
+                                            </h:link>
+                                       </td>
+                                    </tr>
+                                </h:panelGroup>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+
+</ui:composition>

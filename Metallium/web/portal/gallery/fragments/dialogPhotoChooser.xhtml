@@ -1,0 +1,69 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="photoChooserForm" rendered="#{galleryManagedBean.canIeditProfile}">
+
+        <p:dialog header="#{msg.image_gallery_info_photo_chooser}" widgetVar="dialogPhotoChooser" modal="true" height="350" width="750" >
+
+                <table cellspacing="5" cellpadding="0" width="100%" border="0">
+                    <tbody>
+                        <tr>
+                            <td  style="text-align: left" valign="top" width="20%">
+                                <b> #{msg.image_gallery_info_select_cover_photo}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <table cellspacing="0" cellpadding="5" width="100%" border="0">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <!-- Start Gallery -->
+                                            <h:panelGroup  id="albumCoverPanelGroup">
+                                                <h:outputText escape="false" value="#{msg.common_info_no_images}" rendered="#{galleryManagedBean.itemsAlbumCover.rowCount == 0}"/>
+                                                <h:panelGroup rendered="#{galleryManagedBean.itemsAlbumCover.rowCount > 0}" id="albumCoverPanelGroup1">
+                                                    <table width="100%" align="left">
+                                                            <tr>
+                                                                <td>
+                                                                    <p:dataGrid  var="item" value="#{galleryManagedBean.itemsAlbumCover}" columns="5"  rows="200" rendered="true">
+                                                                         <p:column>
+                                                                             <h:commandLink  id="albumCover" actionListener="#{galleryManagedBean.chooseAlbumCoverImageGallery}" >
+                                                                                    <img alt="_\,,/" id="profilePicS" align="left" border="1"  width="100" src="#{item.thumbnailLocation}" />
+                                                                             </h:commandLink>
+                                                                         </p:column>
+                                                                     </p:dataGrid>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <!-- End Gallery -->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            <h:inputHidden value="#{galleryManagedBean.galleryId}" />
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" height="20"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" align="left">
+                                <p:commandButton value="#{msg.commun_button_cancel}" onclick="dialogPhotoChooser.hide();" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </p:dialog>
+    </h:form>
+
+
+</ui:composition>

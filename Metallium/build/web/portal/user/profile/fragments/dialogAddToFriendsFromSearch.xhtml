@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+        <p:dialog header="#{msg.profile_info_add_friend}"
+                  widgetVar="dialogAddToFriendsFromSearchWidget" modal="true" width="600" >
+            <p:outputPanel id="userDetail" style="text-align:center;" layout="block">
+                <table cellspacing="0" cellpadding="5" width="100%" border="0" align="left">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left" valign="top" align="left">
+                                <img alt="_\,,/" id="profilePicM" align="left" border="0" width="150"
+                                     src="#{searchManagedBean.selectedUser.avatarProfileLocation}" />
+                            </td>
+                            <td>xxx
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p:outputPanel>
+        </p:dialog>
+
+
+</ui:composition>

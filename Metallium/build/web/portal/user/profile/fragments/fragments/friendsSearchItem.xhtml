@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+       <h:panelGroup id="messageUserAvatarPanelGroup" rendered="#{! empty item.avatarLocation}" >
+            <h:link outcome="goToProfile"  >
+                <img alt=":)" id="messageProfilePicS" class="avatarReply" border="1" width="75"
+                     src="#{item.avatarLocation}" />
+                <f:param name="nick" value="#{item.nick}"/>
+            </h:link>
+        </h:panelGroup>
+
+        <span class="tlIcon">
+            <span style="padding-left:2px; padding-right:2px" ></span>
+            <h:panelGroup rendered="#{ false and !profileManagedBean.friendSearchComp.canIAddToFriends}">
+                    <h:outputText value="#{msg.profile_info_friend}" style="text-align: right" />
+            </h:panelGroup>
+            <span style="padding-left:2px; padding-right:2px" ></span>
+        </span>
+
+        <span class="tlComment2"  style="margin-left: 85px; display: block; color: #999999; line-height: 17px; font-size: 13px;">
+            <ui:include src="/portal/user/commonFragments/userBasicInfo2.xhtml" />
+        </span>
+
+</ui:composition>

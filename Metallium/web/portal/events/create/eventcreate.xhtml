@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+            <h:panelGroup rendered="#{!eventControlRoom.canIseeTheCreateEventPage}" id="noPanelGroup">
+                <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{eventControlRoom.canIseeTheCreateEventPage}" id="yesPanelGroup">
+
+                <br/>
+                <table cellspacing="0" cellpadding="5" width="100%" border="0" >
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h:outputText value="#{msg.event_info_create_event}" styleClass="sectionTitle" />
+                                </td>
+                                <td ></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" >
+                                    <table cellspacing="5" cellpadding="0" width="100%" border="0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: left" valign="top" width="200">
+                                                    <!-- start images -->
+                                                    <ui:include src="fragments/chooseCover.xhtml"  />
+                                                    <!-- end images -->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20" />
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left" valign="top" width="100%" >
+                                                    <!-- start info news -->
+                                                        <ui:include src="fragments/create.xhtml"  />
+                                                    <!-- end info news -->
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

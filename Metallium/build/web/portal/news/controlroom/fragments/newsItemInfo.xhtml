@@ -1,0 +1,78 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <table width="100%" >
+        <tbody>
+            <tr>
+                <td align="left">
+                    <ui:include src="newsActions1.xhtml"  id="newsActions" />
+                </td>
+            </tr>
+            <tr>
+                <td align="left" >
+                    <h:link outcome="goToNews" style="FONT-SIZE: 15px; COLOR: #e4d7b8;" >
+                        <h:outputText escape="true" value="#{item.title}" />
+                        <f:param name="news" value="#{item.alias}"/>
+                    </h:link>
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <b>
+                        <h:outputText value="#{item.date}" >
+                            <f:convertDateTime pattern="MM.dd.yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </b>
+                    <span style="padding-left:2px; padding-right:2px" />
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <h:outputText value="#{msg.index_info_publishedby}" />
+                    <span style="padding-right:2px" />
+                    <h:link outcome="goToProfile" value="#{item.user.name}" >
+                        <f:param name="nick" value="#{item.user.nick}"/>
+                    </h:link>
+                     -
+                    <h:outputText value="#{item.numberComments}"/> #{msg.index_info_commentaries}
+                </td>
+                <td align="right">
+
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <h:outputText value="#{msg.common_info_state}: " style="font-weight: bold"/>
+                    <h:outputText value="#{item.state}" converter="#{newsControlRoomManagedBean.converter.newsStateConverter}" />
+                </td>
+                <td align="right">
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <h:outputText value="#{msg.profile_info_network}: " style="font-weight: bold"/>
+                    <h:outputText value="#{item.networkCollection}"
+                                converter="#{newsControlRoomManagedBean.converter.networkConverter}"/>
+                </td>
+                <td align="right">
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <h:outputText value="#{msg.common_info_id}: " style="font-weight: bold"/>
+                    <h:outputText value="#{item.id}"  />
+                </td>
+                <td align="right">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</ui:composition>
+
+
+

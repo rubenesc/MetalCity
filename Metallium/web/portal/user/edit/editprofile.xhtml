@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <ui:define name="bodyHeaderTitle" >
+        #{msg.edit_profile_title}
+    </ui:define>
+
+    <ui:define name="body">
+        <f:view >
+
+            <h:panelGroup rendered="#{!editProfileManagedBean.canIeditProfile}" id="noPanelGroup">
+                <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+            </h:panelGroup>
+            <h:panelGroup rendered="#{editProfileManagedBean.canIeditProfile}" id="yesPanelGroup">
+
+                <h:panelGroup rendered="#{editProfileManagedBean.canIeditProfilePictureInfo}" >
+                    <ui:include src="fragments/profilePicture.xhtml"  />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{editProfileManagedBean.canIeditPersonalInfo}" >
+                    <ui:include src="fragments/personalInfo.xhtml"  />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{editProfileManagedBean.canIeditFavoriteInfo}" >
+                    <ui:include src="fragments/favoriteInfo.xhtml"  />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{editProfileManagedBean.canIeditOpinionInfo}" >
+                    <ui:include src="fragments/opinionInfo.xhtml"  />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{editProfileManagedBean.canIaddWallPost}" >
+                    <ui:include src="fragments/wall/addPost.xhtml"  />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{editProfileManagedBean.canIeditWallPost}" >
+                    <ui:include src="fragments/wall/editPost.xhtml"  />
+                </h:panelGroup>
+
+
+            </h:panelGroup>
+        </f:view>
+        <br/>
+    </ui:define>
+</ui:composition>

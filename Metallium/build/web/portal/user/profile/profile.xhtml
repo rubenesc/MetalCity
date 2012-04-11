@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:metadata >
+        <f:viewParam name="nick" converterMessage="#{msg.commun_info_input_invalid}" value="#{profileManagedBean.profileNick}" />
+        <f:viewParam name="nick" converterMessage="#{msg.commun_info_input_invalid}" value="#{profileExtManagedBean.profileNick}" />
+        <f:viewParam name="nick" converterMessage="#{msg.commun_info_input_invalid}" value="#{profileFriendList.profileNick}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+        #{msg.profile_title}
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!profileManagedBean.profileExists}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+
+
+        <h:panelGroup rendered="#{profileManagedBean.profileExists}" id="profilePanelGroup" >
+
+            <ui:include src="fragments/personalInfo.xhtml" />
+            <!--
+            <ui:include src="fragments/favoriteInfo.xhtml" />
+            <ui:include src="fragments/opinionInfo.xhtml" />
+            -->
+            <ui:include src="fragments/wall/wall.xhtml" />
+            <ui:include src="fragments/userWallComments.xhtml" />
+
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,77 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+    <ui:define name="body">
+
+    <h:panelGroup  id="onePanel" rendered="#{editForum.canIeditForum}">
+        <h:form id="editForumForm" >
+
+        <ezPres:title01 id="title" title="#{msg.forum_info_title_edit}" />
+        
+        <table>
+            <tr>
+                <td style="text-align: right">
+                    <b> #{msg.forum_category_title}:</b><span style="padding-left:3px"></span>
+                </td>
+                <td>
+                    <h:selectOneMenu id ="forumCategory" value="#{editForum.forum.category.id}" >
+                        <f:selectItems value="#{editForum.selectItemForumCategory}"
+                                       var="item" itemValue="#{item.one}" itemLabel="#{msg[item.two]}" />
+                    </h:selectOneMenu>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 20"/>
+            </tr>
+            <tr>
+                <td style="text-align: right">
+                    <b> #{msg.news_info_title}:</b><span style="padding-left:3px"></span>
+                </td>
+                <td>
+                    <h:inputText style="text-align: left" styleClass="blackInput" value="#{editForum.forum.title}" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 20"/>
+            </tr>
+            <tr>
+                <td style="text-align: right">
+                    <b> #{msg.wall_post_info_description}:</b><span style="padding-left:3px"></span>
+                </td>
+                <td>
+                    <p:editor id="comment" value="#{editForum.forum.content}"  widgetVar="editor"
+                              controls="bold italic underline strikethrough numbering link unlink pastetext outdent indent"
+                              width="550" height="160" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 20"/>
+            </tr>
+            <tr >
+                <td></td>
+                <td><p>
+                        <h:commandButton value="#{msg.commun_button_save_changes}"
+                                         action="#{editForum.editForum}" styleClass="button nightfall" />
+                        <span style="padding-left:3px"></span>
+                        <h:commandButton id="cancelPost" actionListener="#{editForum.cancelEditForum}"
+                                         value="#{msg.commun_button_cancel}" styleClass="button nightfall" />
+                    </p>
+                </td>
+            </tr>
+        </table>
+        
+        </h:form>
+    </h:panelGroup>
+        
+    </ui:define>
+</ui:composition>

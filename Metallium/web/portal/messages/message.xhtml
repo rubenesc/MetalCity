@@ -1,0 +1,169 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <f:metadata>
+        <f:viewParam name="id" converterMessage="#{msg.commun_info_input_invalid}" value="#{messageManagedBean.messageId}" />
+        <f:viewParam name="box" converterMessage="#{msg.commun_info_input_invalid}" value="#{messageBoxManagedBean.box}" />
+    </f:metadata>
+
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!messageManagedBean.messageExists}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{messageManagedBean.messageExists}" id="yesPanelGroup">
+            <h:form id="messagesForm" >
+
+                <br/>
+                <table cellspacing="2" cellpadding="0" border="0" align="left">
+                    <tr>
+                        <td align="left">
+                            <h:commandButton value="#{msg.message_box_info_back_to_messages}"
+                                             action="#{messageManagedBean.goBackToBox}" styleClass="button nightfall" />
+                            <span style="padding-left:2px; padding-right:2px" ></span>
+                        </td>
+                        <td align="left">
+                            <h:commandButton value="#{msg.common_delete}" onclick="confirmation.show()" immediate="true" styleClass="button nightfall" >
+                                <f:ajax execute="@none"></f:ajax>
+                            </h:commandButton>
+                            <span style="padding-left:2px; padding-right:2px" ></span>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- just a dialog -->
+                 <p:confirmDialog message="#{msg.message_info_delete_confirm_msg}"
+                                  header="#{msg.common_delete}" severity="alert" widgetVar="confirmation">
+                     <p:commandButton value="#{msg.common_yes}" ajax="false" oncomplete="confirmation.hide()"
+                                          action="#{messageManagedBean.deleteMessage}" />
+                     <p:commandButton value="#{msg.common_no}" onclick="confirmation.hide()" type="button" />
+                 </p:confirmDialog>
+                <!-- just a dialog -->
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="5" align="left" >
+                    <tbody>
+                        <tr valign="top">
+                            <td  valign="top" >
+                                <table cellspacing="0"  cellpadding="0" width="160" border="0" style="vertical-align: text-top" >
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align: left" valign="top" width="200" align="left" >
+                                                <table cellspacing="0" style="text-align: left"  cellpadding="0" border="0" align="left" width="100" >
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="text-align: left" valign="top"  align="left">
+                                                                <h:link outcome="goToProfile">
+                                                                    <img alt="_\,,/" id="profilePicS" align="left" border="0" width="100"
+                                                                         src="#{messageManagedBean.message.fromUser.avatarLocation}" />
+                                                                    <f:param name="nick" value="#{messageManagedBean.message.fromUser.nick}"/>
+                                                                </h:link>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <!-- just a little space -->
+                                            <td >
+                                                <span style="padding-left:20px"></span>
+                                            </td>
+                                            <!-- just a little space -->
+                                            <!-- Message info -->
+                                            <td style="text-align: left" valign="top" width="100%" >
+                                                <table cellspacing="2" align="left" cellpadding="0" width="500" border="0" >
+                                                    <tr>
+                                                        <td style="text-align: left" valign="top" >
+                                                            <h:link outcome="goToProfile">
+                                                                <b><h:outputText value="#{messageManagedBean.message.fromUser.name}"
+                                                                                 styleClass="messageMessageMed"/></b>
+                                                                <f:param name="nick" value="#{messageManagedBean.message.fromUser.nick}"/>
+                                                            </h:link>
+                                                            <span style="padding-left:4px"></span>
+                                                            <h:outputText value="#{msg.message_info_to}" />
+                                                            <span style="padding-left:4px"></span>
+                                                            <h:link outcome="goToProfile">
+                                                                <b><h:outputText value="#{messageManagedBean.message.toUser.name}"
+                                                                                 styleClass="messageMessageMed"/></b>
+                                                                <f:param name="nick" value="#{messageManagedBean.message.toUser.nick}"/>
+                                                            </h:link>
+                                                            <span style="padding-left:4px"></span>
+                                                            <b>
+                                                                <h:outputText value="#{messageManagedBean.message.date}"
+                                                                              styleClass="messageMessageMed">
+                                                                        <f:converter converterId="co.metallium.PrettyTimeConverter"/>
+                                                                </h:outputText>
+                                                            </b>
+                                                        </td>
+                                                        <td style="text-align: left">
+                                                        </td>
+                                                    </tr>
+                                                    <h:panelGroup rendered="false" >
+                                                        <tr>
+                                                            <td colspan="2" align="left" width="500">
+                                                                <h:outputText styleClass="messageTitleMed" value="#{messageManagedBean.message.title}" />
+                                                            </td>
+                                                        </tr>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{!empty  messageManagedBean.message.message}" >
+                                                        <tr>
+                                                            <td style="text-align: left" valign="top" width="500">
+                                                                <h:outputText escape="false" styleClass="messageMessageMed" value="#{messageManagedBean.message.message}" />
+                                                            </td>
+                                                        </tr>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{messageManagedBean.canIreplay}" >
+                                                        <tr>
+                                                            <td style="text-align: left" valign="top" height="20">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left" valign="top" >
+                                                                <p:editor id="comment"  value="#{sendMessageFromBoxManagedBean.sendMessage.message}" widgetVar="editor"
+                                                                          controls="bold italic underline strikethrough numbering link unlink pastetext outdent indent"
+                                                                          width="550" height="160" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left" valign="top" height="5">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left" valign="top" height="5">
+                                                                <h:commandButton value="#{msg.message_box_info_reply}"
+                                                                                 action="#{sendMessageFromBoxManagedBean.replyMessage}" 
+                                                                                 styleClass="button nightfall"/>
+                                                            </td>
+                                                        </tr>
+                                                    </h:panelGroup>
+                                                </table>
+                                            </td>
+                                            <!-- Message info -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </h:form>
+        </h:panelGroup>
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="5" align="left" >
+            <tbody>
+                <tr valign="top">
+                    <td  valign="top" height="40"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </ui:define>
+</ui:composition>

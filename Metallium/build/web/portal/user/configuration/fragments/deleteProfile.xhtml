@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="deleteProfileForm" rendered="#{userConfigurationManagedBean.canIeditProfile}" >
+        <table width="500"  cellspacing="0" class="tableBorder" cellpadding="5">
+            <tr>
+                <td colspan="2">
+                    <h:outputText id="title" value="#{msg.delete_profile_title}" styleClass="sectionTitle" />
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left" valign="top" width="28%">
+                    #{msg.delete_profile_info_why}
+                </td>
+                <td align="left" colspan="2">
+                    <h:inputTextarea rows="3" cols="50" value="#{userConfigurationManagedBean.whyAreYouLeaving}" styleClass=""/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left" valign="top" width="28%">
+                    #{msg.change_password_info_current_password}:
+                </td>
+                <td align="left" colspan="2">
+                    <h:inputSecret value="#{userConfigurationManagedBean.password}" id="password" size="30"
+                                   valueChangeListener="#{userConfigurationManagedBean.checkIfCurrentPasswordIsValid}">
+                        <f:ajax execute="@this" render="passwordValitation" />
+                    </h:inputSecret>
+                    <span style="padding-left:3px"></span>
+                    <h:outputText value="#{userConfigurationManagedBean.currentPasswordValitation}" id="passwordValitation" />
+                </td>
+            </tr>
+            <tr>
+                <td height="5"></td>
+                <td ></td>
+            </tr>
+            <tr>
+                <td style="text-align: left" valign="top" width="28%"></td>
+                <td align="left">
+                    <p:captcha label="Captcha"
+                                       language="#{userConfigurationManagedBean.locale}"
+                                       requiredMessage="#{msg.register_field_captcha_required}"/>
+                </td>
+            </tr>
+            <tr>
+                <td height="10"></td>
+                <td ></td>
+            </tr>
+            <tr>
+                <td style="text-align: left" valign="top" width="28%"> </td>
+                <td style="text-align: left" colspan="2">
+                    <h:commandButton id="deleteProfileBtn" value="#{msg.common_confirm}"
+                                     onclick="confirmation.show()"  styleClass="button nightfall" immediate="true" >
+                        <f:ajax execute="@this" />
+                    </h:commandButton>
+                    <span style="padding-left:3px"></span>
+                </td>
+            </tr>
+            <tr>
+                <td height="10"></td>
+            </tr>
+        </table>
+
+        <!-- just a dialog -->
+         <p:confirmDialog message="#{msg.delete_profile_info_confirm}"
+                          showEffect="drop" hideEffect="drop"
+                          header="#{msg.common_delete}" severity="alert" widgetVar="confirmation">
+             <p:commandButton value="#{msg.common_yes}" ajax="false" oncomplete="confirmation.hide()"
+                         actionListener="#{userConfigurationManagedBean.deleteProfile}" />
+             <p:commandButton value="#{msg.common_no}" onclick="confirmation.hide()" type="button" />
+         </p:confirmDialog>
+        <!-- just a dialog -->
+
+    </h:form>
+</ui:composition>
+
+

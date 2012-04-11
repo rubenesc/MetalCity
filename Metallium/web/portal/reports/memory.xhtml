@@ -1,0 +1,160 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/templateMemoryReport.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+
+        <h:panelGroup id="reportPanelGroup">
+
+            <h:form id="reportForm" >
+
+                <br/>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                    <tr>
+                        <td colspan="2">
+                    <h:outputText value="Report Memory Stats" styleClass="sectionTitle" />
+                    </td>
+                    </tr>
+                </table>
+                
+                    <h:dataTable value="#{report.memoryStatList}" var="item" style="width: 700px;"
+                     rowClasses="uneven,even" border="0"  cellpadding="7px" cellspacing="0">
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="Date" />
+                            </f:facet>
+                            <div class="Lastby">
+                                <h:outputText escape="true" value="#{item.date}">
+                                    <f:converter converterId="co.metallium.PrettyTimeConverter"/>
+                                </h:outputText>
+                             </div>
+                        </h:column>
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="Active Web Sessions" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item.activeWebSessions}" />
+                            </div>
+                        </h:column>
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="Percent" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item.percentMemoryUsed}%" />
+                            </div>
+                        </h:column>
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="Used Memeory" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item.memoryUsed}" />
+                            </div>
+                        </h:column>
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="Max Memory" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item.memoryMax}" />
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                <br/>
+                <br/>
+                <br/>
+                <table style="width: 1700px;" border="0" cellspacing="0" cellpadding="0"  class="uneven">
+                    <tr>
+                        <td colspan="2">
+                            <h:outputText value="IP list" styleClass="sectionTitle" />
+                            <span style="padding-left:3px;" />
+                            <h:outputText value="#{report.clientIpSize}" styleClass="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h:outputText value="#{report.clientIpListString}" />
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <br/>
+
+                    <h:dataTable value="#{report.clientIpList}" var="item2" style="width: 1700px;"
+                         rowClasses="uneven,even" border="0"  cellpadding="7px" cellspacing="0">
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="Count" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item2.count}" />
+                            </div>
+                        </h:column>
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="IP" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item2.ip}" />
+                            </div>
+                        </h:column>
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="Referrer" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item2.referer}"  style="text-align:left;"/>
+                            </div>
+                        </h:column>
+
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="x-forwarded-host" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item2.xForwardedHost}"  style="text-align:left;"/>
+                            </div>
+                        </h:column>
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="x-forwarded-server" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item2.xForwardedServer}"  style="text-align:left;"/>
+                            </div>
+                        </h:column>
+                        <h:column headerClass="dataTableHeader2">
+                            <f:facet name="header" >
+                                <h:outputText value="User-Agent" />
+                            </f:facet>
+                            <div class="postCount">
+                                <h:outputText escape="true" value="#{item2.userAgent}" style="text-align:left"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+
+
+        
+
+            </h:form>
+
+
+        </h:panelGroup>
+
+        <br/>
+        <br/>
+
+    </ui:define>
+</ui:composition>

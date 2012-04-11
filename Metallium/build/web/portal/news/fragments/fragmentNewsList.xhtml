@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:form id="newsListForm" >
+
+        <table width="100%" border="0">
+            <tr bgcolor="">
+                <td  align="left" >
+                    <h:outputText value="#{msg.news_title}" styleClass="sectionTitle"/>
+                </td>
+                <td  align="right" valign="bottom">
+                    <h:panelGroup rendered="#{loginUserManagedBean.myProfileAdministrator1}" >
+                        <div>
+                            <h:outputText value="#{msg.profile_info_network}:" style="font-size: large"/>
+                            <span style="padding-left:2px; padding-right:2px" />
+                            <h:selectOneMenu id="network" value="#{newsManagedBean.newsSearchDTO.network}"
+                                             valueChangeListener="#{newsManagedBean.valueChangeListenerNetwork}" >
+                                <f:selectItem itemLabel="#{msg.common_info_none}" itemValue=""/>
+                                <f:selectItems value="#{loginUserManagedBean.selectItemNetwork}" />
+                                <f:ajax render="ajaxPanel"  execute="@this"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </h:panelGroup>
+                </td>
+            </tr>
+        </table>
+
+        <h:panelGroup id="ajaxPanel">
+            <ez:noItemsMsg id="noItemsComp" message="#{msg.commun_info_no_news}"
+                           numberOfItems="#{newsManagedBean.paginationNews.itemsCount}"/>
+
+            <h:panelGroup  rendered="#{newsManagedBean.paginationNews.itemsCount > 0}" id="newsPanelGroup" >
+
+                <table>
+                    <tr>
+                        <td>
+                            <ez:itemPagination id="itemPaginationComp" pagination="#{newsManagedBean.paginationNews}"
+                                               nextAction="#{newsManagedBean.nextNews}" previousAction="#{newsManagedBean.previousNews}" />
+                        </td>
+                    </tr>
+                </table>
+                
+                <table>
+                    <tr>
+                        <td>
+                            <p:dataGrid  var="item" value="#{newsManagedBean.itemsNews}" columns="3"  rows="9" rendered="true" styleClass="commentList">
+                                 <p:column>
+                                    <h:panelGroup id="coverImageThumbnailPanelGroup" rendered="#{! empty item.coverImageThumbnail}" >
+                                        <table width="210" >
+                                            <tr>
+                                                <td>
+                                                    <h:link  outcome="goToNews" >
+                                                        <f:param name="news" value="#{item.alias}"/>
+                                                        <img alt="" id="coverImageThumbnail" align="left"  src="#{item.coverImageThumbnailLocation}" />
+                                                    </h:link>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h2 style="display: inline;">
+                                                        <h:link outcome="goToNews" >
+                                                            <div style="text-align: left">
+                                                                <h:outputText escape="true" value="#{item.title}"/>
+                                                            </div>
+                                                            <f:param name="news" value="#{item.alias}"/>
+                                                        </h:link>
+                                                    </h2>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </h:panelGroup>
+                                 </p:column>
+                             </p:dataGrid>
+                        </td>
+                    </tr>
+                </table>
+            </h:panelGroup>
+        </h:panelGroup>
+
+
+    </h:form>
+
+
+</ui:composition>
+

@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:form id="headerUserForm">
+
+            <div id="header" class="clear-fix">
+                <div id="GH_">
+                    <div id="GH_hat">
+                        <ul class="GH_hat_UL" id="GH_hat_links">
+                            <li class="GH_hat_LI">
+                                <a target="_blank" id="GH_hat_A_first" class="GH_hat_A GH_hat_links_A" href="http://www.aol.com/">Aol.</a>
+                            </li>
+                            <li class="GH_hat_LI">
+                                <a target="_blank" class="GH_hat_A GH_hat_links_A" href="http://webmail.aol.com/?_AOLLOCAL=mail">MAIL</a>
+                            </li>
+                            <li class="GH_hat_LI">
+                                <ul id="GH_hat_more" class="GH_hat_UL">
+                                    <li class="GH_hat_LI">You might also like: </li>
+                                    <li class="GH_hat_LI">
+                                        <a href="http://music.aol.com/" target="_self" class="GH_hat_A GH_hat_more_A">Music</a>,
+                                    </li>
+                                    <li class="GH_hat_LI">
+                                        <a href="http://www.winamp.com/" target="_self" class="GH_hat_A GH_hat_more_A">Media Player</a>,
+                                    </li>
+                                    <li class="GH_hat_LI">
+                                        <a href="http://www.aolradioblog.com/2010/04/17/top-10-music-lists-a-to-z/" target="_self" 
+                                           class="GH_hat_A GH_hat_more_A">Top 10 Lists</a>
+                                    </li>
+                                    <li class="GH_hat_LI GH_hat_LI_more">and
+                                        <a id="GH_hat_more_link" href="#" class="GH_hat_A GH_hat_more_A">More</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul> 
+                        <!-- <ul class="GH_hat_UL" id="GH_hat_tools"><li class="GH_hat_LI"><a title="Sign In / Register" class="jSignIn" href="/user/snslogin">Sign In / Register</a></li></ul> -->
+                        <ul class="" id="GH_hat_tools">
+                            <li class="">
+                                <a title="Sign In / Register" class="" href="http://www.shoutcast.com/user/profile/">Profile</a>
+                            </li>
+                        </ul>   
+                        <div id="GH_more_list" style="left: 403px; display: none;">
+                            <b id="GH_more_list_lab">More Sites You Might Like</b>
+                            <ul class="GH_more_list_UL">
+                                <li><a href="http://www.spinner.com/" target="_self">Spinner</a></li>
+                                <li><a href="http://www.theboombox.com/" target="_self">The Boombox</a></li>
+                            </ul>
+                            <ul class="GH_more_list_UL">
+                                <li><a href="http://www.theboot.com/" target="_self">The Boot</a></li>
+                                <li><a href="http://www.noisecreep.com/" target="_self">NoiseCreep</a></li>
+                            </ul>
+                            <ul class="GH_more_list_UL">
+                                <li><a href="http://www.tourtracker.com/" target="_self">Tour Tracker</a></li>
+                                <li><a href="http://www.popeater.com/" target="_self">PopEater</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="GH_guts">
+                        <div id="GH_brand">
+                            <a id="GH_brand_link" href="http://www.shoutcast.com/">SHOUTcast</a>
+                        </div>
+                        <div id="GH_search">
+                            <form method="get" id="GH_search_form" action="javascript:searchOnKeyword()">
+                                <input id="GH_search_field" value="metallica" name="s" autocomplete="off" type="text"/>
+                                <input id="GH_search_button" value="" type="submit"/>
+                                <div id="GH_search_results"></div>
+                            </form>
+                            
+                        </div>
+                        
+                    </div>
+                        <ul id="GH_nav">
+                        </ul>
+                </div>					
+            </div>
+        
+    </h:form>
+
+
+ 
+
+</ui:composition>

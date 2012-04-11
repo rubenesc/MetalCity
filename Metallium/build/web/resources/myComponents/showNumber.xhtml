@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:utils="http://java.sun.com/jsf/composite/utils">
+
+    <head>
+        <title>(For validation only)</title>
+    </head>
+    <body>
+
+        <composite:interface>
+            <composite:attribute name="number" required="true"/>
+            <composite:attribute name="positiveStyleClass" required="true"/>
+            <composite:attribute name="negativeStyleClass" required="true"/>
+        </composite:interface>
+
+        <composite:implementation>
+            <span class="#{(cc.attrs.number >= 0) ? cc.attrs.positiveStyleClass : cc.attrs.negativeStyleClass}">
+                #{cc.attrs.number}
+            </span>
+        </composite:implementation>
+    </body>
+</html>

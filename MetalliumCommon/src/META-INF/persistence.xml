@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="MetalliumCommonPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>co.com.metallium.core.entity.NewsNetwork</class>
+    <class>co.com.metallium.core.entity.UserBan</class>
+    <class>co.com.metallium.core.entity.Event</class>
+    <class>co.com.metallium.core.entity.UserComments</class>
+    <class>co.com.metallium.core.entity.UserCommentsImage</class>
+    <class>co.com.metallium.core.entity.Forum</class>
+    <class>co.com.metallium.core.entity.stats.MemoryStat</class>
+    <class>co.com.metallium.core.entity.UserWallPost</class>
+    <class>co.com.metallium.core.entity.ReservedNames</class>
+    <class>co.com.metallium.core.entity.ForumCategory</class>
+    <class>co.com.metallium.core.entity.jukebox.JukeMedia</class>
+    <class>co.com.metallium.core.entity.jukebox.JukePlaylist</class>
+    <class>co.com.metallium.core.entity.jukebox.JukePlaylistMedia</class>
+    <class>co.com.metallium.core.entity.UserSession</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/metallium"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>

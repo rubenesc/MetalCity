@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:myComponents="http://java.sun.com/jsf/composite/myComponents"
+                template="/templates/metalcity_template_01.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <f:metadata>
+        <f:viewParam name="id" converterMessage="#{msg.commun_info_input_invalid}" value="#{chatManagedBean.toUserId}" />
+    </f:metadata>
+
+    <!-- Shows the Chat Log -->
+    <script type="text/javascript" >
+        function showMedium(sUrl) {
+            window.open(sUrl, '', 'width=800, height=600, scrollbars=yes, resizable=yes, status=no, location=no, menubar=no');
+        }
+    </script>
+
+    <ui:define name="bodyHeaderTitle" >
+        Chaaattt
+    </ui:define>
+
+    <ui:define name="body">
+
+    <h:panelGroup rendered="#{!chatManagedBean.authenticated}" id="noPanelGroup">
+        <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+    </h:panelGroup>
+
+
+    <h:panelGroup rendered="#{chatManagedBean.authenticated}" id="yesPanelGroup">
+        <h:form id="userChatForm" >
+        <h:panelGroup id="chatPanel" style="text-align: left">
+            <h:panelGrid columns="2" style="text-align: left" width="400" bgcolor="yellow" >
+                <h:outputText value="Chat" />
+                <h:commandButton id="saveChat" value="Save Chat" 
+                                 rendered="true" 
+                                 onclick="javascript: showMedium('index.xhtml');"
+                                 style="padding-left: 13px; text-align: right" />
+
+
+
+
+            </h:panelGrid>
+        </h:panelGroup>
+        </h:form>
+    </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

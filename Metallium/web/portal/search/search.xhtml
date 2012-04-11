@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <f:metadata>
+        <f:viewParam name="q" converterMessage="#{msg.commun_info_input_invalid}"  value="#{searchManagedBean.searchQueryRequest}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+    <ui:define name="body">
+
+    <h:panelGroup rendered="false" id="noPanelGroup">
+        <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+    </h:panelGroup>
+
+    <h:panelGroup rendered="true" id="yesPanelGroup">
+        <h:form id="searchForm">
+
+            <!-- Start Query Search Table -->
+            <ezPres:title01 id="title" title="#{msg.search_info_search}" />
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="5">
+                <ui:include src="fragments/basicSearch.xhtml"  />
+            </table>
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="5">
+                <ui:include src="fragments/advancedSearch.xhtml"  />
+            </table>
+
+                        <h:selectOneRadio value="#{searchManagedBean.searchEntity}"
+                                          valueChangeListener="#{searchManagedBean.valueChangeListenerEntity}">
+                            <f:selectItem itemLabel="#{msg.search_info_option_profiles}" itemValue="profile" />
+                            <!--
+                            <f:selectItem itemLabel="#{msg.search_info_option_news}" itemValue="news"  />
+                            <f:selectItem itemLabel="#{msg.search_info_option_forums}" itemValue="forums" />
+                            -->
+                        </h:selectOneRadio>
+            <!-- End Query Search Table -->
+
+            <br/>
+            
+            <!-- Start search results -->
+            <ui:include src="fragments/fragmentSearchResults.xhtml"  />
+            <!-- End search results -->
+
+        </h:form>
+
+        <br/>
+    </h:panelGroup>
+        
+    </ui:define>
+</ui:composition>

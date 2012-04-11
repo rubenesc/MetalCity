@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+
+    <div class="footerHolderNone">
+      <div class="footer">
+          <h:link outcome="goToIndex" value="#{msg.footer_info_pagename}" title="#{msg.footer_info_pagename}" rendered="false" />
+          <h:link outcome="goToInfoAbout" value="#{msg.footer_info_about}" title="#{msg.footer_info_about}" rendered="false" />
+          <h:link outcome="goToInfoHelp" value="#{msg.footer_info_help}" title="#{msg.footer_info_help}" rendered="false"/>
+          <h:link outcome="goToInfoPoweredBy" value="#{msg.footer_info_poweredby}" title="#{msg.footer_info_poweredby}" rendered="false"/>
+      </div>
+
+    </div>
+
+</ui:composition>

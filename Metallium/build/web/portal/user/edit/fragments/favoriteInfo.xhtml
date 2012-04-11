@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="editFavoriteForm" >
+        <table cellspacing="0" cellpadding="5" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td align="left">
+                        <h:outputText value="${msg.profile_info_favorite}" styleClass="sectionTitle" />
+                    </td>
+                    <td width="100%" align="right">
+                        <h:selectBooleanCheckbox title="display" value="#{editProfileManagedBean.user.userFavorite.display}" />
+                        <h:outputText value="${msg.edit_profile_display_info}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table cellspacing="2" cellpadding="5" width="100%" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_band}</b></td>
+                                    <td style="text-align: left">
+                                        <h:inputTextarea rows="5" cols="80" value="#{editProfileManagedBean.user.userFavorite.band}" styleClass=".frmTextarea"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_album}</b> </td>
+                                    <td  style="text-align: left">
+                                        <h:inputTextarea rows="5" cols="80" value="#{editProfileManagedBean.user.userFavorite.album}" styleClass=".frmTextarea"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_song} </b> </td>
+                                    <td  style="text-align: left">
+                                        <h:inputTextarea rows="5" cols="80" value="#{editProfileManagedBean.user.userFavorite.song}" styleClass=".frmTextarea"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_movie} </b> </td>
+                                    <td  style="text-align: left">
+                                        <h:inputTextarea rows="5" cols="80" value="#{editProfileManagedBean.user.userFavorite.movie}" styleClass=".frmTextarea"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_book} </b> </td>
+                                    <td  style="text-align: left"><h:inputText value="#{editProfileManagedBean.user.userFavorite.book}" size="85"/></td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_author} </b> </td>
+                                    <td  style="text-align: left"><h:inputText value="#{editProfileManagedBean.user.userFavorite.author}" size="85"/></td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_god} </b> </td>
+                                    <td  style="text-align: left"><h:inputText value="#{editProfileManagedBean.user.userFavorite.god}" size="85"/></td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_game} </b> </td>
+                                    <td  style="text-align: left"><h:inputText value="#{editProfileManagedBean.user.userFavorite.game}" size="85"/></td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_fav_info_drink} </b> </td>
+                                    <td  style="text-align: left"><h:inputText value="#{editProfileManagedBean.user.userFavorite.drink}" size="85"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" height="20"></td>
+                                </tr>
+                                <tr>
+                                    <td  valign="top" width="20%"> </td>
+                                    <td colspan="3">
+                                         <h:inputHidden value="#{editProfileManagedBean.profileNick}" />
+                                         <h:commandButton id="saveChangesUserProfileFavoriteInfo" value="#{msg.commun_button_save_changes}"
+                                                     action="#{editProfileManagedBean.saveChangesUserProfileFavoriteInfo}" styleClass="button nightfall" />
+
+                                        <span style="padding-left:3px"></span>
+
+                                         <h:commandButton id="cancelEditProfile" value="#{msg.commun_button_cancel}" immediate="true"
+                                                          action="#{editProfileManagedBean.cancelEditProfile}" styleClass="button nightfall" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </h:form>
+</ui:composition>

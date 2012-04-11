@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
+    </context-param>
+    <context-param>
+        <description>State saving method: "client" or "server" (= default)
+            See JSF Specification 2.5.3
+        </description>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.enableMissingResourceLibraryDetection</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <!-- Prime Faces, Start -->
+    <!-- if this primefaces.skin is un commented, then make sure that in
+        metalcity_template_01.xhtml there is a skin activated, like for example
+            <h:outputStylesheet name="skin.css" library="css/trontastic"/>
+            This, just disactivates the default primefaces skin, so you can add another one.    -->
+
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>vader</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.allowTextChildren</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6LcGUMESAAAAAIidnzQLfalUm89ucqM72sus7sSD</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6LcGUMESAAAAAEGDEkw9amc7Xld2lhrAZlxsAbC5</param-value>
+    </context-param>
+    <!-- x-ray 
+    <filter>
+        <filter-name>HTTPRequestInterceptor</filter-name>
+        <filter-class>com.abien.xray.probe.http.HTTPRequestRESTInterceptor</filter-class>
+        <init-param>
+            <param-name>serviceURL</param-name>
+            <param-value>http://localhost:8080/x-ray/resources/hits</param-value>
+        </init-param>
+    </filter> -->
+    <!-- x-ray -->
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>co.com.metallium.view.jsf.filter.SecurityFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>51200</param-value>
+        </init-param>
+        <init-param>
+            <param-name>uploadDirectory</param-name>
+            <param-value>E:/Desarrollo/Dunkelheit/FileSystem/temp</param-value>
+            <!--
+            <param-value>/home/metallium/FileSystem/temp</param-value>
+            -->
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>Pretty Filter</filter-name>
+        <filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Pretty Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>ASYNC</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>ASYNC</dispatcher>
+    </filter-mapping>
+    <!-- x-ray 
+    <filter-mapping>
+        <filter-name>HTTPRequestInterceptor</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+	
+
+    <!-- Prime Faces, End -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <description>
+            Servlet that is in charge of displaying images that are located
+            in the servers file system, which are images outside the application
+            server. The ImageServlet is mapped to the pattern "image".
+            Remember if you want to change pattern to another word dont forget to
+            also change it in the Configuracion Database table.
+        </description>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>co.com.metallium.view.util.ImageServlet</servlet-class>
+    </servlet>
+    <!-- Prime Faces, Start -->
+    <servlet>
+        <servlet-name>Resource Servlet</servlet-name>
+        <servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
+    </servlet>
+    <!-- Prime Faces, End -->
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/img/*</url-pattern>
+    </servlet-mapping>
+    <!-- Prime Faces, Start -->
+    <servlet-mapping>
+        <servlet-name>Resource Servlet</servlet-name>
+        <url-pattern>/primefaces_resource/*</url-pattern>
+    </servlet-mapping>
+    <!-- Prime Faces, End -->
+    <session-config>
+        <session-timeout>
+            20
+        </session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+        <!-- MAKE SURE IT DOES NOT START WITH A SLASH
+            http://turbomanage.wordpress.com/2009/03/06/jsf-welcome-file-gotcha/
+        -->
+        <welcome-file>portal/index.jsf</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/portal/common/errors/servererror.jsf</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/portal/common/errors/servererror.jsf</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/portal/common/errors/pagenotfound.jsf</location>
+    </error-page>
+</web-app>

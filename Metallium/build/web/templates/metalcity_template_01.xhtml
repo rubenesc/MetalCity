@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:head>
+        <title>#{msg.general_pagename}</title>
+        <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
+        <meta name="keywords" content="metal social network, heavy metal, thrash metal, death metal, black metal, news, events" />
+        <meta name="description" content="Heavy Metal Social Network" />
+
+        <h:outputStylesheet name="styleMetalCity_1.css" library="css"/>
+        <!--
+        <h:outputStylesheet name="skin.css" library="css/trontastic"/>
+        -->
+        <h:outputStylesheet name="slimbox2.css" library="components/slimbox/css"/>
+        <h:outputScript name="slimbox2.js" library="components/slimbox/js" />
+
+    </h:head>
+
+    <h:body >
+        <f:view contentType="text/html" locale="#{loginUserManagedBean.locale}">
+            <!-- Inicio Header -->
+            <ui:include src="/snippets/fragmentHeader.xhtml"/>
+            <!-- Fin Header -->
+
+            <table width="100%" border="0"  cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+
+                    <!-- Inicio contenido Izquierdo -->
+                    <td background="#{request.contextPath}/resources/images/izqbg.jpg" width="150" valign="top" >
+
+                            <ui:include src="/snippets/fragmentGeneralMenu.xhtml"  />
+                            <!--
+                        <br/>
+                            <img src="#{request.contextPath}/resources/images/navmenu.jpg" width="145" height="248" usemap="#Map" border="0"/>
+                        <br/>
+                            -->
+                            <ui:include src="/snippets/fragmentMenu.xhtml"  />
+                        <br/>
+                            <ui:include src="/snippets/fragmentRecentForums.xhtml"  />
+                        <br/>
+                            <ui:include src="/snippets/fragmentSurvey.xhtml"  />
+                        <br/>
+
+
+                    </td>
+                    <!-- Fin contenido Izquierdo -->
+
+                    <!-- Inicio contenido centro -->
+                    <td align="center" valign="top" >
+
+                        <table width="95%" border="0" cellspacing="0" cellpadding="0" bgcolor="#89836D">
+                            <tr>
+                                <td colspan="3">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="150" background="#{request.contextPath}/resources/images/ct_top.jpg" height="30" align="center" nowrap="true" >
+                                                <font color="#D2C6A6" face="Geneva, Arial, Helvetica, san-serif" size="3"></font>
+                                            </td>
+                                            <td class="cttitulos"  align="left">
+                                                <span style="padding-left:200px; padding-right:200px" ></span>
+                                            </td>
+                                            <td width="80" background="#{request.contextPath}/resources/images/ct_top_der.jpg" height="30">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td background="#{request.contextPath}/resources/images/ct_izq.jpg"  width="25">
+                                    <img src="#{request.contextPath}/resources/images/t.gif" width="25" height="30" />
+                                </td>
+                                <td width="100%" align="center" valign="top">
+
+
+                                    <table width="666" border="0" >
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+
+                                    <ui:include src="/portal/common/fragments/errorMsg.xhtml" />
+
+                                    <ui:insert name="body">Body</ui:insert>
+
+                                    <p></p>
+                                    <p></p>
+                                    <p>
+                                        <br/>
+                                        <br/>
+
+                                        <!-- Inicio Footer -->
+                                        <ui:include src="/snippets/fragmentFooter.xhtml"/>
+                                        <!-- Fin Footer -->
+
+                                        <br/>
+                                    </p>
+                                </td>
+                                <td background="#{request.contextPath}/resources/images/ct_der.jpg" width="25">
+                                    <img src="#{request.contextPath}/resources/images/t.gif" width="25" height="30"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="3">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="150" background="#{request.contextPath}/resources/images/ct_top_down.jpg" height="30" align="center" nowrap="true" >
+                                            </td>
+                                            <td class="cttitulos"  align="left">
+                                                <span style="padding-left:200px; padding-right:200px" ></span>
+                                            </td>
+                                            <td width="80" background="#{request.contextPath}/resources/images/ct_top_der_down.jpg" height="30">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+
+
+                    </td>
+                    <!-- Fin contenido centro -->
+                    <!-- Inicio contenido Derecho -->
+
+                    <td width="150" background="#{request.contextPath}/resources/images/derbg.jpg" valign="top" align="right">
+
+                        <!-- Tabla Usuario Login Inicio -->
+                        <h:panelGroup id="userLoginPanelGroup" rendered="#{!loginUserManagedBean.authenticated}" >
+                            <ui:include src="/snippets/fragmentUserLogin.xhtml"  />
+                        </h:panelGroup>
+
+                        <h:panelGroup id="authenticatedUserPanelGroup" rendered="#{loginUserManagedBean.authenticated}" >
+                            <ui:include src="/snippets/fragmentAuthenticatedUser.xhtml"  />
+                        </h:panelGroup>
+                       <!-- Tabla Usuario Login Fin -->
+
+                        <br/>
+
+                        <br/>
+
+
+                        <br/>
+                    </td>
+                    <!-- Fin contenido Derecho -->
+                </tr>
+              </tbody>
+
+            </table>
+        </f:view>
+    </h:body>
+</html>
+

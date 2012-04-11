@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:form id="opinionInfoForm" >
+    <table cellspacing="0" cellpadding="5" width="100%" border="0">
+        <tbody>
+            <h:panelGroup rendered="#{profileManagedBean.user.userOpinion.display || profileManagedBean.canIeditProfile}" >
+                <tr>
+                    <td>
+                        <h:outputText value="#{msg.profile_info_opinion}" styleClass="sectionTitle" />
+                    </td>
+                    <td width="100%" align="right">
+                        <h:link rendered="#{profileManagedBean.canIeditProfile}" outcome="goToEditProfile" value="#{msg.common_edit}" >
+                            <f:param name="nick" value="#{profileManagedBean.profileNick}"/>
+                            <f:param name="edit" value="opinion"/>
+                        </h:link>
+                    </td>
+                </tr>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{profileManagedBean.user.userOpinion.display}" >
+            <tr>
+                <td colspan="2">
+                    <table cellspacing="5" cellpadding="0" width="100%"
+                           border="0">
+                        <tbody>
+                            <h:panelGroup rendered="#{!empty profileManagedBean.user.userOpinion.yourself}" >
+                                <tr>
+                                    <td style="text-align: left" valign="top" width="20%"> <b> #{msg.profile_opinion_info_yourself} </b> </td>
+                                    <td align="left">#{profileManagedBean.user.userOpinion.yourself}</td>
+                                </tr>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{!empty profileManagedBean.user.userOpinion.religion}" >
+                                <tr>
+                                    <td style="text-align: left" valign="top" width="20%"> <b>#{msg.profile_opinion_info_religion} </b> </td>
+                                    <td align="left">#{profileManagedBean.user.userOpinion.religion}</td>
+                                </tr>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{!empty profileManagedBean.user.userOpinion.music}" >
+                                <tr>
+                                    <td style="text-align: left" valign="top" width="20%"> <b>#{msg.profile_opinion_info_music} </b> </td>
+                                    <td align="left">#{profileManagedBean.user.userOpinion.music}</td>
+                                </tr>
+                            </h:panelGroup>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </h:panelGroup>
+        </tbody>
+    </table>
+    </h:form>
+
+</ui:composition>

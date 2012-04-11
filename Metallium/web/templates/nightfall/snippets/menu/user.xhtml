@@ -1,0 +1,46 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+        <li> 
+            <h:graphicImage name="profileicon.png" library="images/nightfall/icons" width="29"/>
+            <h:link outcome="goToProfile"  >
+                <f:param name="nick" value="#{loginUserManagedBean.authenticaedUser.nick}"/>
+                <h:outputText value="#{msg.profile_info_profile}"  />
+            </h:link>
+        </li>
+        <li>
+            <h:graphicImage name="pedal.png" library="images/nightfall/icons" width="29"/>
+            <h:link outcome="goToProfileConfiguration" >
+                <f:param name="edit" value="config"/>
+                <h:outputText value="#{msg.profile_config_menu}" />
+            </h:link>
+        </li>
+        <li>
+            <h:graphicImage name="camara.png" library="images/nightfall/icons" width="29"/>
+            <h:link outcome="goToGalleries" >
+                <f:param name="nick" value="#{loginUserManagedBean.authenticaedUser.nick}"/>
+                <h:outputText value="#{msg.image_gallery_info_my_galleries}"  />
+            </h:link>
+        </li>
+        <li>
+            <h:graphicImage name="amplificador.png" library="images/nightfall/icons" width="29"/>
+            <h:link outcome="goToMessageBox">
+                <h:outputText value="#{msg.message_box_info_my_messages}"
+                              styleClass="#{loginUserManagedBean.doIHaveNewMessages ? 'textNewsRed' : 'textNews' }"/>
+            </h:link>
+            <h:graphicImage name="mail_new_blink.gif" library="images/nightfall/icons/mail" rendered="#{loginUserManagedBean.doIHaveNewMessages}"/>
+        </li>
+        <li>
+        <h:graphicImage name="bombicons.png" library="images/nightfall/icons" width="29"/>
+            <h:link outcome="goToUserNotifications" >
+                <h:outputText value="#{msg.notification_info_notifications}"
+                              styleClass="#{loginUserManagedBean.doIHaveNewNofitications ? 'textNewsRed' : 'textNews' }"/>
+            </h:link>
+            <h:graphicImage name="mail_new_blink.gif" library="images/nightfall/icons/mail" rendered="#{loginUserManagedBean.doIHaveNewNofitications}"/>
+        </li>
+
+</ui:composition>
+

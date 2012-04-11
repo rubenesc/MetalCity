@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <!--
+
+    ##     ## ######## ########    ###    ##        ######  #### ######## ##    ##
+    ###   ### ##          ##      ## ##   ##       ##    ##  ##     ##     ##  ##
+    #### #### ##          ##     ##   ##  ##       ##        ##     ##      ####
+    ## ### ## ######      ##    ##     ## ##       ##        ##     ##       ##
+    ##     ## ##          ##    ######### ##       ##        ##     ##       ##
+    ##     ## ##          ##    ##     ## ##       ##    ##  ##     ##       ##
+    ##     ## ########    ##    ##     ## ########  ######  ####    ##       ##
+
+    -->
+
+    <h:head>
+        <title>#{msg.general_pagename}</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="Heavy Metal Social Network" />
+        <meta name="keywords" content="the metal social network, metal, heavy metal, thrash metal, death metal, black metal, news, concerts, headbangers" />
+        <h:outputStylesheet name="style1.css" library="css/nightfall"/>
+        <h:outputStylesheet name="style2.css" library="css/nightfall"/>
+
+        <link rel="icon"
+              type="image/png"
+              href="#{loginUserManagedBean.faviconUrl}" />
+
+    </h:head>
+
+    <h:body >
+        <f:view contentType="text/html" locale="#{loginUserManagedBean.locale}">
+
+            <!-- start siteHolder -->
+            <div class="siteHolder">
+                <ui:include src="/templates/nightfall/snippets/header.xhtml"/>
+
+                <div class="main">
+                    <div class="contentHolder">
+                        <!--start left nav-->
+                        <div class="contentColumnLeft">
+                            <div style="padding-left:20px;">
+                                <ui:include src="/portal/common/fragments/errorMsg.xhtml" />
+
+
+                                <h:panelGroup styleClass="defaultText" >
+                                    <ui:insert name="body">Body</ui:insert>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                        <!--end left nav-->
+                        <!--start right nav-->
+                        <div>
+                            <div class="block blockMain">
+                                <div class="dashboard">
+                                    <h:panelGroup id="advertismentPanelGroup" rendered="false" >
+                                        <ui:include src="/templates/nightfall/snippets/advertisment1.xhtml"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup id="userLoginPanelGroup" rendered="#{!loginUserManagedBean.authenticated}" >
+                                        <ui:include src="/templates/nightfall/snippets/userLogin.xhtml"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup id="authenticatedUserPanelGroup" rendered="#{loginUserManagedBean.authenticated}" >
+                                        <ui:include src="/templates/nightfall/snippets/authenticatedUser.xhtml"/>
+                                    </h:panelGroup>
+                                    
+                                    <h:panelGroup styleClass="defaultText" >
+                                        <ui:include src="/portal/user/profile/fragments/friendsPreview.xhtml" />
+                                    </h:panelGroup>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--end right nav-->
+
+                    </div>
+
+                        <ui:include src="/templates/nightfall/snippets/bottomMenu.xhtml" />
+
+                </div>
+
+                <ui:include src="/templates/nightfall/snippets/footer.xhtml"/>
+
+            </div>
+            <!-- end siteHolder -->
+
+
+
+        </f:view>
+    </h:body>
+</html>
+
+

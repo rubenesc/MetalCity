@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="5" >
+        <tr>
+            <td align="left" nowrap="true" class="messageTitleMed" background="#{request.contextPath}/resources/images/tabla_deco.jpg"  height="31">
+                <h:outputText value="#{msg.notification_info_friend_request}" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            <h:panelGroup  id="ajaxPanalGroup">
+                <h:outputText id="itemCount" styleClass="messageTitleMed" escape="false" value="#{msg.common_info_empty}" rendered="#{notificationManagedBean.items.rowCount == 0}"/>
+                <h:panelGroup  rendered="#{notificationManagedBean.items.rowCount > 0}" id="itemPanelGroup">
+                    <table width="100%" align="left">
+                        <tr>
+                            <td>
+                            <h:dataTable id="items" value="#{notificationManagedBean.items}" var="item" width="100%" border="0" cellspacing="0" cellpadding="1" rowClasses="ntcMarco_zero"  >
+                                <h:column>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="1" class="#{item.read ? 'ntcMarcoMessageUnread' : 'ntcMarco'}">
+                                    <tr>
+                                        <td align="right">
+                                            <h:link  outcome="goToProfile">
+                                                <h:panelGroup  rendered="true" id="messageUserAvatarPanel">
+                                                    <img alt=":)" id="messageProfilePicS" align="center" border="1" width="70"
+                                                         src="#{item.userFrom.avatarLocation}" />
+                                                </h:panelGroup>
+                                                <f:param name="nick" value="#{item.userFrom.nick}"/>
+                                            </h:link>
+                                        </td>
+                                        <td >
+                                            <table width="130">
+                                                <tr>
+                                                    <td align="left">
+                                                        <h:link  outcome="goToProfile">
+                                                            <h:outputText value="#{item.userFrom.name}" />
+                                                            <f:param name="nick" value="#{item.userFrom.nick}"/>
+                                                        </h:link>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left">
+                                                        <h:outputText value="#{item.date}">
+                                                            <f:convertDateTime pattern="yyyy.MM.dd HH:mm:ss" />
+                                                        </h:outputText>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td align="right">
+                                            <span style="padding-left:2px; padding-right:2px" ></span>
+                                            <h:commandLink id="deleteMessage" style="text-align: right"
+                                                             actionListener="#{messageBoxManagedBean.doSomething}"
+                                                             onclick="confirmation.show()"
+                                                            value="#{msg.common_delete}" immediate="true">
+                                                <f:ajax/>
+                                            </h:commandLink>
+                                            <span style="padding-left:2px; padding-right:2px" ></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </h:column>
+                            </h:dataTable>
+                            </td>
+                        </tr>
+                    </table>
+                </h:panelGroup>
+
+            </h:panelGroup>
+            </td>
+        </tr>
+    </table>
+
+    <!-- just a dialog -->
+     <p:confirmDialog message="#{msg.message_info_delete_confirm_msg}"
+                      showEffect="drop" hideEffect="drop"
+                      header="#{msg.common_delete}" severity="alert" widgetVar="confirmation">
+         <p:commandButton value="#{msg.common_yes}" ajax="true"  update="ajaxPanalGroup"  oncomplete="confirmation.hide()"
+                          actionListener="#{messageBoxManagedBean.deleteMessage}" />
+         <p:commandButton value="#{msg.common_no}" onclick="confirmation.hide()" type="button" />
+     </p:confirmDialog>
+    <!-- just a dialog -->
+
+
+
+</ui:composition>
+

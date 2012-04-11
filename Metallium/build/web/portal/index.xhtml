@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:myComponents="http://java.sun.com/jsf/composite/myComponents"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+    <ui:define name="body" >
+
+        <br/>
+
+
+        <!-- Inicio Tabla Noticias y Eventos -->
+        <ui:include src="/portal/news/fragments/fragmentNewsList.xhtml" />
+        <!-- Fin Tabla Noticias y Eventos -->
+
+
+        <hr/>
+
+        <!-- Inicio Tabla Noticias y Eventos -->
+        <ui:include src="/portal/events/fragments/fragmentEventList.xhtml" />
+        <!-- Fin Tabla Noticias y Eventos -->
+
+
+        <div style="padding-left:20px;">
+            <!-- Inicio Tabla Eventos mas cercanos -->
+            <!-- Fin Tabla Eventos mas cercanos -->
+        </div>
+
+
+        <br/>
+
+
+
+    </ui:define>
+</ui:composition>

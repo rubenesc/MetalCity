@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="avatarLocation" required="true"/>
+        <cc:attribute name="nick" required="true"/>
+        <cc:attribute name="name" required="true"/>
+        <cc:attribute name="whatsOnYourMind" required="false"/>
+        <cc:attribute name="date" required="true"/>
+        <cc:attribute name="comment" required="true"/>
+        
+        
+        <cc:attribute name="mediaId" required="false"/>
+        <cc:attribute name="playMedia" required="false"/>
+        <cc:attribute name="mediaThumbnail1" required="false"/>
+        <cc:attribute name="mediaTitle" required="false"/>
+        <cc:attribute name="mediaDescription" required="false"/>
+        <cc:attribute name="content" required="false"/>
+        <cc:attribute name="playVideo"
+                      method-signature="void action()" required="false"/>
+        
+        
+    </cc:interface>
+    
+    
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        
+        <h:panelGroup id="profilePicSPanelGroup" rendered="#{not empty cc.attrs.avatarLocation}" >
+            <h:link outcome="goToProfile" >
+                <f:param name="nick" value="#{cc.attrs.nick}"/>
+                <img alt=":)" id="profilePicS"  class="avatarReply"  src="#{cc.attrs.avatarLocation}" />
+            </h:link>
+        </h:panelGroup>
+        <span class="tlComment2"  style="margin-left: 96px; display: block; color: #999999;
+              line-height: 17px; font-size: 14px;">
+            #{msg.index_info_by}
+            <h:link outcome="goToProfile" value="#{cc.attrs.name}" >
+                <f:param name="nick" value="#{cc.attrs.nick}"/>
+            </h:link>
+            ( <h:outputText value="#{cc.attrs.whatsOnYourMind}"/> )
+            -
+            <h:outputText value="#{cc.attrs.date}">
+                <f:converter converterId="co.metallium.PrettyTimeConverter"/>
+            </h:outputText>
+            <br/>
+                <h:panelGrid id ="commentPanel" rendered="#{not empty cc.attrs.comment}">
+                    <h:outputText escape="false" value="#{cc.attrs.comment}"/>
+                </h:panelGrid>                
+                <h:panelGrid id ="mediaPanel" rendered="#{not empty cc.attrs.mediaId}">
+                    <ez:mediaPost mediaId="#{cc.attrs.mediaId}" playMedia="#{cc.attrs.playMedia}" 
+                                  mediaThumbnail1="#{cc.attrs.mediaThumbnail1}" mediaTitle="#{cc.attrs.mediaTitle}"
+                                   mediaDescription="#{cc.attrs.mediaDescription}" content="" 
+                                   playVideo="#{cc.attrs.playVideo}" />
+                </h:panelGrid>                
+        </span>
+        <hr/>
+        
+        
+    </cc:implementation>
+    
+</html>

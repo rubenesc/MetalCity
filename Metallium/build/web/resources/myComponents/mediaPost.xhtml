@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="mediaId" required="true"/>
+        <cc:attribute name="playMedia" required="true"/>
+        <cc:attribute name="mediaThumbnail1" required="true"/>
+        <cc:attribute name="mediaTitle" required="false"/>
+        <cc:attribute name="mediaDescription" required="false"/>
+        <cc:attribute name="content" required="false"/>
+        <cc:attribute name="playVideo"
+                      method-signature="void action()" required="true"/>
+    </cc:interface>
+    
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+         <h:panelGrid id ="videoPanelGrid">
+        
+             <h:panelGroup rendered="#{!cc.attrs.playMedia and not empty cc.attrs.mediaId}" >
+                 <h:commandLink actionListener="#{cc.attrs.playVideo}"  >
+                     <f:ajax execute="@all" render="videoPanelGrid"  />
+                        <table class="movieList" >
+                            <tbody>
+                                <tr>
+                                  <td>
+                                      <img width='220' src="#{cc.attrs.mediaThumbnail1}" />
+                                  </td>
+                                  <td width="100%">
+                                      <span style="font-size: 18px; color: red; font-weight: bold; line-height: 18px;"> 
+                                          #{cc.attrs.mediaTitle}
+                                      </span>
+                                      <br/>  
+                                      <span class="userTag" style="line-height: 22px;">youtube.com</span> 
+                                      <br/><br/>
+                                      <span style="font-size: 14px; color: #CCCCCC; line-height: 18px;">
+                                          <h:outputText value="#{cc.attrs.mediaDescription}" />
+                                      </span>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>                                 
+                 </h:commandLink>
+             </h:panelGroup>
+
+             <h:panelGroup rendered="#{cc.attrs.playMedia}" >
+                 <iframe width="560" height="315" src='http://www.youtube.com/v/#{cc.attrs.mediaId}&amp;version=3&amp;autoplay=1'  
+                         frameborder='0' allowfullscreen='true'></iframe>
+             </h:panelGroup>
+
+             <h:outputText value="#{cc.attrs.content}" escape="false" rendered="#{not empty cc.attrs.content}"/>
+         </h:panelGrid> 
+        
+    </cc:implementation>
+    
+</html>

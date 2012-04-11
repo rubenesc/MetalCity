@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:form id="authenticatedUserForm">
+
+        <div class="profile" style="margin: 0px;">
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="userpic" >
+                                <h:link  outcome="goToProfile">
+                                    <f:param name="nick" value="#{baseBean.authenticaedUser.nick}"/>
+                                    <h:panelGroup  rendered="true" id="userAvatarPanel">
+                                        <img alt=":)" id="profilePicS" align="right" border="1" width="100"
+                                             src="#{baseBean.authenticaedUser.avatarLocation}" />
+                                    </h:panelGroup>
+                                </h:link>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="minidashboardInfo">
+                                <h3>
+                                    <h:link outcome="goToProfile" value="#{loginUserManagedBean.authenticaedUser.name}" >
+                                        <f:param name="nick" value="#{loginUserManagedBean.authenticaedUser.nick}"/>
+                                    </h:link>
+                                </h3>
+                                <h:link outcome="goToEditProfile">
+                                    <h:outputText value="#{msg.authenticated_user_info_edit_profile}" styleClass="" style="font-size: 12px;" />
+                                    <f:param name="nick" value="#{loginUserManagedBean.authenticaedUser.nick}"/>
+                                    <f:param name="edit" value="personal"/>
+                                </h:link>
+                                <br/>
+                                <h:commandLink action="#{loginUserManagedBean.logoutUser}" id="logoutbtn"  style="font-size: 12px;">
+                                    <h:outputText value="#{msg.authenticated_user_info_log_out}"/>
+                                </h:commandLink>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="quickBox">
+            <ul class="quickLinks">
+
+                <ui:include src="menu/user.xhtml"/>
+
+                <h:panelGroup rendered="#{loginUserManagedBean.myProfileAdministrator1}" >
+                    <ui:include src="menu/admin1.xhtml"/>
+                </h:panelGroup>
+
+            </ul>
+        </div>
+
+
+    </h:form>
+
+</ui:composition>

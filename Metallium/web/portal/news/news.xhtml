@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>
+        <f:viewParam name="news"  converterMessage="#{msg.commun_info_input_invalid}"  value="#{newsManagedBean.newsAlias}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!newsManagedBean.newsExists}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{newsManagedBean.newsExists}" id="newsPanelGroup">
+
+            <h:form id="newsForm" >
+                <br/>
+                    <h:panelGroup rendered="#{loginUserManagedBean.myProfileAdministrator1}" >
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                            <h:outputText value="#{msg.common_info_state}: " style="font-weight: bold"/>
+                            <h:outputText value="#{newsManagedBean.currentNews.state}" converter="#{newsManagedBean.converter.newsStateConverter}" />
+                            <span style="padding-left:3px; padding-right:3px" />
+                            <h:outputText value="#{msg.common_info_id}: " style="font-weight: bold"/>
+                            <h:outputText value="#{newsManagedBean.currentNews.id}"  />
+                            <span style="padding-left:3px; padding-right:3px" />
+                            <ui:include src="/portal/news/controlroom/fragments/newsActions2.xhtml"  id="newsActions" />
+                        </table>
+                    </h:panelGroup>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                        <tr>
+                            <td colspan="2">
+                                <h:outputText value="#{newsManagedBean.currentNews.title}" styleClass="sectionTitleX" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left" >
+                                <b>
+                                    <h:outputText value="#{newsManagedBean.currentNews.date}">
+                                        <f:convertDateTime pattern="MM.dd.yyyy" />
+                                    </h:outputText>
+
+                                </b>
+                            </td>
+                            <td align="right"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h:panelGroup id="coverImagePanelGroup" rendered="#{! empty newsManagedBean.currentNews.coverImage}" >
+                                    <img alt="" id="coverImage" align="left" border="1" width="400" src="#{newsManagedBean.currentNews.coverImageLocation}" />
+                                </h:panelGroup>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table width="500" border="0" cellspacing="0" cellpadding="0" >
+                        <tr>
+                            <td style="text-align: left" colspan="2">
+                                <font size="2">
+                                <h:outputText escape="false" value="#{newsManagedBean.currentNews.content}" styleClass="textNews" />
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                        <h:panelGroup rendered="#{!empty  newsManagedBean.currentNews.mediaUrl}" >
+                            <tr>
+                                <td height="10px"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <h:outputText escape="false" value="#{newsManagedBean.currentNews.mediaUrl}" styleClass="textNews" />
+                                </td>
+                            </tr>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{!empty  newsManagedBean.currentNews.sourceUrl}" >
+                            <tr>
+                                <td colspan="2">
+                                   <h:outputText value="#{msg.news_field_source_url}: " /> 
+                                   <h:outputLink   value="#{newsManagedBean.currentNews.sourceUrl}" styleClass="textNews" >
+                                        <h:outputText value="#{newsManagedBean.currentNews.sourceUrl}" id="sourceUrlDomain"
+                                                      converter="#{newsManagedBean.converter.urlDomainConverter}" />
+                                   </h:outputLink>
+                                </td>
+                            </tr>
+                        </h:panelGroup>
+                    </table>
+                    <br/>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+                        <tr>
+                            <td colspan="2">
+                                <div align="center">
+                                    [<h:commandLink action="#{newsManagedBean.goToIndex}" value="#{msg.commun_return}"/>]
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+            </h:form>
+
+            <ui:include src="fragments/fragmentNewsComments.xhtml"/>
+        </h:panelGroup>
+
+        <br/>
+        <br/>
+
+    </ui:define>
+</ui:composition>

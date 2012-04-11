@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="5"  >
+        <tr>
+            <td align="left" nowrap="true">
+                <h:outputText value="#{msg.message_box_info_inbox}" styleClass="sectionTitle" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            <h:panelGroup  id="ajaxPanalGroup">
+
+                <ez:noItemsMsg id="noItemsInboxComp" message="#{msg.message_info_inbox_empty}"
+                                  numberOfItems="#{messageBoxManagedBean.pagination.itemsCount}"/>
+
+                <h:panelGroup  rendered="#{messageBoxManagedBean.pagination.itemsCount > 0}" id="itemPanelGroup">
+
+                    <ez:itemPagination id="itemPaginationInboxComp" pagination="#{messageBoxManagedBean.pagination}"
+                       nextAction="#{messageBoxManagedBean.next}" previousAction="#{messageBoxManagedBean.previous}" />
+
+                    <h:commandLink value="#{msg.common_delete}" actionListener="#{messageBoxManagedBean.deleteMessages}" />
+
+                    <hr/>
+
+                    <table width="100%" align="left">
+                        <tr>
+                            <td>
+                                <h:dataTable id="items" value="#{messageBoxManagedBean.items}" var="item" width="100%"  styleClass="commentList" >
+                                    <h:column>
+                                        <span id="inboxitemspan">
+                                            <ui:include src="inboxitem.xhtml" id="inboxitem"/>
+                                        </span>
+                                    </h:column>
+                                </h:dataTable>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br/>
+
+                    <ez:itemPagination id="itemPaginationInboxCompBottom" pagination="#{messageBoxManagedBean.pagination}"
+                       nextAction="#{messageBoxManagedBean.next}" previousAction="#{messageBoxManagedBean.previous}" />
+
+                    <br/>
+                    <br/>
+
+                </h:panelGroup>
+
+            </h:panelGroup>
+            </td>
+        </tr>
+    </table>
+
+    <!-- just a dialog -->
+     <p:confirmDialog message="#{msg.message_info_delete_confirm_msg}"
+                      showEffect="drop" hideEffect="drop"
+                      header="#{msg.common_delete}" severity="alert" widgetVar="confirmation">
+         <p:commandButton value="#{msg.common_yes}" ajax="true"  update="ajaxPanalGroup"  oncomplete="confirmation.hide()"
+                          actionListener="#{messageBoxManagedBean.deleteMessage}" />
+         <p:commandButton value="#{msg.common_no}" onclick="confirmation.hide()" type="button" />
+     </p:confirmDialog>
+    <!-- just a dialog -->
+
+
+
+</ui:composition>
+

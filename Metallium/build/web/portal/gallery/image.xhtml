@@ -1,0 +1,156 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!imageManagedBean.galleryExists }" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{imageManagedBean.galleryExists}" id="yesPanelGroup">
+
+            <h:form id="imageForm" >
+                <f:view>
+
+                <br/>
+                <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                    <tr>
+                        <td colspan="2" align="left">
+                            <h:link outcome="goToGallery" >
+                                <h:outputText value="#{imageManagedBean.imageGallery.title}" styleClass="sectionTitle"/>
+                                <f:param name="nick" value="#{imageManagedBean.imageGallery.user.nick}"/>
+                                <f:param name="gid" value="#{imageManagedBean.imageGallery.id}"/>
+                            </h:link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <h:link outcome="goToProfile" value="#{imageManagedBean.imageGallery.user.name}" >
+                                <f:param name="nick" value="#{imageManagedBean.imageGallery.user.nick}"/>
+                            </h:link>
+                            <span style="padding-left:3px"/> >> <span style="padding-left:3px"/>
+                            <h:link outcome="goToGalleries" value="#{msg.common_galleries}" >
+                                <f:param name="nick" value="#{imageManagedBean.imageGallery.user.nick}"/>
+                            </h:link>
+                            <span style="padding-left:3px"/> >> <span style="padding-left:3px"/>
+                            <h:link outcome="goToGallery" value="#{imageManagedBean.imageGallery.title}" >
+                                <f:param name="nick" value="#{imageManagedBean.imageGallery.user.nick}"/>
+                                <f:param name="gid" value="#{imageManagedBean.imageGallery.id}"/>
+                            </h:link>
+                        </td>
+                    </tr>
+                </table>
+
+                <h:panelGroup rendered="#{!imageManagedBean.galleryEmpty}" id="imagePanelGroupOne">
+                <br/>
+                 <table cellspacing="0"  cellpadding="0" width="100%" border="0" >
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left" valign="top" width="100%" >
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                    <td align="left" >
+                                        <table width="100%">
+                                            <tr>
+                                                <td align="left" width="30%">
+                                                    <h:panelGroup id="imageCountPanelGroup" >
+                                                        #{msg.image_gallery_info_photo} #{imageManagedBean.currentImageIndex} #{msg.commun_info_of} #{imageManagedBean.imageGallery.numberPics}
+                                                    </h:panelGroup>
+                                                 </td>
+                                                 <td align="center" width="40%" valign="middle">
+                                                    <h:panelGroup id="deleteImagePanelGroup" rendered="#{imageManagedBean.canIeditProfile}">
+                                                        <span style="padding-left:3px"/><span style="padding-left:3px"/>
+
+                                                         <h:commandButton id="deleteImageDirect" 
+                                                                          value="#{msg.common_delete}"
+                                                                          rendered="false"
+                                                                          actionListener="#{imageManagedBean.deleteImage}"
+                                                                          styleClass="button nightfall">
+                                                            <f:ajax execute="@this" render="@all" />
+                                                         </h:commandButton>
+
+                                                        <h:commandButton id="deleteImageConfirmDialog" value="#{msg.common_delete}" rendered="true"
+                                                                         onclick="confirmation.show()"  styleClass="button nightfall">
+                                                            <f:ajax execute="@this"
+                                                                    render="image imageCountPanelGroup noImagesPanelGroup xPanelGroup" />
+                                                        </h:commandButton>
+
+                                                        <!-- just a dialog -->
+                                                         <p:confirmDialog message="#{msg.confirm_msg_delete_image}"
+                                                                          showEffect="drop" hideEffect="drop"
+                                                                          header="#{msg.common_delete}" severity="alert" widgetVar="confirmation">
+                                                             <p:commandButton value="#{msg.common_yes}" ajax="false" oncomplete="confirmation.hide()"
+                                                                         actionListener="#{imageManagedBean.deleteImage}" />
+                                                             <p:commandButton value="#{msg.common_no}" onclick="confirmation.hide()" type="button" />
+                                                         </p:confirmDialog>
+                                                        <!-- just a dialog -->
+                                                        <span style="padding-left:3px"/><span style="padding-left:3px"/>
+
+                                                     </h:panelGroup>
+                                                </td>
+                                                <td width="30%"  align="right">
+                                                     <h:commandButton id="previousImage" value="#{msg.pagination_previous}" actionListener="#{imageManagedBean.findPreviousImage}" styleClass="button nightfall">
+                                                        <f:ajax execute="image" render="@form" />
+                                                     </h:commandButton>
+                                                    <span style="padding-left:3px"/><span style="padding-left:3px"/>
+                                                    <h:commandButton id="nextImage" value="#{msg.pagination_next}" actionListener="#{imageManagedBean.findNextImage}" styleClass="button nightfall">
+                                                        <f:ajax execute="image" render="@form" />
+                                                    </h:commandButton>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </table>
+
+                                <h:panelGroup  id="noImagesPanelGroup" rendered="#{imageManagedBean.galleryEmpty}">
+                                     <table cellspacing="0"  cellpadding="0" width="100%" border="0" >
+                                        <tr>
+                                            <td align="center"  valign="top">
+                                                <h:outputText escape="false" value="#{msg.common_info_no_images}" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:panelGroup>
+                                <h:panelGroup id="xPanelGroup" rendered="#{!imageManagedBean.galleryEmpty}">
+                                     <table cellspacing="0"  cellpadding="0" width="100%" border="0" >
+                                        <tr>
+                                            <td align="center"  valign="top">
+
+                                                <h:commandLink id="image" actionListener="#{imageManagedBean.findNextImage}" >
+                                                    <h:panelGroup id="imagePanelGroup" >
+                                                        <img alt="_\,,/" id="image" align="center" border="0"  src="#{imageManagedBean.imageLocation}" />
+                                                    </h:panelGroup>
+                                                    <f:ajax execute="image" render="@form" />
+                                                </h:commandLink>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:panelGroup>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                 </table>
+                </h:panelGroup>
+
+                <ui:include src="fragments/fragmentImageComments.xhtml" id="fragmentImageComments" />
+
+                </f:view>
+            </h:form>
+
+
+        </h:panelGroup>
+        <br/>
+        <br/>
+
+    </ui:define>
+</ui:composition>

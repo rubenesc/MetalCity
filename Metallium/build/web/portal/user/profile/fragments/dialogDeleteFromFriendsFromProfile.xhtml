@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="dialogDeleteFromFriendsFromProfile" rendered="#{profileManagedBean.canIDeleteFromFriends}"  >
+
+        <p:dialog header="#{msg.profile_info_delete_friend}"
+                  widgetVar="dialogDeleteFromFriendsFromProfileWidget" modal="true" width="600" >
+            <table cellspacing="0" cellpadding="5" width="100%" border="0" align="left">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left" valign="top" align="left">
+                                    <img alt="_\,,/" id="profilePicM" align="left" border="0" width="150"
+                                         src="#{profileManagedBean.user.avatarProfileLocation}" />
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td  style="text-align: left" valign="top" width="100%">
+                                            <h:outputText id="deleteFriendConfirmMessage" value="#{profileManagedBean.deleteFriendConfirmMessage}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="20"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="left" valign="top">
+                                            <p:commandButton id="deleteFriendBtn" value="#{msg.common_send}"
+                                                             actionListener="#{profileManagedBean.deleteUserFromFriends}"
+                                                             ajax="false" >
+                                                <f:ajax execute="@this" render="@none"/>
+                                            </p:commandButton>
+
+                                            <span style="padding-left:3px"></span>
+
+                                            <p:commandButton value="#{msg.commun_button_cancel}"
+                                                             onclick="dialogDeleteFromFriendsFromProfileWidget.hide();" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </p:dialog>
+
+    </h:form>
+
+</ui:composition>

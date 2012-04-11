@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+<h:form id="dialogSendMessageFromProfileForm" rendered="#{sendMessageFromProfileManagedBean.canISendMessage}"  >
+
+        <p:dialog header="#{msg.message_info_new_message}" closeListener="#{sendMessageFromProfileManagedBean.handleClose}"
+                  widgetVar="dialogSendMessageFromProfile" modal="true" draggable="true" width="750" >
+                    <table cellspacing="0" cellpadding="5" width="100%" border="0">
+                    <tbody>
+                        <tr>
+                            <td  style="text-align: left" valign="top" >
+                                #{msg.message_info_to}
+                            </td>
+                            <td  style="text-align: left">
+                                <h:outputText  value="#{sendMessageFromProfileManagedBean.sendMessage.toUser.name}" />
+                            </td>
+                        </tr>
+                        <h:panelGroup rendered="false" >
+                            <tr>
+                                <td  style="text-align: left" valign="top" >
+                                    #{msg.message_info_subject}
+                                </td>
+                                <td  style="text-align: left">
+                                    <h:inputText size="50" value="#{sendMessageFromProfileManagedBean.sendMessage.title}" />
+                                </td>
+                            </tr>
+                        </h:panelGroup>                        
+                        <tr>
+                            <td  style="text-align: left" valign="top" >
+                                #{msg.message_info_message}
+                            </td>
+                            <td  style="text-align: left">
+                                <p:editor id="comment" value="#{sendMessageFromProfileManagedBean.sendMessage.message}"  widgetVar="editor"
+                                          controls="bold italic underline strikethrough numbering link unlink pastetext outdent indent"
+                                          width="550" height="160" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" height="20"></td>
+                        </tr>
+                        <tr>
+                            <td  valign="top" > </td>
+                            <td colspan="3" align="left">
+                                <p:commandButton id="sendMessage" value="#{msg.common_send}"
+                                                 actionListener="#{sendMessageFromProfileManagedBean.sendMessageFromProfile}"
+                                                 ajax="false" >
+                                    <f:ajax execute="@this" render="@none"/>
+                                </p:commandButton>
+                                <span style="padding-left:3px"></span>
+                                <p:commandButton value="#{msg.commun_button_cancel}"
+                                                 actionListener="#{sendMessageFromProfileManagedBean.cancelSendMessage}"
+                                                 onclick="dialogSendMessageFromProfile.hide();" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </p:dialog>
+
+
+ </h:form>
+</ui:composition>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="MetalliumStatsPU" transaction-type="JTA">
+    <jta-data-source>jdbc/metallium_stats</jta-data-source>
+    <class>co.com.metallium.core.entity.stats.MemoryStat</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>ALL</shared-cache-mode>
+    <properties>
+      <property name="eclipselink.cache.size.default" value="10000"/>
+      <property name="eclipselink.cache.type.default" value="Soft"/>
+      <property name="eclipselink.logging.parameters" value="true"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="MetalliumPU" transaction-type="JTA">
+    <jta-data-source>jdbc/metallium</jta-data-source>
+    <class>co.com.metallium.core.entity.Configuration</class>
+    <class>co.com.metallium.core.entity.Country</class>
+    <class>co.com.metallium.core.entity.Event</class>
+    <class>co.com.metallium.core.entity.Forum</class>
+    <class>co.com.metallium.core.entity.ForumCategory</class>
+    <class>co.com.metallium.core.entity.ImageGallery</class>
+    <class>co.com.metallium.core.entity.LogUserAuthentication</class>
+    <class>co.com.metallium.core.entity.LogUserDelete</class>
+    <class>co.com.metallium.core.entity.Message</class>
+    <class>co.com.metallium.core.entity.MetMensaje</class>
+    <class>co.com.metallium.core.entity.Network</class>
+    <class>co.com.metallium.core.entity.News</class>
+    <class>co.com.metallium.core.entity.NewsNetwork</class>
+    <class>co.com.metallium.core.entity.NewsNetworkPK</class>
+    <class>co.com.metallium.core.entity.Notification</class>
+    <class>co.com.metallium.core.entity.Profile</class>
+    <class>co.com.metallium.core.entity.ReservedNames</class>
+    <class>co.com.metallium.core.entity.User</class>
+    <class>co.com.metallium.core.entity.UserBan</class>
+    <class>co.com.metallium.core.entity.UserComments</class>
+    <class>co.com.metallium.core.entity.UserFavorite</class>
+    <class>co.com.metallium.core.entity.UserFriend</class>
+    <class>co.com.metallium.core.entity.UserOpinion</class>
+    <class>co.com.metallium.core.entity.UserSession</class>
+    <class>co.com.metallium.core.entity.UserWallComments</class>
+    <class>co.com.metallium.core.entity.UserWallPost</class>
+    <class>co.com.metallium.core.entity.jukebox.JukePlaylistMedia</class>
+    <class>co.com.metallium.core.entity.jukebox.JukePlaylist</class>
+    <class>co.com.metallium.core.entity.jukebox.JukeMedia</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>ALL</shared-cache-mode>
+    <properties>
+      <property name="eclipselink.cache.size.default" value="10000"/>
+      <property name="eclipselink.cache.type.default" value="Soft"/>
+      <property name="toplink.logging.level" value="FINE"/>
+    </properties>
+  </persistence-unit>
+</persistence>

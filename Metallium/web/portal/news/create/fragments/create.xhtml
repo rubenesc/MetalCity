@@ -1,0 +1,127 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+        <h:form id="createNewsForm">
+
+         <!-- Start buttons top-->
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+               <tr >
+                   <td colspan="2" align="left">
+                        <h:commandButton value="#{msg.common_button_create}"
+                                         action="#{editNewsManagedBean.createNews}" styleClass="button nightfall" />
+                        <span style="padding-left:3px"></span>
+                        <h:commandButton action="#{editNewsManagedBean.goToNewControlRoom}" value="#{msg.commun_button_cancel}" immediate="true" styleClass="button nightfall" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+         <!-- End buttons top-->
+
+
+        <!-- Start News Content -->
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+                <tr>
+                    <td  style="text-align: left" valign="top" width="10%"> <b> #{msg.news_info_title} </b> </td>
+                    <td  style="text-align: left" >
+                        <h:inputText style="text-align: left" value="#{editNewsManagedBean.news.title}" size="94" maxlength="90"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+                <tr>
+                    <td colspan="2" align="left">
+                        <p:editor value="#{editNewsManagedBean.news.content}" widgetVar="editor" width="650"/>
+                    </td>
+               </tr>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+        <!-- End News Content -->
+
+        <!-- Start Video Content -->
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+                <tr>
+                    <td  style="text-align: left" valign="top" width="15%"> <b> <h:outputText value="#{msg.news_field_video_url}" /> </b> </td>
+                    <td  style="text-align: left" >
+                        <h:inputText style="text-align: left" value="#{editNewsManagedBean.news.mediaUrl}" size="100"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="text-align: left" valign="top" width="15%"> <b> <h:outputText value="#{msg.news_field_source_url}" /> </b> </td>
+                    <td  style="text-align: left" >
+                        <h:inputText style="text-align: left" value="#{editNewsManagedBean.news.sourceUrl}" size="100"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+        <!-- End Video Content -->
+
+
+
+        <!-- Start choose network -->
+        <h3><h:outputText value="#{msg.news_info_network_choose}" /></h3>
+
+        <p:pickList value="#{editNewsManagedBean.networks}"
+                    var="network"
+                    itemLabel="#{network.name}"
+                    itemValue="#{network}" converter="#{editNewsManagedBean.converter.networkConverter}">
+                         <f:facet name="sourceCaption">#{msg.news_info_network_source}</f:facet>
+                         <f:facet name="targetCaption">#{msg.news_info_network_target}</f:facet>
+        </p:pickList>
+         <!-- End choose network -->
+
+         <!-- Start buttons bottom-->
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="2" align="left" height="10">
+                    </td>
+               </tr>
+               <tr >
+                   <td colspan="2" align="left">
+                        <h:commandButton value="#{msg.common_button_create}"
+                                         action="#{editNewsManagedBean.createNews}" styleClass="button nightfall" />
+                        <span style="padding-left:3px"></span>
+                        <h:commandButton action="#{editNewsManagedBean.goToNewControlRoom}"
+                                         value="#{msg.commun_button_cancel}" immediate="true" styleClass="button nightfall" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+         <!-- End button bottom-->
+
+        </h:form>
+
+
+</ui:composition>
+
+
+

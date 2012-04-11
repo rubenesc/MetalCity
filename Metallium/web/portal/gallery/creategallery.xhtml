@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <f:metadata>
+        <f:viewParam name="id" converterMessage="#{msg.commun_info_input_invalid}" value="#{imageGalleryBase.userId}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!createImageGallery.canIeditProfile}" id="noPanelGroup">
+
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+
+        </h:panelGroup>
+        <h:panelGroup rendered="#{createImageGallery.canIeditProfile}" id="yesPanelGroup">
+
+            <ui:include src="fragments/fragmentCreateGallery.xhtml"  />
+
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

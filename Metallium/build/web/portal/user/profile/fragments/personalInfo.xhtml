@@ -1,0 +1,166 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <br/>
+    <!-- profile user name and actions-->
+    <ui:include src="/portal/user/profile/fragments/fragments/headerPersonalInfo.xhtml"  id="headerPersonalInfo" />
+    <!-- profile user name and actions-->
+
+    <h:form id="personalInfoForm" >
+        <table width="100%" border="0" >
+            <tbody>
+                <tr valign="top">
+                    <td colspan="2" valign="top" >
+                        <table cellspacing="0"  cellpadding="0" width="100%" border="0" style="vertical-align: text-top">
+                            <tbody>
+                                <tr>
+                                    <!-- profile picture -->
+                                    <ui:include src="personalInfoProfilePicture.xhtml" />
+                                    <!-- profile picture -->
+                                    <!-- just a little space -->
+                                    <td >
+                                        <span style="padding-left:20px"></span>
+                                    </td>
+                                    <!-- just a little space -->
+                                    <!-- profile info -->
+                                    <td style="text-align: right" valign="top" width="100%" >
+                                        <table cellspacing="0" cellpadding="0" border="0">
+                                            <tbody>
+                                            <h:panelGroup rendered="false" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"><b> #{msg.profile_info_name} </b> </td>
+                                                    <td style="text-align: left" colspan="3" valign="top" width="320" >#{profileManagedBean.user.name}</td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{profileManagedBean.amIadministrator}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b> #{msg.common_info_id} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320">
+                                                        <h:outputText value="#{profileManagedBean.user.id}" id="userId" />
+                                                    </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{loginUserManagedBean.myProfileAdministrator1}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b> #{msg.profile_info_network} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320">
+                                                        <h:outputText value="#{profileManagedBean.user.network}" id="network"
+                                                                      converter="#{profileManagedBean.converter.networkConverter}" />
+                                                    </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{profileManagedBean.amIadministrator}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"><b> #{msg.register_field_email} </b> </td>
+                                                    <td style="text-align: left" colspan="3" valign="top" width="320" >#{profileManagedBean.user.email}</td>
+                                                </tr>
+                                            </h:panelGroup>
+                                                <h:panelGroup rendered="#{!empty  profileManagedBean.user.birthday and profileManagedBean.user.birthdayDispay != 3}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"><b> #{msg.profile_info_birthday} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320">
+                                                        <h:outputText value="#{profileManagedBean.user.birthday}" rendered="#{profileManagedBean.user.birthdayDispay == 1}">
+                                                            <f:convertDateTime pattern="MM.dd.yyyy" />
+                                                        </h:outputText>
+                                                        <h:outputText value="#{profileManagedBean.user.birthday}" rendered="#{profileManagedBean.user.birthdayDispay == 2}">
+                                                            <f:convertDateTime pattern="MM.dd" />
+                                                        </h:outputText>
+
+
+                                                    </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{!empty  profileManagedBean.user.sex}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b> #{msg.profile_info_sex} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320"> 
+                                                        <h:outputText value="#{profileManagedBean.user.sex}"
+                                                                      converter="#{profileManagedBean.converter.sexConverter}"  /></td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{! empty  profileManagedBean.user.country.printableName }" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b> #{msg.profile_info_country} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320"> #{profileManagedBean.user.country.printableName} </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{!empty  profileManagedBean.user.city}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b> #{msg.profile_info_city} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320"> #{profileManagedBean.user.city} </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{profileManagedBean.amIadministrator}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b> #{msg.profile_info_profile} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320">
+                                                        <h:outputText value="#{profileManagedBean.user.profile}" id="profile"  converter="#{profileManagedBean.converter.profileConverter}" />
+                                                    </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{profileManagedBean.amIadministrator}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b> #{msg.profile_info_state} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320">
+                                                        <h:outputText value="#{profileManagedBean.user.state}" id="state"  converter="#{profileManagedBean.converter.userStateConverter}" />
+                                                    </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{profileManagedBean.amIadministrator}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b>#{msg.profile_info_member_since}</b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320">
+                                                        <h:outputText value="#{profileManagedBean.user.registrationDate}">
+                                                            <f:convertDateTime pattern="MM.dd.yyyy" />
+                                                        </h:outputText>
+                                                    </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{profileManagedBean.amIadministrator}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b> #{msg.profile_info_last_modified} </b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320">
+                                                        <h:outputText value="#{profileManagedBean.user.lastModified}" id="lastModified" >
+                                                            <f:converter converterId="co.metallium.PrettyTimeConverter"/>
+                                                        </h:outputText>
+                                                    </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="false" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b>#{msg.profile_info_last_visit}</b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320">27.07.2003 20:58 </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{!empty  profileManagedBean.user.whatsOnYourMind}" >
+                                                <tr>
+                                                    <td style="text-align: left" valign="top" width="160"> <b>#{msg.profile_info_actual_state}</b> </td>
+                                                    <td style="text-align: left" valign="top" colspan="3" width="320"> #{profileManagedBean.user.whatsOnYourMind} </td>
+                                                </tr>
+                                            </h:panelGroup>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                   <!-- profile info -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+    </h:form>
+
+
+    <ui:include src="/portal/user/profile/fragments/dialogAddToFriendsFromProfile.xhtml"  id="dialogAddToFriendsFromProfile" />
+    <ui:include src="/portal/user/profile/fragments/dialogDeleteFromFriendsFromProfile.xhtml"  id="dialogDeleteFromFriendsFromProfile" />
+    <ui:include src="/portal/messages/sendMessageFromProfle.xhtml"  id="sendMessageFromProfile" />
+    <ui:include src="/portal/user/profile/fragments/dialogBanUserFromProfile.xhtml" id="dialogBanUserFromProfile" />
+    <ui:include src="/portal/user/profile/fragments/dialogUnbanUserFromProfile.xhtml" id="dialogUnbanUserFromProfile" />
+
+</ui:composition>
+
+

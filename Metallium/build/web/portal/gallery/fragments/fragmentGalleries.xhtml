@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="fragmentGalleriesForm" rendered="#{galleriesManagedBean.galleryExists}" >
+
+        <table cellspacing="0" cellpadding="5" width="100%" border="0">
+            <tbody>
+            <tr>
+                <td colspan="2">
+
+                    <!-- Start pagination -->
+                    <h:panelGroup  id="itemsPanelGroup">
+
+                        <ez:noItemsMsg id="noItemsComp" message="#{msg.common_info_no_galleries}"
+                                          numberOfItems="#{galleriesManagedBean.pagination.itemsCount}"/>
+
+                        <h:panelGroup rendered="#{galleriesManagedBean.pagination.itemsCount > 0}" id="itemsPanelGroup1">
+
+                        <table width="100%" align="left" cellpadding="0" cellspacing="0"  border="0" >
+                            <tr>
+                                <td>
+                                    <ez:itemPagination id="itemPaginationComp" pagination="#{galleriesManagedBean.pagination}"
+                                       nextAction="#{galleriesManagedBean.next}" previousAction="#{galleriesManagedBean.previous}" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table width="100%" align="left" cellpadding="0" cellspacing="0"  border="0" >
+                            <tr>
+                                <td>
+                                    <!-- image Galleries -->
+                                    <p:dataGrid  var="item" value="#{galleriesManagedBean.items}" columns="4" rows="120" rendered="true"  styleClass="imageList">
+                                         <p:column>
+                                             <table align="left">
+                                                <tr>
+                                                    <td colspan="2" align="left">
+                                                        <h:link  outcome="goToGallery">
+                                                            <f:param name="nick" value="#{galleriesManagedBean.userNick}"/>
+                                                            <f:param name="gid" value="#{item.id}"/>
+                                                            <img alt="_\,,/" id="galleryS" align="left" border="1" width="150" src="#{item.coverImage}" />
+                                                        </h:link>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" align="left">
+                                                        <h:outputText value="#{item.title}" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left">
+                                                        <h:outputText value="#{msg.image_gallery_info_photos}" />:
+                                                        <h:outputText value="#{item.numberPics}" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left">
+                                                        <h:panelGroup rendered="#{galleriesManagedBean.amItheOwnerOfTheGallery}" >
+                                                            <h:outputText value="#{msg.image_gallery_info_visibility}" />:
+                                                            <h:outputText value="#{item.state}"
+                                                                          converter="#{galleriesManagedBean.converter.galleryVisibilityConverter}" />
+                                                        </h:panelGroup>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                         </p:column>
+                                     </p:dataGrid>
+                                    <!-- image Galleries -->
+                                </td>
+                            </tr>
+                        </table>
+                        
+                       </h:panelGroup>
+                    </h:panelGroup>
+                <!-- End pagination -->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <h:inputHidden value="#{imageGalleryBaseManagedBean.user.id}" />
+
+    </h:form>
+</ui:composition>
+

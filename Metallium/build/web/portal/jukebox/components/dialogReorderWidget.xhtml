@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="dialogReorder"  >
+
+        <p:dialog header="Playlist Change Order"
+                  widgetVar="dialogReorderWidget" modal="true" width="450">
+
+            <h:panelGroup id="dialogReorderPanelGroup" >
+                
+                <p:orderList value="#{jukebox.playlists}" var="playlist" iconOnly="true"   
+                             itemValue="#{playlist}" converter="#{jukebox.playlistOrderConverter}" controlsLocation="right" styleClass="wideList" >  
+                     <p:column>  
+                         <h:outputLabel value="#{playlist.title}" />
+                    </p:column>  
+                </p:orderList>      
+                <br/>
+                
+                <p:commandButton value="#{msg.commun_button_save_changes}" 
+                         update=":jukeboxForm:playlistPanelGroup"   
+                         actionListener="#{jukebox.reorderPlaylist}"   
+                         oncomplete="handleReorderPlaylistRequest(xhr, status, args)"  />
+                    
+                
+                <span style="padding-left:6px;" />
+                <p:commandButton value="#{msg.commun_button_cancel}"
+                                 onclick="dialogReorderWidget.hide();" >
+                </p:commandButton>
+                
+            </h:panelGroup>
+        </p:dialog>
+
+    </h:form>
+    
+    
+    <script type="text/javascript">  
+        function handleReorderPlaylistRequest(xhr, status, args) {  
+            if(args.result) {  
+                dialogReorderWidget.hide();  
+            }  
+        }  
+    </script>     
+
+</ui:composition>

@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:form id="eventListForm"  >
+
+        <table width="100%" border="0">
+            <tr bgcolor="">
+                <td  align="left" >
+                    <h:outputText value="#{msg.index_info_upcomingevents}" styleClass="sectionTitle"/>
+                </td>
+                <td  align="right" valign="bottom">
+                    <h:panelGroup rendered="#{loginUserManagedBean.myProfileAdministrator1}" >
+                        <div>
+                            <h:outputText value="#{msg.profile_info_network}:" style="font-size: large"/>
+                            <span style="padding-left:2px; padding-right:2px" />
+                            <h:selectOneMenu id="eventNetwork" value="#{event.searchDTO.network}"
+                                             valueChangeListener="#{event.valueChangeListenerNetwork}" >
+                                <f:selectItem itemLabel="#{msg.common_info_none}" itemValue=""/>
+                                <f:selectItems value="#{loginUserManagedBean.selectItemNetwork}" />
+                                <f:ajax render="eventAjaxPanel"  execute="@this"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </h:panelGroup>
+                </td>
+            </tr>
+        </table>
+
+        <h:panelGroup id="eventAjaxPanel">
+            <ez:noItemsMsg id="eventNoItemsComp" message="#{msg.commun_info_no_events}"
+                               numberOfItems="#{event.paginationEvent.itemsCount}"/>
+
+            <h:panelGroup  rendered="#{event.paginationEvent.itemsCount > 0}" id="eventPanelGroup" >
+                <table>
+                    <tr>
+                        <td>
+                            <ez:itemPagination id="itemPaginationComp" pagination="#{event.paginationEvent}"
+                                               nextAction="#{event.nextEvents}" previousAction="#{event.previousEvents}" />
+                        </td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td>
+                            <p:dataGrid  var="item" value="#{event.itemsEvent}" columns="3"  rows="9" rendered="true" styleClass="commentList">
+                                 <p:column>
+                                     <div style="text-align: left">
+                                        <h:panelGroup id="eventCoverImageThumbnailPanelGroup" rendered="#{! empty item.coverImageThumbnail}" >
+                                            <table width="210" >
+                                                <tr>
+                                                    <td>
+                                                        <h:link  outcome="goToEvent" >
+                                                            <f:param name="event" value="#{item.alias}"/>
+                                                            <img alt="" id="eventCoverImageThumbnail" align="left"  src="#{item.coverImageThumbnailLocation}" />
+                                                        </h:link>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h2 style="display: inline;">
+                                                            <h:link outcome="goToEvent" >
+                                                                <h:outputText escape="true" value="#{item.title}"/>
+                                                                <f:param name="event" value="#{item.alias}"/>
+                                                            </h:link>
+                                                        </h2>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span style="font-size: 13px; color: rgb(204, 204, 204);">
+                                                           <h:outputText value="#{msg.event_info_event_location}: "
+                                                                         style="font-weight: bold"/>
+                                                           <h:outputText value="#{item.location}" />
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="dr">
+                                                            <h:outputText value="#{item.eventDate}">
+                                                                <f:convertDateTime pattern="EEEE, MMMM  dd yyyy" />
+                                                            </h:outputText>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </h:panelGroup>
+                                    </div>
+                                 </p:column>
+                             </p:dataGrid>
+                        </td>
+                    </tr>
+                </table>
+            </h:panelGroup>
+        </h:panelGroup>
+
+
+    </h:form>
+
+
+</ui:composition>
+

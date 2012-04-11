@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="fragmentGalleryForm" rendered="#{galleryManagedBean.galleryExists}" >
+
+        <table cellspacing="0" cellpadding="5" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td valign="top">
+                    <!-- Start Gallery -->
+                    <h:panelGroup  id="itemsPanelGroup">
+
+                        <ez:noItemsMsg message="#{msg.common_info_no_images}"
+                                          numberOfItems="#{galleryManagedBean.pagination.itemsCount}"/>
+
+                        <h:panelGroup rendered="#{galleryManagedBean.pagination.itemsCount > 0}" id="itemsPanelGroup1">
+
+                        <table width="640" align="center" cellpadding="0" cellspacing="0"  border="0" >
+                            <tr>
+                                <td>
+                                    <ez:itemPagination pagination="#{galleryManagedBean.pagination}"
+                                       nextAction="#{galleryManagedBean.next}" previousAction="#{galleryManagedBean.previous}" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table width="600" align="center" cellpadding="0" cellspacing="0"  border="0" >
+                            <tr>
+                                <td>
+                                    <p:dataGrid  var="item" value="#{galleryManagedBean.items}" columns="4"  rows="120" rendered="true">
+                                         <p:column>
+                                            <h:link outcome="image">
+                                                <img alt="_\,,/" id="imageS" align="left" border="1"  width="150" src="#{item.thumbnailLocation}" />
+                                                <f:param name="id" value="#{galleryManagedBean.imageGallery.id}"/>
+                                                <f:param name="iid" value="#{item.imageName}"/>
+                                            </h:link>
+                                         </p:column>
+                                     </p:dataGrid>
+                                </td>
+                            </tr>
+                        </table>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <!-- End Gallery -->
+                </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+
+        <h:inputHidden value="#{galleryManagedBean.user.id}" />
+
+    </h:form>
+</ui:composition>

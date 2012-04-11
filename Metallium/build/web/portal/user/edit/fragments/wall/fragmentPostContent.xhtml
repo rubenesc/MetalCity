@@ -1,0 +1,102 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <table cellspacing="0" cellpadding="5" width="100%" border="0">
+            <tbody>
+                    <tr>
+                        <td>
+                            <h:selectOneRadio value="#{editProfileManagedBean.userWallComp.userWallPost.type}"
+                                              valueChangeListener="#{editProfileManagedBean.userWallComp.valueChangedPostType}">
+                                <f:selectItem itemValue="VIDEO" itemLabel="#{msg.wall_post_type_video}" />
+                                <f:selectItem itemValue="TEXT" itemLabel="#{msg.wall_post_type_text}" />
+                                <f:selectItem itemValue="IMAGE" itemLabel="#{msg.wall_post_type_image}" />
+                                <f:selectItem itemValue="LINK" itemLabel="#{msg.wall_post_type_link}" />
+                                <f:ajax render="infoPanelGroup"/>
+                            </h:selectOneRadio>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+
+        <h:panelGroup id="infoPanelGroup" >
+            <table cellspacing="0" cellpadding="5" width="100%" border="0">
+                <tbody>
+                    <h:panelGroup rendered="#{editProfileManagedBean.userWallComp.infoRender.text}" id="textPanelGroup">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{msg.wall_post_info_description}"/><br/>
+                                <p:editor value="#{editProfileManagedBean.userWallComp.userWallPost.content}" widgetVar="editor"
+                                  controls="bold italic underline strikethrough numbering link unlink pastetext outdent indent"
+                                  width="500"/>
+                            </td>
+                        </tr>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{editProfileManagedBean.userWallComp.infoRender.link}" id="linkPanelGroup">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{msg.wall_post_info_description}"/><br/>
+                                <h:inputText style="text-align: left" styleClass="blackInput"
+                                             value="#{editProfileManagedBean.userWallComp.userWallPost.content}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputText value="#{msg.wall_post_info_url_link}"/><br/>
+                                <h:inputText style="text-align: left" styleClass="blackInput"
+                                             value="#{editProfileManagedBean.userWallComp.userWallPost.url}" />
+                            </td>
+                        </tr>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{editProfileManagedBean.userWallComp.infoRender.image}" id="imagePanelGroup">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{msg.wall_post_info_url_image}"/><br/>
+                                <p:fileUpload id="imageUpload" fileUploadListener="#{editProfileManagedBean.userWallComp.handleImageUpload}"
+                                              update="tempImagePanelGroup" auto="true"
+                                              sizeLimit="3000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width: 300px;"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:panelGroup id="tempImagePanelGroup">
+                                    <img alt="" id="image" border="1" width="200" src="#{editProfileManagedBean.userWallComp.userWallPost.imageLocation}" />
+                                </h:panelGroup>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputText value="#{msg.wall_post_info_description}"/><br/>
+                                <p:editor value="#{editProfileManagedBean.userWallComp.userWallPost.content}" widgetVar="editor"
+                                      controls="bold italic underline strikethrough numbering link unlink pastetext outdent indent"
+                                      width="500"/>
+                            </td>
+                        </tr>
+                    </h:panelGroup>
+                   <h:panelGroup rendered="#{editProfileManagedBean.userWallComp.infoRender.video}" id="videoPanelGroup">
+                       <tr>
+                            <td>
+                               <h:outputText value="#{msg.wall_post_info_url_video}"/><br/>
+                                <h:inputText style="text-align: left" styleClass="blackInput"
+                                             value="#{editProfileManagedBean.userWallComp.userWallPost.url}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputText value="#{msg.wall_post_info_description}"/><br/>
+                                <p:editor value="#{editProfileManagedBean.userWallComp.userWallPost.content}" widgetVar="editor"
+                                      controls="bold italic underline strikethrough numbering link unlink pastetext outdent indent"
+                                      width="500"/>
+                            </td>
+                        </tr>
+                    </h:panelGroup>
+
+                </tbody>
+            </table>
+        </h:panelGroup>
+
+</ui:composition>

@@ -1,0 +1,164 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="bodyHeaderTitle" >
+        #{msg.register_title}
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="registerUserForm">
+
+            <h:panelGroup rendered="#{registerUserManagedBean.authenticated}" id="alreadyRegisteredPanelGroup">
+                <div align="center">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                    <h:outputText escape="false" value="#{msg.register_info_you_are_already_registered}" />
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                    [<h:commandLink action="#{registerUserManagedBean.goToIndex}" >
+                        #{msg.commun_return}
+                    </h:commandLink>]
+                </div>
+
+            </h:panelGroup>
+            <h:panelGroup rendered="#{!registerUserManagedBean.authenticated}" id="registerPanelGroup">
+
+                <ezPres:title01 id="title" title="#{msg.register_title}" />
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="text-align: left" valign="top" width="20%">#{msg.register_field_name}</td>
+                        <td align="left"><h:inputText value="#{registerUserManagedBean.name}" id="name" size="30" /></td>
+                    </tr>
+                    <tr>
+                        <td height="5"></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left" valign="top" width="20%">#{msg.register_field_email}</td>
+                        <td align="left"><h:inputText value="#{registerUserManagedBean.user.email}" id="email"  size="30" /></td>
+                    </tr>
+                    <tr>
+                        <td height="5"></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left" valign="top" width="20%">#{msg.register_field_email_reenter}</td>
+                        <td align="left">
+                            <h:inputText value="#{registerUserManagedBean.emailReenter}" id="emailReenter"   size="30" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="5"></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td height="5"></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left" valign="top" width="20%">#{msg.register_field_birthday}</td>
+                        <td style="text-align: left">
+                    <h:selectOneMenu id="month" value="#{registerUserManagedBean.dateHelper.month}" >
+                        <f:selectItems value="#{registerUserManagedBean.selectItemMonths}"
+                                       var="item" itemValue="#{item.one}" itemLabel="#{msg[item.two]}" />
+                    </h:selectOneMenu>
+                    <span style="padding-left:3px" ></span>
+                    <h:selectOneMenu id="day" value="#{registerUserManagedBean.dateHelper.day}" >
+                        <f:selectItem itemValue="" itemLabel="#{msg.common_info_day}" />
+                        <f:selectItems value="#{registerUserManagedBean.selectItemDays}" />
+                    </h:selectOneMenu>
+                    <span style="padding-left:3px" ></span>
+                    <h:selectOneMenu id="year" value="#{registerUserManagedBean.dateHelper.year}" >
+                        <f:selectItem itemValue="" itemLabel="#{msg.common_info_year}"  />
+                        <f:selectItems value="#{registerUserManagedBean.selectItemYears}" />
+                    </h:selectOneMenu>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td height="5"></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left" valign="top" width="20%">#{msg.register_field_sex}</td>
+                        <td align="left">
+                    <h:selectOneMenu id="sex" value="#{registerUserManagedBean.user.sex}"  >
+                        <f:selectItems value="#{registerUserManagedBean.selectItemSex}"
+                                       var="item" itemValue="#{item.one}" itemLabel="#{msg[item.two]}" />
+                    </h:selectOneMenu>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td height="5"></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left" valign="top" width="20%">#{msg.register_field_password}</td>
+                        <td align="left">
+                        <h:inputSecret value="#{registerUserManagedBean.user.password}" id="password"  size="30" />
+                    </td>
+                    </tr>
+                    <tr>
+                        <td height="10"></td>
+                        <td >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left" valign="top" width="20%"></td>
+                        <td align="left" >
+                            <p:captcha label="Captcha"
+                                               language="#{registerUserManagedBean.locale}"
+                                               requiredMessage="#{msg.register_field_captcha_required}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="10"></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td height="20"></td>
+                        <td ></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left" valign="top" width="20%"></td>
+                        <td align="left">
+                           <h:commandButton action="#{registerUserManagedBean.registerUser}" value="#{msg.register_button_register}" styleClass="button nightfall" />
+                            <span style="padding-left:4px;" />
+                            <h:commandButton action="#{registerUserManagedBean.goToIndex}" value="#{msg.commun_button_cancel}" immediate="true" styleClass="button nightfall" />
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                <br/>
+
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr align="left">
+                        <td colspan="2">
+                            <h:outputText value="#{msg.register_info_terms} " />
+                            <h:link outcome="goToInfoTerms" value="#{msg.footer_info_terms}" title="#{msg.footer_info_terms}" />
+                        </td>
+                    </tr>
+                </table>
+
+            </h:panelGroup>
+
+        </h:form>
+
+        <br/>
+        <br/>
+
+    </ui:define>
+</ui:composition>

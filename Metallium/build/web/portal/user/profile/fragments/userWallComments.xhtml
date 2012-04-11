@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="commentsForm" >
+
+        <ez:commentInput  canIpublishComment="#{profileManagedBean.canIWriteOnUserWall}"
+                         comment="#{profileManagedBean.comment}"
+                         publishCommentAction="#{profileManagedBean.publishComment}"/>
+
+        <ez:noItemsMsg  message="#{msg.commun_info_no_comments}"
+                          numberOfItems="#{profileManagedBean.pagination.itemsCount}"/>
+
+        <h:panelGroup  id="commentsPanelGroup">
+
+            <h:panelGroup rendered="#{profileManagedBean.pagination.itemsCount > 0}" id="commentsPanelGroup1">
+                <br/>
+                <table>
+                    <tr>
+                        <td>
+                            <ez:itemPagination pagination="#{profileManagedBean.pagination}"
+                               nextAction="#{profileManagedBean.next}" previousAction="#{profileManagedBean.previous}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:dataTable value="#{profileManagedBean.items}" var="item"  styleClass="commentList">
+                                <h:column>
+                                    <span >
+					<span class="tlIcon" style="color: #555555;">
+                                            <h:commandLink id="deleteComment" style="text-align: right"
+                                                           rendered="#{profileManagedBean.canIdeleteComment}"
+                                                           actionListener="#{profileManagedBean.deleteComment}"
+                                                           value="#{msg.common_delete}" >
+                                                <f:ajax execute="@form" render="@form"  />
+                                            </h:commandLink>
+                                        </span>
+                                        
+                                        <ez:commentPost avatarLocation="#{item.user.avatarLocation}"
+                                                        nick="#{item.user.nick}"
+                                                        name="#{item.user.name}"
+                                                        whatsOnYourMind="#{item.user.whatsOnYourMind}"
+                                                        date="#{item.date}"
+                                                        comment="#{item.comment}"
+                                                         />
+                                        
+                                    </span>
+                                </h:column>
+                            </h:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ez:itemPagination pagination="#{profileManagedBean.pagination}"
+                               nextAction="#{profileManagedBean.next}" previousAction="#{profileManagedBean.previous}" />
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </h:panelGroup>
+        </h:panelGroup>
+        <!-- End comments -->
+
+        <h:inputHidden value="#{profileManagedBean.profileId}" />
+    </h:form>
+    
+    <br/>
+
+</ui:composition>
+
+

@@ -1,0 +1,41 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+     <span style="padding-left:4px" class="tlIcon" >
+         <h:panelGroup >
+
+            <h:link style="text-align: right" outcome="goToEventEdit" >
+                <h:outputText escape="true" value="#{msg.common_edit}" />
+                <f:param name="id" value="#{event.currentEvent.id}"/>
+                <f:param name="view" value="in"/>
+            </h:link>
+
+            <h:panelGroup rendered="#{event.currentEvent.state == 'PENDING'}" >
+                <span style="padding-left:3px; padding-right:3px" />
+                <h:commandLink id="activateNews" style="text-align: right"
+                               action="#{event.activateEvent}" value="#{msg.common_activate}" >
+                </h:commandLink>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{event.currentEvent.state == 'DELETED'}" >
+                <span style="padding-left:3px; padding-right:3px" />
+                <h:commandLink id="restoreNews" style="text-align: right"
+                               action="#{event.activateEvent}" value="#{msg.common_restore}" >
+                </h:commandLink>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{event.currentEvent.state == 'ACTIVE' || event.currentEvent.state == 'PENDING' }" >
+                <span style="padding-left:3px; padding-right:3px" />
+                <h:commandLink id="deleteNews" style="text-align: right"
+                               action="#{event.deleteEvent}" value="#{msg.common_delete}" >
+                </h:commandLink>
+            </h:panelGroup>
+         </h:panelGroup>
+     </span>
+
+</ui:composition>
+

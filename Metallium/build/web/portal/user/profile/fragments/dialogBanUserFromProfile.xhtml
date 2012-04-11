@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="dialogBanUserFromProfile" rendered="#{profileManagedBean.canIbanUser}"  >
+
+        <p:dialog header="#{msg.banned_info_ban_button}"
+                  widgetVar="dialogBanUserFromProfileWidget" modal="true" width="750" >
+
+            <table cellspacing="0" cellpadding="5" width="100%" border="0" align="left">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left" valign="top" align="left">
+                                <img alt="_\,,/" id="profilePicM" align="left" border="0" width="150"
+                                     src="#{profileManagedBean.user.avatarProfileLocation}" />
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td colspan="2"  style="text-align: left" valign="top" width="100%">
+                                            <h:outputText id="banUserConfirmMessage" value="#{msg.banned_info_confirmation}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="10"></td>
+                                    </tr>
+                                    <tr>
+                                        <td  style="text-align: left" valign="top">  #{msg.banned_info_how_long_will_the_ban_be}  </td>
+                                    </tr>
+                                    <tr>
+                                        <td  style="text-align: left">
+                                            <h:selectOneMenu id="banTime" value="#{profileManagedBean.userBan.banTime}" >
+                                                <f:selectItems value="#{profileManagedBean.selectItemBanTime}"
+                                                               var="item" itemValue="#{item.one}" itemLabel="#{msg[item.two]}" />
+                                            </h:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td  style="text-align: left" valign="top">  #{msg.banned_info_why}  </td>
+                                    </tr>
+                                    <tr>
+                                        <td  style="text-align: left">
+                                            <h:inputText value ="#{profileManagedBean.userBan.why}" size="40" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="left" valign="top">
+                                            <p:commandButton id="banUserBtn" value="#{msg.common_send}"
+                                                             actionListener="#{profileManagedBean.banUser}"
+                                                             ajax="false" >
+                                                <f:ajax execute="@this" render="@none"/>
+                                            </p:commandButton>
+
+                                            <span style="padding-left:3px"></span>
+
+                                            <p:commandButton value="#{msg.commun_button_cancel}"
+                                                             onclick="dialogBanUserFromProfile.hide();" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </p:dialog>
+
+    </h:form>
+
+</ui:composition>

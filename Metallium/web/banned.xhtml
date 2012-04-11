@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:myComponents="http://java.sun.com/jsf/composite/myComponents"
+                template="/templates/metalcity_template_01.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="bodyHeaderTitle" >
+        #{msg.banned_info_title}
+    </ui:define>
+
+    <ui:define name="body">
+
+    <h:form id="bannedForm" >
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <table width="60%"  align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="padding-left:40px"></td>
+                <td>
+                    <h:outputText id ="bannedMessage" value="#{msg.banned_info_description}" styleClass="titulos"/>
+                </td>
+                <td>
+                    <h:outputText id ="jaja" value="#{bannedManagedBean.doNothing}" styleClass="titulos"/>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </h:form>
+
+    </ui:define>
+</ui:composition>

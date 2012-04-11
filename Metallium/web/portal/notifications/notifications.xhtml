@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:metadata>
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!notificationManagedBean.authenticated}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{notificationManagedBean.authenticated}" id="yesPanelGroup">
+            <h:form id="notificationsForm" >
+
+                <br/>
+
+                <table cellspacing="2" width="100%" cellpadding="0" border="0" align="left">
+                    <tr>
+                        <td>
+                            <ui:include src="fragments/friendrequests.xhtml"  />
+                        </td>
+                    </tr>
+                </table>
+
+            </h:form>
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

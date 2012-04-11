@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="commentsForm" >
+
+        <p:growl autoUpdate="true"/>
+
+        <h:panelGroup  id="commentsPanelGroup">
+
+            <ez:commentInput canIpublishComment="#{event.authenticated}"
+                             comment="#{event.commentComp.comment}"
+                             publishCommentAction="#{event.commentComp.publishComment}"/>
+
+            <ez:noItemsMsg message="#{msg.commun_info_no_comments}"
+                           numberOfItems="#{event.commentComp.paginationComments.itemsCount}"/>
+
+            <h:panelGroup rendered="#{event.commentComp.paginationComments.itemsCount > 0}" id="commentsPanelGroup1">
+                <br/>
+                <table>
+                    <tr>
+                        <td>
+                            <ez:itemPagination pagination="#{event.commentComp.paginationComments}"
+                                               nextAction="#{event.commentComp.nextComments}"
+                                               previousAction="#{event.commentComp.previousComments}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <h:dataTable value="#{event.commentComp.itemsComments}" var="item"  styleClass="commentList">
+                                <h:column>
+                                    <span >
+					<span class="tlIcon" style="color: #555555;">
+                                            <h:commandLink id="deleteComment" style="text-align: right"
+                                                           rendered="#{event.commentComp.canIdeleteComment}"
+                                                           actionListener="#{event.commentComp.deleteComment}"
+                                                           value="#{msg.common_delete}" >
+                                                <f:ajax execute="@form" render="@form"  />
+                                            </h:commandLink>
+                                        </span>
+                                        
+                                        <ez:commentPost avatarLocation="#{item.user.avatarLocation}"
+                                                        nick="#{item.user.nick}"
+                                                        name="#{item.user.name}"
+                                                        whatsOnYourMind="#{item.user.whatsOnYourMind}"
+                                                        date="#{item.date}"
+                                                        comment="#{item.comment}"
+                                                         />
+                                        
+                                    </span>
+                                </h:column>
+                            </h:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ez:itemPagination pagination="#{event.commentComp.paginationComments}"
+                                               nextAction="#{event.commentComp.nextComments}"
+                                               previousAction="#{event.commentComp.previousComments}" />
+                        </td>
+                    </tr>
+                </table>
+
+            </h:panelGroup>
+        </h:panelGroup>
+        <!-- End comments -->
+    </h:form>
+
+    <br/>
+
+</ui:composition>
+
+

@@ -1,0 +1,14 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <center>
+        <div id="belowFooter">
+            #{msg.footer_info_copyright} <h:link outcome="goToIndex" value="#{msg.footer_info_pagename}" title="#{msg.footer_info_pagename}" /> 
+            / <h:link outcome="goToInfoPrivacy" value="#{msg.footer_info_privicy}" title="#{msg.footer_info_privicy}" />
+            / <h:link outcome="goToInfoTerms" value="#{msg.footer_info_terms}" title="#{msg.footer_info_terms}" />
+            / <h:outputText value="admin@metalcity.net" />  
+        </div>
+    </center>
+</ui:composition>

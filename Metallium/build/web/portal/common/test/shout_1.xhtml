@@ -1,0 +1,236 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/shout/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+
+    <style type="text/css">
+        .wideList .ui-orderlist .ui-orderlist-list{
+            width: 900px;
+            height: 900px;
+        }
+    </style>    
+
+    <ui:define name="body">
+        <h:form id="jukeboxForm" >
+            
+
+            <script type="text/javascript">
+
+              var params = { allowScriptAccess: "always", 
+                             events: { 'onStateChange': onytplayerStateChange,
+                                       'onError': onytplayerError
+                                     } 
+                           };
+              var atts = { id: "myytplayer", wmode: "opaque" };
+              
+              var variableFromServer = '<h:outputText value="#{jukebox.firstVideoId}" />';
+
+              swfobject.embedSWF('http://www.youtube.com/v/'+variableFromServer+'?enablejsapi=1&amp;playerapiid=ytplayer&amp;version=3&amp;autoplay=1',
+                  "ytapiplayer", "480", "360", "8", null, null, params, atts);
+
+           
+
+            function reload(event){
+               
+                if(event.status == 'begin') { }
+
+                if(event.status == 'complete') { }
+
+                if(event.status == 'success') { }
+                
+              }
+           
+           
+              function onYouTubePlayerReady(playerId) {
+                ytplayer = document.getElementById("myytplayer");
+                ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
+              }
+              
+
+              function onytplayerStateChange(newState) {
+                  if (newState == 0 ) {
+                      playNextMedia();
+                  }
+              }                      
+             
+             function playNextMedia(){
+                document.getElementById('jukeboxForm:next').click();
+             }
+             
+            //YouTube player error
+            function onytplayerError (errorCode) {
+            }              
+
+            function handleTrackChangeRequest(xhr, status, args) {  
+                if(args.result) {  
+                    ytplayer = document.getElementById("myytplayer");
+                    if(ytplayer) {
+                        ytplayer.loadVideoById(args.mediaId);
+                    }                    
+                }  
+            }  
+
+                       
+            </script>            
+            
+            
+            <h:panelGroup id="searchPanelGroup" rendered="true">
+                
+                <div id="topzone">
+                    <div id="leftnavzone">
+                        <h:panelGroup id="playlistPanelGroup" rendered="#{jukebox.authenticated}" >
+                             <div id="radiopicker">
+                                  <h2>Playlists</h2> 
+                                  <ui:repeat var="playlist" value="#{jukebox.playlists}" varStatus="status">
+                                      <ul> 
+                                           <li class="prigen" id="xxx#{playlist.id}">
+                                                <div class="arrowup"></div> 
+                                                <h:commandLink action="#{jukebox.loadPlaylist(playlist.id)}" value="#{playlist.title}">
+                                                    <f:ajax execute="@this" render="@form"  />
+                                                </h:commandLink>
+                                            </li> 
+                                           <ul style="display: none;" class="secgen" id="#{playlist.id}_sec"></ul>  
+                                      </ul> 
+                                  </ui:repeat>
+                             </div> 
+                             <script type="text/javascript">
+                                $(document).ready(function() {
+                                                populate1("null","null");
+                                                $("#"+'null').addClass("genreSelected");
+                                                $("#"+'null a').css("color","#fff");
+                                });
+                             </script> 
+                        </h:panelGroup>
+                    </div>			
+
+                    <div id="stationresults">
+                        
+                        <h:panelGroup id="mediaTitle" >
+                            <ezPres:title01 title="Jukebox: #{jukebox.youtubeVideo.title}" />
+                        </h:panelGroup>
+                        
+                        <h:panelGroup id="searchPanelGroup2" rendered="#{not empty jukebox.firstVideoId }" style="">
+                            <div id="ytapiplayer">
+                                You need Flash player 8+ and JavaScript enabled to view this video.
+                            </div>
+
+                            <table width="100%" border="0" cellspacing="0" cellpadding="5">
+                                <tr>
+                                    <td style="text-align: center">
+                                        <p:commandButton id="previous" value="#{msg.juke_media_previous}" 
+                                                 update=":jukeboxForm:playlistTracksPanelGroup :jukeboxForm:mediaTitle"   
+                                                 actionListener="#{jukebox.previousTrack}"   
+                                                 oncomplete="handleTrackChangeRequest(xhr, status, args)"  />                                            
+
+                                            <span style="padding-left:5px;" />
+
+                                        <p:commandButton id="next" value="#{msg.juke_media_next}" 
+                                                 update=":jukeboxForm:playlistTracksPanelGroup :jukeboxForm:mediaTitle"   
+                                                 actionListener="#{jukebox.nextTrack}"   
+                                                 oncomplete="handleTrackChangeRequest(xhr, status, args)"  />
+                                    </td>
+                                </tr>
+                            </table>
+                        </h:panelGroup>
+
+                        
+                        
+                        <h:panelGrid id="playlistTracksPanelGroup"  >
+                            <div id="tableheadtext" style="float: left;">
+                             <h1> Playlist: '<b>#{jukebox.currentPlaylistTitle}</b>'</h1>
+                            </div>
+                            <div id="dumean" style="margin: 0pt 0pt 10px 22px; clear: left;"></div>
+
+                            <div class="dirhead">
+                              <div class="dirheadsta"><span class="dirheadsta1" id="stationhead2">station</span></div>
+                              <div class="dirheadgenre"><span class="dirheadgenre1" id="genrehead2">genre</span></div>
+                              <div class="dirheadlist"><span class="dirheadlist1" id="listenershead2">listeners</span></div>
+                              <div class="dirheadbit"><span class="dirheadbit1" id="bitratehead2">bitrate</span></div>
+                              <div style="border-right: 0px none;" class="dirheadtyp"><span class="dirheadtyp1" id="typehead2">type</span></div>
+                            </div>
+
+                            <ui:repeat var="item" value="#{jukebox.videoList}" varStatus="status" id="media">
+                                <div id="resulttable"> 
+                                 <div class="dirlist"> 
+                                  <div class="stationcol" style="width: 428px;"> 
+                                   <a href="http://yp.shoutcast.com/sbin/tunein-station.pls?id=2964213" title="Metallica Channel 24x7" class="playbutton playimage" name="Metallica Channel 24x7" id="2964213"></a> 
+                                   <div style="height: 0px;" class="videoBody"> 
+                                        <div class="gridModule"> 
+                                         <div class="surrogate"> 
+                                          <div id="thumbnail2964213" class="thumbnail"> 
+                                            <p:commandLink actionListener="#{jukebox.playTrack(item)}" 
+                                                           oncomplete="handleTrackChangeRequest(xhr, status, args)" 
+                                                           update=":jukeboxForm:playlistTracksPanelGroup :jukeboxForm:mediaTitle" styleClass="playbutton clickabletitle">
+                                                <h:outputText id="mediaTitle" escape="true" value="#{item.title}" style="#{jukebox.validateIfMediaIsSelected(item.mediaId) ? 'font-weight: bold; text-decoration: underline;': ''}" />
+                                            </p:commandLink>
+                                          </div> 
+                                         </div> 
+                                        </div> 
+                                   </div> 
+                                  </div> 
+                                  <div class="dirspacer"></div> 
+                                  <div class="dirgenre">
+                                      <!--  -->
+                                    <h:panelGroup rendered="#{jukebox.authenticated}" >
+                                        <p:menuButton value="x">  
+                                            <p:menuitem value="#{msg.juke_media_play}" actionListener="#{jukebox.playMedia}" update=":jukeboxForm:playlistTracksPanelGroup :jukeboxForm:mediaTitle" oncomplete="handleTrackChangeRequest(xhr, status, args)" icon="ui-icon-disk"/>  
+                                            <p:menuitem value="#{msg.juke_media_save}" actionListener="#{jukebox.saveMediaMenu}" update="media"   rendered="#{jukebox.canIsaveMedia}" icon="ui-icon-disk"/>  
+                                            <p:menuitem value="#{msg.juke_media_delete}" actionListener="#{jukebox.deleteMedia}" update="media"   rendered="#{!jukebox.canIsaveMedia}" icon="ui-icon-disk"/>  
+                                            <p:menuitem value="Move to Playlist" actionListener="#{jukebox.moveMediaToPlaylist1(item)}" id="moveMeidaToPlaylistBtn" icon="ui-icon-disk"/>  
+                                        </p:menuButton>                                                 
+
+                                        <p:overlayPanel for="moveMeidaToPlaylistBtn" hideEffect="fade" >  
+                                            <p:dataTable var="playlist" value="#{jukebox.playlists}" rows="50" paginator="false">  
+                                                <p:column headerText="select a playlist">
+                                                    <h:commandLink actionListener="#{jukebox.moveMediaToPlaylist2(playlist)}" value="#{playlist.title}">
+                                                        <f:ajax execute="@this"  render=":jukeboxForm:playlistTracksPanelGroup"/>
+                                                    </h:commandLink>
+                                                </p:column>
+                                            </p:dataTable>  
+                                        </p:overlayPanel>                                                 
+                                    </h:panelGroup>
+
+                                      <!-- -->
+                                  </div> 
+                                  <div class="dirspacer"></div> 
+                                  <div class="dirlistners">
+                                   18
+                                  </div> 
+                                  <div class="dirspacer"></div> 
+                                  <div class="dirbitrate">
+                                   128
+                                  </div> 
+                                  <div class="dirspacer"></div> 
+                                  <div class="dirtype">
+                                   MP3
+                                  </div> 
+                                 </div> 
+                                </div>
+                            </ui:repeat>
+                        </h:panelGrid>
+                    </div>			                
+
+				</div>
+            </h:panelGroup>
+        
+        
+        </h:form>
+        
+        <ui:include src="/portal/jukebox/components/dialogCreatePlaylistWidget.xhtml"  id="dialogCreatePlaylistWidget" />
+        <ui:include src="/portal/jukebox/components/dialogReorderWidget.xhtml"  id="dialogReorderWidget" />
+        
+        
+
+    </ui:define>
+    
+</ui:composition>
+

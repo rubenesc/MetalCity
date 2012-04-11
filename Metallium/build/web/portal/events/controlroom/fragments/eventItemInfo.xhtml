@@ -1,0 +1,57 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <table width="100%" >
+        <tbody>
+            <tr>
+                <td align="left">
+                    <ui:include src="eventActions1.xhtml"  id="eventActions" />
+                </td>
+            </tr>
+            <tr>
+                <td align="left" >
+                    <h:link outcome="goToEvent" style="FONT-SIZE: 15px; COLOR: #e4d7b8;" >
+                        <h:outputText escape="true" value="#{item.title}" />
+                        <f:param name="event" value="#{item.alias}"/>
+                    </h:link>
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <h:outputText value="#{msg.event_info_event_date}: " style="font-weight: bold" />
+                    <h:outputText value="#{item.eventDate}" >
+                        <f:convertDateTime pattern="EEEE, MMMM  dd yyyy" />
+                   </h:outputText>
+                   <span style="padding-left:2px; padding-right:2px" />
+                   <h:outputText value="#{msg.event_info_event_location}: " style="font-weight: bold"/><h:outputText value="#{item.location}" />
+
+                </td>
+                <td align="right">
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                        <h:outputText value="#{msg.profile_info_network}: " style="font-weight: bold"/>
+                        <h:outputText value="#{item.network}" converter="#{newsControlRoomManagedBean.converter.networkConverter}"/>
+                        <span style="padding-left:2px; padding-right:2px" />
+                        <h:outputText value="#{msg.common_info_state}: " style="font-weight: bold"/>
+                        <h:outputText value="#{item.state}" converter="#{eventControlRoom.converter.newsStateConverter}" />
+                        <span style="padding-left:2px; padding-right:2px" />
+                        <h:outputText value="#{msg.common_info_id}: " style="font-weight: bold"/>
+                        <h:outputText value="#{item.id}"  />
+                </td>
+                <td align="right">
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</ui:composition>
+
+
+

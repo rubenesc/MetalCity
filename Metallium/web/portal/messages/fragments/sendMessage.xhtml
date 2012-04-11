@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="">
+        <tr>
+            <td align="left" nowrap="true">
+                <h:outputText value="#{msg.message_info_new_message}" styleClass="sectionTitle" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            <h:panelGroup  id="ajaxPanalGroupNewMessage">
+                <table cellspacing="0" cellpadding="5" width="100%" border="0">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right">
+                                <b> #{msg.message_info_to}:</b><span style="padding-left:3px"></span>
+                            </td>
+                            <td  style="text-align: left">
+                                <p:autoComplete id="name" value="#{sendMessageFromBoxManagedBean.toUserName}"
+                                                completeMethod="#{sendMessageFromBoxManagedBean.complete}"
+                                                 forceSelection="true">
+                                    <p:ajax event="itemSelect" listener="#{sendMessageFromBoxManagedBean.handleSelect}" />
+                                </p:autoComplete>
+                            </td>
+                        </tr>
+                        <h:panelGroup rendered="false" >
+                            <tr>
+                                <td style="text-align: right">
+                                    <b> #{msg.message_info_subject}:</b><span style="padding-left:3px"></span>
+                                </td>
+                                <td  style="text-align: left">
+                                    <h:inputText size="80" value="#{sendMessageFromBoxManagedBean.sendMessage.title}" />
+                                </td>
+                            </tr>
+                        </h:panelGroup>
+                        <tr>
+                            <td style="text-align: right">
+                                <b> #{msg.message_info_message}:</b><span style="padding-left:3px"></span>
+                            </td>
+                            <td  style="text-align: left">
+                                <p:editor id="comment" value="#{sendMessageFromBoxManagedBean.sendMessage.message}"  widgetVar="editor"
+                                          controls="bold italic underline strikethrough numbering link unlink pastetext outdent indent"
+                                          width="550" height="160" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" height="20"></td>
+                        </tr>
+                        <tr>
+                            <td  valign="top" width="20%"> </td>
+                            <td colspan="3" align="left">
+                                <h:commandButton id="sendMessage" value="#{msg.common_send}"
+                                                 action="#{sendMessageFromBoxManagedBean.sendMessageFromMessageBox}" styleClass="button nightfall">
+                                </h:commandButton>
+                                <span style="padding-left:3px"></span>
+                                <h:commandButton value="#{msg.commun_button_cancel}"
+                                                 action="#{sendMessageFromBoxManagedBean.cancelSendMessage}"
+                                                 styleClass="button nightfall">
+                                </h:commandButton>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </h:panelGroup>
+            </td>
+        </tr>
+    </table>
+
+</ui:composition>
+

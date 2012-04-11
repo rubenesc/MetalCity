@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+         <h:form id="dialogEditGalleryForm" rendered="#{galleryManagedBean.canIeditProfile}" >
+            <p:dialog header="#{msg.common_edit}" widgetVar="dialogEditGallery" modal="true" width="750" >
+                <table cellspacing="0" cellpadding="5" width="100%" border="0">
+                    <tbody>
+                        <tr>
+                            <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.image_gallery_info_title} </b> </td>
+                            <td  style="text-align: left">
+                                <h:inputText size="50" maxlength="80" value="#{galleryManagedBean.imageGallery.title}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.image_gallery_info_description} </b> </td>
+                            <td  style="text-align: left">
+                                <h:inputTextarea rows="4" cols="50" value="#{galleryManagedBean.imageGallery.description}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  style="text-align: left" valign="top" width="20%"> <b> #{msg.image_gallery_info_visibility} </b> </td>
+                            <td  style="text-align: left">
+                                <h:selectOneMenu id="sex" value="#{galleryManagedBean.imageGallery.state}" >
+                                    <f:selectItems value="#{galleryManagedBean.selectItemVisibility}"
+                                                   var="item" itemValue="#{item.one}" itemLabel="#{msg[item.two]}" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" height="20"></td>
+                        </tr>
+                        <tr>
+                            <td  valign="top" width="20%"> </td>
+                            <td colspan="3" align="left">
+                                <p:commandButton id="createImageGallery"  value="#{msg.commun_button_save_changes}"
+                                                 action="#{galleryManagedBean.editImageGalleryBasicInfo}"
+                                                 ajax="false" />
+                                <span style="padding-left:3px"></span>
+                                <p:commandButton value="#{msg.commun_button_cancel}"
+                                                 onclick="dialogEditGallery.hide();" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p:dialog>
+         </h:form>
+
+
+</ui:composition>

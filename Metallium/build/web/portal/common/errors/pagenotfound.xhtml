@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+    <h:form id="pagenotfoundForm">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <table width="60%"  align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="padding-left:40px"></td>
+                <td>
+                    <h:outputText value="Page not found" styleClass="titulos"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left:40px"></td>
+                <td>
+                    <h:outputText value="The page you are looking for doesn't exist or there was a terrible error." styleClass="titulos"/>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <div align="center">
+            [<h:commandLink action="#{indexManagedBean.goToIndex}" >
+                #{msg.commun_return}
+            </h:commandLink>]
+        </div>
+
+    </h:form>
+
+    </ui:define>
+</ui:composition>

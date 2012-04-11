@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:metadata>
+        <f:viewParam name="id" converterMessage="#{msg.commun_info_input_invalid}" value="#{editEvent.id}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+            <h:panelGroup rendered="#{!editEvent.canIseeTheCreateEventPage}" id="noPanelGroup">
+                <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+            </h:panelGroup>
+
+
+            <h:panelGroup rendered="#{editEvent.canIseeTheCreateEventPage}" id="yesPanelGroup">
+
+                <br/>
+                <table cellspacing="0" cellpadding="5" width="100%" border="0">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h:outputText value="#{msg.event_info_edit_event}" styleClass="sectionTitle" />
+                            </td>
+                            <td ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" >
+                                <table cellspacing="5" cellpadding="0" width="100%" border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" align="left">
+                                                <!-- start images -->
+                                                    <ui:include src="../create/fragments/chooseCover.xhtml"  />
+                                                <!-- end images -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="20" />
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left" valign="top" width="400">
+                                                <!-- start info news -->
+                                                    <ui:include src="fragments/edit.xhtml"  />
+                                                <!-- end info news -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+        </h:panelGroup>
+
+        <br/>
+
+    </ui:define>
+</ui:composition>

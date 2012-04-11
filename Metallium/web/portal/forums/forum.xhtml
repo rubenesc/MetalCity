@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:metadata>
+        <f:viewParam name="forum"  converterMessage="#{msg.commun_info_input_invalid}"  value="#{forum.alias}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!forum.exists}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{forum.exists}" id="yesPanelGroup">
+
+            <h:form id="forumForm" >
+                <br/>
+
+                <table >
+                    <tr >
+                        <td >
+                            <h:link outcome="goToProfile"  >
+                                <img alt=":)" id="profilePic" border="0" src="#{forum.current.user.avatarLocation}" />
+                                <f:param name="nick" value="#{forum.current.user.nick}"/>
+                            </h:link>
+                        </td>
+                        <td>
+                            
+                            <span class="forumText">
+                               <ui:include src="fragments/fragmentEditMenu.xhtml" />
+
+                               <br/>
+                                   <h:link outcome="goToForumList" >
+                                       <h:outputText value="#{msg[forum.current.category.name]}" />
+                                       <f:param name="category" value="#{forum.current.category.id}"/>
+                                   </h:link>
+                               <br/>
+    
+                                   <h:outputText value="#{forum.current.title}" styleClass="sectionTitleForum" />
+                                <br/>
+                                    <h:outputText escape="true" value="#{forum.current.date}">
+                                        <f:converter converterId="co.metallium.PrettyTimeConverter"/>
+                                    </h:outputText>
+                                    <h:panelGroup rendered="false" id="numberCommentsPanelGroup">
+                                         /
+                                         <h:outputText value="#{forum.current.numberComments} "/>
+                                         <h:outputText value="#{msg.index_info_commentaries}" style="text-transform: lowercase" />
+                                         /
+                                    </h:panelGroup>
+
+                                     <h:outputText value=" #{msg.index_info_by} " />
+                                     <h:link outcome="goToProfile" value="#{forum.current.user.name}" >
+                                        <f:param name="nick" value="#{forum.current.user.nick}"/>
+                                     </h:link>
+                                <p>
+                                    <h:outputText escape="false" value="#{forum.current.content}"/>
+                                </p>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                <div align="center">
+                    [<h:commandLink action="#{forum.goToForumList}" value="#{msg.commun_return}"/>]
+                </div>
+
+
+                <ui:include src="fragments/fragmentForumComments.xhtml" id="fragmentForumComments" />
+
+            </h:form>
+
+        </h:panelGroup>
+
+        <br/>
+        <br/>
+
+    </ui:define>
+</ui:composition>

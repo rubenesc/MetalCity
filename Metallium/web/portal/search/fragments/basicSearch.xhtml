@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:panelGroup id="basicSearchPanelGroup" rendered="#{searchManagedBean.basicSearch}">
+        <tr >
+            <td >
+                <h:inputText id="searchQuery" value="#{searchManagedBean.searchQuery}" size="50" />
+                <span style="padding-left:5px" ></span>
+                <h:commandButton action="#{searchManagedBean.performSearch}"
+                                 value="#{msg.search_info_btn_search}" styleClass="button nightfall" >
+                    <f:ajax execute="basicSearchPanelGroup" render="@form"  />
+                </h:commandButton>
+                <span style="padding-left:3px" ></span>
+                <h:commandLink id="showAdvancedSearchLink" value="#{msg.search_info_btn_show_advanced_search}"
+                               actionListener="#{searchManagedBean.showAdvancedSearch}"
+                               style="text-decoration: underline"
+                               rendered="false"
+                               >
+                    <f:ajax execute="@form" render="@form" />
+                </h:commandLink>
+            </td>
+        </tr>
+    </h:panelGroup>
+
+</ui:composition>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="bodyHeaderTitle" >
+        #{msg.banned_info_title}
+    </ui:define>
+
+    <ui:define name="body">
+
+            <h:form>
+                <h:outputText id="txt_count" value="#{counterBean.count}" />
+
+                <p:poll interval="3"
+                        actionListener="#{counterBean.increment}" update="txt_count" />
+            </h:form>
+
+    </ui:define>
+</ui:composition>
+

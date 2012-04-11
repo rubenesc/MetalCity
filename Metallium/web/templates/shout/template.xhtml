@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <!--
+
+    ##     ## ######## ########    ###    ##        ######  #### ######## ##    ##
+    ###   ### ##          ##      ## ##   ##       ##    ##  ##     ##     ##  ##
+    #### #### ##          ##     ##   ##  ##       ##        ##     ##      ####
+    ## ### ## ######      ##    ##     ## ##       ##        ##     ##       ##
+    ##     ## ##          ##    ######### ##       ##        ##     ##       ##
+    ##     ## ##          ##    ##     ## ##       ##    ##  ##     ##       ##
+    ##     ## ########    ##    ##     ## ########  ######  ####    ##       ##
+
+    -->
+
+    <h:head>
+        <title>#{msg.general_pagename}</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="Heavy Metal Social Network" />
+        <meta name="keywords" content="the metal social network, metal, heavy metal, thrash metal, death metal, black metal, news, concerts, headbangers" />
+
+        <h:outputStylesheet name="a.css" library="css/shout"/>
+        <h:outputStylesheet name="main.css" library="css/shout"/>
+        <h:outputStylesheet name="aol_globalheader-1_3D.css" library="css/shout"/>
+            
+        <h:outputScript name="shoutcast.js" library="css/shout" />
+        <h:outputScript name="global.js" library="css/shout" />
+        <h:outputScript name="mg2.js" library="css/shout" />
+        <h:outputScript name="feedback.js" library="css/shout" />
+        
+        
+        <link rel="icon"
+              type="image/png"
+              href="#{loginUserManagedBean.faviconUrl}" />
+
+    </h:head>
+
+    <h:body >
+        <f:view contentType="text/html" locale="#{loginUserManagedBean.locale}">
+            
+        <a class="hide" accesskey="c" href="#content">Skip to main content</a>
+        
+        <!-- container -->
+        <div id="container" class="clear-fix">
+            
+            <!-- header -->
+            <ui:include src="/templates/shout/snippets/header.xhtml"/>
+            <!-- header -->
+            
+            <div id="content" class="clear-fix">
+                <ui:insert name="body">Body</ui:insert>
+            </div><!-- content -->
+			
+            <div id="footer">
+		<div style="float: left; width: 980px;" id="GF_">
+                    <style>
+                    .footerBottomCenter{float:left;padding:0px 0px 0px 64px;width:380px;text-align:center;}
+                    #channelFooter .chFtrLinks{padding-right:12px;}
+                    </style>
+
+                    <div id="channelFooter">
+                            <div class="chFtrLinks">
+                            </div>
+                            <div class="footerBottomCenter">SHOUTcast Radio offers thousands of free Internet radio <br/>stations from DJs and broadcasters around the world</div>
+                            <div class="chFtrsLegal">                               
+                                    <ul>
+                                            <li><a target="_blank" href="http://www.shoutcast.com/sitemap">Site Map</a></li>
+                                            <li><a href="http://www.shoutcast.com/tos">Terms of Service</a></li>
+                                            <li><a href="http://privacy.aol.com/">Privacy Policy</a></li>
+                                            <li class="chFtrsLegalLast"><a href="http://adinfo.aol.com/about-our-ads/">About Our Ads</a></li>
+                                    </ul>
+                                     <div class="rightsres">©2011 NULLSOFT. All Rights Reserved.</div>
+                            </div>                          
+                    </div>
+                </div>											
+            </div><!-- footer -->
+            
+        </div>
+        <!-- container -->
+        
+        <div class="bottom-bar fonstyle" id="bottom-bar">
+          <div class="bottom-bar-inner">
+                <div style="float: left;"></div>
+                <div onclick="javascript: invokePopOutStop();" class="popUpoutPlayer"></div>
+           </div>
+        </div>
+    
+            
+
+        </f:view>
+    </h:body>
+</html>
+
+

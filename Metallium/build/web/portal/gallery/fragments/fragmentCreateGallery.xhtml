@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:form id="createGalleryForm" rendered="#{createImageGallery.canIeditProfile}" >
+
+        <ezPres:title01 id="title" title="#{msg.image_gallery_info_create_gallery}" />
+
+        
+        <table>
+            <tr>
+                <td style="text-align: right">
+                    <b> #{msg.image_gallery_info_title}:</b><span style="padding-left:3px"></span>
+                </td>
+                <td>
+                    <h:inputText style="text-align: left" size="50" maxlength="80"  styleClass="blackInput" value="#{createImageGallery.imageGallery.title}" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 20"/>
+            </tr>
+            <tr>
+                <td style="text-align: right">
+                    <b> #{msg.image_gallery_info_description}:</b><span style="padding-left:3px"></span>
+                </td>
+                <td>
+            <h:inputTextarea style="text-align: left" rows="5" cols="60" value="#{createImageGallery.imageGallery.description}" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 20"/>
+            </tr>
+            <tr >
+                <td></td>
+                <td><p>
+                    <h:commandButton id="createImageGallery"  value="#{msg.common_button_create}"
+                         action="#{createImageGallery.createImageGallery}" styleClass="button nightfall" >
+                    </h:commandButton>
+                    <span style="padding-left:3px"></span>
+                    <h:commandButton id="cancelCreateImageGallery"  value="#{msg.commun_button_cancel}"
+                                     action="#{createImageGallery.cancelCreateImageGallery}" styleClass="button nightfall" >
+                    </h:commandButton>
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+    </h:form>
+
+
+</ui:composition>

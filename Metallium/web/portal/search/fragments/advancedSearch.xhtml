@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:panelGroup id="advancedSearchPanelGroup" rendered="#{false and !searchManagedBean.basicSearch}">
+        <tr>
+            <td style="text-align: left">
+                <h:outputText value="#{msg.profile_info_name}" />
+            </td>
+            <td style="text-align: left" valign="top"  >
+                <h:inputText id="userName" value="#{searchManagedBean.searchCriteria.name}" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: left">
+                <h:outputText value="#{msg.commun_email}" />
+            </td>
+            <td style="text-align: left" valign="top"  >
+                <h:inputText id="userEmail" value="#{searchManagedBean.searchCriteria.email}" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: left">
+                <h:outputText value="#{msg.profile_info_sex}" />
+            </td>
+            <td style="text-align: left"  >
+                <h:selectOneMenu id="userSex" value="#{searchManagedBean.searchCriteria.sex}" >
+                    <f:selectItems value="#{searchManagedBean.selectItemSex}"
+                                   var="item" itemValue="#{item.one}" itemLabel="#{msg[item.two]}" />
+                </h:selectOneMenu>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: left">
+                <h:outputText value="#{msg.profile_info_country}" />
+            </td>
+            <td style="text-align: left" >
+                <h:selectOneMenu id="userCountry" value="#{searchManagedBean.searchCriteria.country}" >
+                    <f:selectItem itemValue="" itemLabel="" />
+                    <f:selectItems value="#{editProfileManagedBean.selectItemCountry}" />
+                </h:selectOneMenu>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: left">
+                <h:outputText value="#{msg.profile_info_city}" />
+            </td>
+            <td style="text-align: left" valign="top"  >
+                <h:inputText id="userCity" value="#{searchManagedBean.searchCriteria.city}" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td  align="left" >
+                <h:commandButton action="#{searchManagedBean.performAdvancedSearch}" value="#{msg.search_info_btn_search}" styleClass="button nightfall" >
+                    <f:ajax execute="advancedSearchPanelGroup" render="@form"  />
+                </h:commandButton>
+                <span style="padding-left:3px" ></span>
+                <h:commandLink id="showBasicSearchLink" value="#{msg.search_info_btn_hide_advanced_search}"
+                               actionListener="#{searchManagedBean.showBasicSearch}"
+                               style="text-decoration: underline" >
+                    <f:ajax execute="@form" render="@form" />
+                </h:commandLink>
+            </td>
+        </tr>
+    </h:panelGroup>
+
+
+</ui:composition>
+

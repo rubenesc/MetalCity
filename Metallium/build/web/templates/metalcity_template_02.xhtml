@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:head>
+        <title>#{msg.general_pagename}</title>
+        <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
+        <h:outputStylesheet name="styleMetalCity_1.css" library="css"/>
+    </h:head>
+
+    <h:body >
+        <f:view locale="#{loginUserManagedBean.locale}">
+            <!-- Inicio Header -->
+            <br/>
+            <br/>
+            <!-- Fin Header -->
+
+            <table width="800" align="center" border="0"  cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+
+                    <!-- Inicio contenido Izquierdo -->
+                    <!-- Fin contenido Izquierdo -->
+
+                    <!-- Inicio contenido centro -->
+                    <td align="center" valign="top">
+
+                        <table width="95%" border="0" cellspacing="0" cellpadding="0" bgcolor="#89836D">
+                            <tr>
+                                <td colspan="3">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="150" background="#{request.contextPath}/resources/images/ct_top.jpg" height="30" align="center" nowrap="true" >
+                                                <font color="#D2C6A6" face="Geneva, Arial, Helvetica, san-serif" size="3"></font>
+                                            </td>
+                                            <!-- The Title goes here -->
+                                            <td class="messageTitleMed"  align="left">
+                                                <ui:insert name="bodyHeaderTitle"></ui:insert>
+                                            </td>
+                                            <td width="80" background="#{request.contextPath}/resources/images/ct_top_der.jpg" height="30"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td background="#{request.contextPath}/resources/images/ct_izq.jpg"  width="25">
+                                    <img src="#{request.contextPath}/resources/images/t.gif" width="25" height="30" />
+                                </td>
+                                <td width="100%" align="center" valign="top">
+
+
+                                    <table width="666" border="0" >
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+
+                                    <ui:include src="/portal/common/fragments/errorMsg.xhtml" />
+
+                                    <ui:insert name="body">Body</ui:insert>
+
+                                    <p>
+                                        <!-- Inicio Footer -->
+                                        <!-- Fin Footer -->
+                                    </p>
+                                </td>
+                                <td background="#{request.contextPath}/resources/images/ct_der.jpg" width="25">
+                                    <img src="#{request.contextPath}/resources/images/t.gif" width="25" height="30"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="3">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="150" background="#{request.contextPath}/resources/images/ct_top_down.jpg" height="30" align="center" nowrap="true" >
+                                            </td>
+                                            <td class="cttitulos"  align="left">
+                                                <span style="padding-left:200px; padding-right:200px" ></span>
+                                            </td>
+                                            <td width="80" background="#{request.contextPath}/resources/images/ct_top_der_down.jpg" height="30"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+
+
+                    </td>
+                    <!-- Fin contenido centro -->
+                    <!-- Inicio contenido Derecho -->
+                    <!-- Fin contenido Derecho -->
+                </tr>
+              </tbody>
+
+            </table>
+        </f:view>
+    </h:body>
+</html>
+

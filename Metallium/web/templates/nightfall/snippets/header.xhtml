@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:form id="headerUserForm">
+
+        <div class="siteHeader2">
+            <div class="headerLeftSideHolder">
+                <table cellpadding="0" cellspacing="0" >
+                    <tbody>
+                        <tr>
+                            <td valign="bottom" align="left">
+                                <h:link outcome="goToIndex" >
+                                    <img alt="logo" align="center" border="0"  src="/img/resources/logo.jpg" style="border-style: none; vertical-align: bottom" />
+                                </h:link>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="headerSearchOptions">
+
+                <table cellpadding="0" cellspacing="0" width="100%" >
+                    <tbody>
+                        <tr>
+                            <td height="28" valign="middle">
+                                <div class="searchbar">
+                                <h:link outcome="goToJukebox" value="Jukebox" styleClass="sectionTitle" style="font-size: medium;" />
+                                    -
+                                
+                                <h:link outcome="goToNewsList" value="#{msg.news_title}" styleClass="sectionTitle" style="font-size: medium;" />
+
+                                <h:panelGroup rendered="true" >
+                                    -
+                                    <h:link outcome="goToEventList" value="#{msg.event_info_title}" styleClass="sectionTitle" style="font-size: medium;" />
+                                </h:panelGroup>
+                                -
+                                <h:link outcome="goToForumCategories" value="#{msg.forum_info_title}" styleClass="sectionTitle" style="font-size: medium; "/>
+                                    <span style="padding-left:5px" ></span>
+                                    <h:inputText id="searchQuery" value="#{searchManagedBean.searchQueryRequest}" size="30" />
+                                    <span style="padding-left:5px" ></span>
+                                    <h:commandLink action="#{searchManagedBean.performSearch2}"
+                                                   value="#{msg.search_info_btn_search}" styleClass="button nightfall" style="font-size: x-small ">
+                                        <f:param value="#{searchManagedBean.searchQueryRequest}" />
+                                    </h:commandLink>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </h:form>
+
+
+ 
+
+</ui:composition>

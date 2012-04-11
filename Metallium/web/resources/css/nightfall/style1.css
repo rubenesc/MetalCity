@@ -1,0 +1,243 @@
+@charset "utf-8";
+
+
+.nowrapcss {
+    white-space: nowrap;
+}
+
+.forum{
+    font-size:13px;
+    margin-left:13px;
+    margin-bottom:20px;
+}
+
+.fvisited a:visited{
+    color:#666666;
+}
+
+.forum td{
+    vertical-align:middle;
+}
+
+.forumTitle a{
+    font-size:17px;
+}
+.forumTitle img{
+    border:0px;
+    margin-right:7px;
+    float:left;
+    padding:5px;
+    vertical-align:middle;
+}
+
+.forumDesc{
+    color:#555555;
+    padding-top:5px;
+}
+
+.forumFloatRight{
+    font-size:12px;
+    color:#666666;
+    float:right;
+}
+
+.forumActivity a{
+    color:#999999;
+}
+
+.forumActivity img{
+    max-height:60px;
+    width:60px;
+    height:60px;
+    border: 1px solid #333333;
+}
+
+.forumActivity h3{
+    display:inline;
+    padding-left:8px;
+}
+
+.forumActivityBlock{
+    float:left;
+    padding:7px;
+    width:75px
+}
+
+/*viewforum*/
+.subText {
+    margin-top:2px;
+    font-size:13px;
+    color:#555555;
+}
+
+.subText a{
+    font-size:13px;
+    color:#666666;
+}
+
+.subText a:hover{
+    font-size:13px;
+    color:#666666;
+    text-decoration:underline;
+}
+
+.postCount{
+    font-size:18px;
+    text-align:center;
+}
+
+.dataTableHeader1{
+    white-space: nowrap;
+    width: auto;
+    font-size: 16px;
+    text-align: left;
+    background-color:#222222;
+}
+
+.dataTableHeader2{
+    width: 100px;
+    white-space: nowrap;
+    font-size: 16px;
+    text-align: center;
+    background-color:#222222;
+}
+
+.Lastby{
+    color:#555555;
+    font-size:12px;
+    text-align:right;
+}
+.Lastby a{
+    color:#555555;
+    text-decoration:underline;
+}
+.Lastby a:hover{
+    color:#555555;
+    text-decoration:underline;
+}
+
+.even{
+    /* its empty, but I have to define it anyway. */
+}
+
+.uneven{
+    background-color:#111111;
+}
+
+/*viewtopic*/
+
+.avatarReply{
+    max-height:80px;
+    border:1px solid #333333;
+    float:left;
+}
+.avatarPoster{
+    max-height:100px;
+    border:1px solid #333333;
+    float:left;
+}
+
+/*user tag*/
+.userTag{
+    background-color:#333333;
+    display:inline;
+    font-size:10px;
+    margin-right:2px;
+    padding:1px 3px;
+}
+
+
+
+/*Remove the space between <img> and <td>*/
+.img { padding:0px; border-width:0px; margin:0px; display: block}
+
+.sectionTitleForum{
+    color:#FF0000;
+    font-size: large;
+}
+
+.forumText{
+    margin-left: 5px;
+    display: block;
+    color: #999999;
+    text-align: justify;
+    line-height: 17px;
+    font-size: 14px;
+}
+
+.sectionTitle{
+    color:#FF0000;
+    font-size: large;
+    font-weight: bold;
+}
+
+.sectionTitleX{
+    color:#FF0000;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+
+.sectionTitleColor{
+    color:#FF0000;
+    font-weight: bold;
+}
+
+
+.button {
+    padding: 5px 10px;
+    display: inline;
+    background: #777;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-shadow: 1px 1px #666;
+    }
+.button:active {
+    background-position: 0 top;
+    position: relative;
+    top: 1px;
+    padding: 6px 10px 4px;
+    }
+
+.button.red { background-color: red; }
+.button.small { font-size: 75%; padding: 3px 7px; }
+.button.small:active { padding: 4px 7px 2px; background-position: 0 top; }
+.button.large { font-size: 125%; padding: 7px 12px; }
+.button.large:active { padding: 8px 12px 6px; background-position: 0 top; }
+.button.nightfall { font-size: 75%; padding: 3px 7px; background-color: #FF0000;}
+
+
+
+.widgetButton {
+    font-size: 10px; 
+    font-weight: bold;
+}
+
+.widgetIconButton {
+    font-size: 8px; 
+}
+
+.iconStar {
+    background-image: url(/img/resources/bookmark.png) !important;
+}
+
+.iconPlus {
+    background-image: url(/img/resources/plus.png) !important;
+}
+
+.iconDownload {
+    background-image: url(/img/resources/download.png) !important;
+}
+
+.iconRight {
+    background-image: url(/img/resources/right.png) !important;
+}
+.iconLeft {
+    background-image: url(/img/resources/left.png) !important;
+}
+
+

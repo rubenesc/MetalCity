@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:ezPres="http://java.sun.com/jsf/composite/myComponents/presentation"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <ui:define name="bodyHeaderTitle" >
+        #{msg.login_info_login}
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="loginForm">
+
+                <h:panelGroup rendered="#{loginUserManagedBean.authenticated}" id="alreadyLoggedinPanelGroup">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h:outputText escape="false" value="#{msg.login_info_you_are_already_logged_in}" />
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div align="center">
+                        [<h:commandLink action="#{loginUserManagedBean.goToIndex}" >
+                            #{msg.commun_return}
+                        </h:commandLink>]
+                    </div>
+
+                </h:panelGroup>
+                <h:panelGroup rendered="#{!loginUserManagedBean.authenticated}" id="loginPanelGroup">
+
+                    <ezPres:title01 id="title" title="#{msg.login_info_login}" />
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td align="left">#{msg.commun_email}:</td>
+                            <td align="left"><h:inputText value="#{loginUserManagedBean.user.email}" id="email" size="40"  /></td>
+                        </tr>
+                        <tr>
+                            <td height="10"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td align="left">#{msg.commun_password}:</td>
+                            <td align="left">
+                                <h:inputSecret value="#{loginUserManagedBean.user.password}" id="password" size="41" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="10"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                            </td>
+                            <td align="left">
+                                <table align="left" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <h:commandButton id="loginBtn" value="Login"
+                                                 action="#{loginUserManagedBean.loginUser}" styleClass="button nightfall" />
+                                        </td>
+                                        <td valign="top" style="padding-left:10px; padding-right:10px"> #{msg.commun_info_or} </td>
+                                        <td valign="top">
+                                            <h:commandLink style="border: none" action="#{loginUserManagedBean.goToRegisterUser}" >
+                                                #{msg.login_info_register}
+                                            </h:commandLink>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="10"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                            </td>
+                            <td align="left">
+                                <h:commandLink id="forgotPasswordLink" value="#{msg.login_info_forgot_password}"
+                                                 onclick="dialogForgotPassword.show()"  immediate="true">
+                                                <f:ajax execute="@none"/>
+                                </h:commandLink>
+                            </td>
+                        </tr>
+                </table>
+                </h:panelGroup>
+
+                <ui:include src="/portal/user/commonFragments/forgotpassword.xhtml"  id="fragmentForgotPassword" />
+                
+        </h:form>
+    </ui:define>
+</ui:composition>

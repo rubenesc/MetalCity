@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/nightfall/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <f:metadata>
+        <f:viewParam name="nick" converterMessage="#{msg.commun_info_input_invalid}" value="#{imageGalleryBase.userNick}" />
+    </f:metadata>
+
+    <ui:define name="bodyHeaderTitle" >
+        <span style="padding-left:200px; padding-right:200px" ></span>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{!galleriesManagedBean.galleryExists}" id="noPanelGroup">
+            <ui:include src="/portal/common/fragments/errorAccessDeniedMsg.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{galleriesManagedBean.galleryExists}" id="yesPanelGroup">
+
+            <h:form id="galleriesForm" >
+                <br/>
+                <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                    <tr>
+                        <td colspan="2">
+                            <h:outputText value="#{msg.common_galleries}" styleClass="sectionTitle" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <h:link outcome="goToProfile" value="#{galleriesManagedBean.user.name}" >
+                                <f:param name="nick" value="#{galleriesManagedBean.user.nick}"/>
+                            </h:link>
+                        </td>
+                        <td align="right">
+                            <h:commandLink value="#{msg.image_gallery_info_create_gallery}"
+                                action="#{galleriesManagedBean.goToCreateGallery}"
+                               rendered="#{galleriesManagedBean.canIeditProfile}" id="createImageGalleryLink" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+            <br/>
+
+            <ui:include src="fragments/fragmentGalleries.xhtml"  />
+
+
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

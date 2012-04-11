@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ez="http://java.sun.com/jsf/composite/myComponents"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <h:form id="userWallForm" >
+
+        <h:panelGroup rendered="#{profileManagedBean.canIeditProfile}" >
+            <tr>
+                <td width="100%" align="right">
+                    <h:link rendered="#{profileManagedBean.canIeditProfile}" outcome="goToEditProfile" value="#{msg.wall_info_add_post}" styleClass="sectionTitle" >
+                        <f:param name="nick" value="#{profileManagedBean.profileNick}"/>
+                        <f:param name="edit" value="addpost"/>
+                    </h:link>
+                </td>
+            </tr>
+        </h:panelGroup>
+
+        <!-- Just a dialog -->
+         <p:confirmDialog message="#{msg.wall_info_delete_post_msg}"
+                          header="#{msg.common_delete}" severity="alert" widgetVar="confirmation">
+             <p:commandButton value="#{msg.common_yes}" update="messages" ajax="false" oncomplete="confirmation.hide()"
+                              action="#{profileManagedBean.userWallComp.deletePost}" />
+             <p:commandButton value="#{msg.common_no}" onclick="confirmation.hide()" type="button" />
+         </p:confirmDialog>
+        <!-- Just a dialog -->
+
+
+        <ez:noItemsMsg   message="#{msg.commun_info_no_user_wall_posts}"
+                          numberOfItems="#{profileManagedBean.userWallComp.pagination.itemsCount}"/>
+
+        <h:panelGroup  id="itemsPanelGroup">
+            <h:panelGroup rendered="#{profileManagedBean.userWallComp.pagination.itemsCount > 0}" id="itemsPanelGroup1" >
+                <table cellspacing="0" cellpadding="5" width="100%" border="0" >
+                    <tr>
+                        <td>
+                            <ez:itemPagination  pagination="#{profileManagedBean.userWallComp.pagination}"
+                               nextAction="#{profileManagedBean.userWallComp.next}" previousAction="#{profileManagedBean.userWallComp.previous}" />
+                        </td>
+                    </tr>
+                </table>
+                
+                <p:dataGrid  var="item" value="#{profileManagedBean.userWallComp.items}"   columns="1"  rows="21" rendered="true" styleClass="commentList">
+                     <p:column>
+
+                         <h:panelGroup >
+                             <span class="dr">
+                                 <h:outputText value="#{msg.wall_post_info_posted} " />
+                                 <h:outputText value="#{item.date}">
+                                    <f:converter converterId="co.metallium.PrettyTimeConverter"/>
+                                 </h:outputText>
+                             </span>
+
+                             <span style="padding-left:4px" class="tlIcon" >
+                                 <h:panelGroup id="itemEditActionsPanelGroup" rendered="#{profileManagedBean.canIeditProfile}">
+                                     <h:link  outcome="goToEditProfile" value="#{msg.common_edit}" >
+                                        <f:param name="nick" value="#{profileManagedBean.profileNick}"/>
+                                        <f:param name="edit" value="editpost"/>
+                                        <f:param name="id" value="#{item.id}"/>
+                                    </h:link>
+                                     <span style="padding-left:4px"></span>
+                                        <p:commandLink value="#{msg.common_delete}" onclick="confirmation.show()" >
+                                         <f:setPropertyActionListener value="#{item}"
+                                              target="#{profileManagedBean.userWallComp.selectedItem}" />
+                                     </p:commandLink>
+                                 </h:panelGroup>
+                            </span>
+                         </h:panelGroup>
+
+                         <p>
+                             <h:panelGroup id="textPanelGroup" rendered="#{item.type == 'TEXT'}">
+                                    <h:outputText value="#{item.content}" escape="false" style="font-size: 14px;"/>
+                             </h:panelGroup>
+                             <h:panelGroup id="imagePanelGroup" rendered="#{item.type == 'IMAGE'}">
+                                 <table>
+                                     <tr>
+                                         <td>
+                                             <img alt="image" align="left" src="#{item.imageLocation}" />
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <td>
+                                             <h:outputText value="#{item.content}" escape="false" style="font-size: 14px;"/>
+                                         </td>
+                                     </tr>
+                                 </table>
+                             </h:panelGroup>
+                             <h:panelGroup id="linkPanelGroup" rendered="#{item.type == 'LINK'}">
+                                 <h:outputText value="#{item.content}" style="font-size: 14px;"/>
+                                 <span style="padding-left:3px"></span>
+                                 <h:outputLink  onclick="window.open('#{item.url}'); return false" ><h:outputText value="#{item.url}" style="font-size: 14px; color: red" /> </h:outputLink>
+                             </h:panelGroup>
+                             <h:panelGroup id="videoPanelGroup" rendered="#{item.type == 'VIDEO'}">
+                                 
+                                <ez:mediaPost mediaId="#{item.mediaId}" playMedia="#{item.playMedia}" 
+                                              mediaThumbnail1="#{item.mediaThumbnail2}" mediaTitle="#{item.mediaTitle}"
+                                               mediaDescription="#{item.mediaDescription}" content="#{item.content}" 
+                                               playVideo="#{profileManagedBean.userWallComp.playVideo(item)}" />
+                      
+                             </h:panelGroup>
+                             <hr/>
+                        </p>
+                     </p:column>
+                 </p:dataGrid>
+
+            </h:panelGroup>
+        </h:panelGroup>
+        
+        
+        
+    </h:form>
+
+</ui:composition>

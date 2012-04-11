@@ -1,0 +1,65 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <span style="float:left; vertical-align: middle; border: 10px">
+            <h:selectBooleanCheckbox value="#{item.delete}" />
+        </span>
+
+        <h:panelGroup id="messageUserAvatarPanelGroup" rendered="#{! empty item.fromUser.avatarLocation}" >
+            <h:link outcome="goToMessage"  >
+                <img alt=":)" id="messageProfilePicS" class="avatarReply" border="1" width="50"
+                     src="#{item.fromUser.avatarLocation}" />
+                <f:param name="id" value="#{item.id}"/>
+                <f:param name="box" value="inbox"/>
+            </h:link>
+        </h:panelGroup>
+
+        <span class="tlIcon">
+            <span style="padding-left:2px; padding-right:2px" ></span>
+            <h:commandLink id="deleteMessage" style="text-align: right"
+                             actionListener="#{messageBoxManagedBean.doSomething}"
+                             onclick="confirmation.show()"
+                            value="#{msg.common_delete}" immediate="true">
+                <f:ajax/>
+            </h:commandLink>
+            <span style="padding-left:2px; padding-right:2px" ></span>
+        </span>
+
+        <span class="tlComment2"  style="margin-left: 85px; display: block; color: #999999; line-height: 17px; font-size: 13px;">
+
+            <h:link  outcome="goToProfile">
+                <h:outputText value="#{item.fromUser.name} " />
+                <f:param name="nick" value="#{item.fromUser.nick}"/>
+            </h:link>
+            <h:outputText value="#{msg.message_info_sent_you_message} " />
+            <b>
+                <h:outputText value="#{item.date}" >
+                    <f:converter converterId="co.metallium.PrettyTimeConverter"/>
+                </h:outputText>
+            </b>
+
+            <div style="padding-top: 5px;">
+                <h:outputText value="#{msg.message_info_subject}: " />
+                <h:link outcome="goToMessage"  >
+                    <h:outputText escape="true" styleClass="messageTitle" style="color: lightgreen;" value="#{item.titlePreview}" />
+                    <f:param name="id" value="#{item.id}"/>
+                    <f:param name="box" value="inbox"/>
+                </h:link>
+
+                <span id="isMessageRead">
+                    <h:outputText value="--#{msg.message_info_unread_message}! " rendered="#{item.messageRead == 0}" style="color: yellow; font-weight: bold" />
+                </span>
+            </div>
+
+        </span>
+        <hr/>
+
+
+</ui:composition>
+
+
+
